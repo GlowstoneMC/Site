@@ -1,13 +1,11 @@
-Ultros-site
-===========
+Glowstone Site
+==============
 
-[![Code Health](https://landscape.io/github/UltrosBot/Ultros-site/falcon/landscape.svg?style=flat)](https://landscape.io/github/UltrosBot/Ultros-site/falcon)
-
-This is the code for the new version of our site at 
-[https://ultros.io](https://ultros.io).
+This is the code for the new downloads site for Glowstone, and potentially for a full site replacement
+later. Based on the code for [the Ultros site](https://github.com/UltrosBot/Ultros-site).
 
 This project uses the Ace editor in the admin interface. The license for Ace
-can be found in [LICENSE_ACE](https://github.com/UltrosBot/Ultros-Site/blob/falcon/LICENSE_ACE).
+can be found in [LICENSE_ACE](https://github.com/GlowstoneMC/Site/blob/falcon/LICENSE_ACE).
 
 Setting up
 ----------
