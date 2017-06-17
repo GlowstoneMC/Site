@@ -107,7 +107,7 @@ class RouteManager:
             if not path.endswith(".py"):
                 continue
 
-            module_name = os.path.relpath(path).replace("/", ".").split(".py", 1)[0]
+            module_name = os.path.relpath(path).replace(os.path.sep, ".").split(".py", 1)[0]
             # module_name = "ultros_site.routes.{}".format(module_fragment)
 
             if module_name.endswith("__"):
