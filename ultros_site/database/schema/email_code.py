@@ -14,7 +14,7 @@ class EmailCode(DeclarativeBase):
     user_id = Column(Integer, ForeignKey("user.id"), unique=True)
     user = relationship("User", back_populates="email_code")
 
-    code = Column(String(32), unique=True)
+    code = Column(String, unique=True)
 
     def __repr__(self):
         return "<{}(user={})>".format(
