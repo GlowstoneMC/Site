@@ -23,10 +23,10 @@
     <meta property="og:description" content="<%block name="og_description" />" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content="Ultros" />
-    <meta property="og:image" content="https://ultros.io/static/images/logos/rakiru.png" />
+    <meta property="og:image" content="/static/images/glowstone-logo.png" />
 
-    <link rel="shortcut icon" href="/static/images/ultros.png"/>
-    <link rel="apple-touch-icon-precomposed" href="/static/images/ultros.png"/>
+    <link rel="shortcut icon" href="/static/images/favicon.ico"/>
+    <link rel="apple-touch-icon-precomposed" href="/static/images/favicon.ico"/>
 
     <link rel="alternate" type="application/atom+xml" title="News (Atom)" href="/feeds/atom/news" />
     <link rel="alternate" type="application/rss+xml" title="News (RSS)" href="/feeds/rss/news"/>
@@ -48,48 +48,11 @@
             <nav class="nav">
                 <div class="nav-left" style="min-width: 150px;">
                     <span class="nav-item">
-                        Ultros - Insert Logo Here
+                        <img alt="Glowstone" src="/static/images/glowstone-text.png" />
                     </span>
                 </div>
 
                 <div class="nav-right">
-##                     % if bots > 0:
-##                         <span class="nav-item">
-##                         % if self.attr.tab == "metrics":
-##                             <a class="button is-light" href="/metrics">
-##                                 <span class="icon">
-##                                     <i class="fa fa-pie-chart"></i>
-##                                 </span>
-##                                 <span>Bots online: ${bots}</span>
-##                             </a>
-##                         % else:
-##                             <a class="button is-light is-outlined" href="/metrics">
-##                                 <span class="icon">
-##                                     <i class="fa fa-pie-chart"></i>
-##                                 </span>
-##                                 <span>Bots online: ${bots}</span>
-##                             </a>
-##                         % endif
-##                         </span>
-##                     % else:
-##                         <span class="nav-item">
-##                         % if self.attr.tab == "metrics":
-##                         <a class="button is-light" href="/metrics">
-##                             <span class="icon">
-##                                 <i class="fa fa-pie-chart"></i>
-##                             </span>
-##                             <span>Metrics</span>
-##                         </a>
-##                         % else:
-##                         <a class="button is-light is-outlined" href="/metrics">
-##                             <span class="icon">
-##                                 <i class="fa fa-pie-chart"></i>
-##                             </span>
-##                             <span>Metrics</span>
-##                         </a>
-##                         % endif
-##                     </span>
-##                     %endif
                     <span class="nav-item">
                         % if _context["user"] is None:
                             % if self.attr.tab == "login":
@@ -130,22 +93,107 @@
         </div>
         <%block name="hero_head_end"/>
     </div>
-##     % if self.attr.tab == "home":
-##     <div class="hero-body">
-##         <div class="container is-centered">
-##             <img class="image" src="/static/images/logos/rakiru-400-200.png"
-##                  style="margin: auto;"/>
-##             <h1 class="title is-centered" style="text-align: center">Connecting
-##                 communities, one squid at a time.</h1>
-##         </div>
-##     </div>
-##     % endif
+    % if self.attr.tab == "home":
+    <div class="hero-body">
+        <div class="container">
+          <div class="columns is-vcentered">
+            <div class="column is-one-quarter is-hidden-touch">
+              <figure class="image" style="max-width: 175px;float:left;left:20%">
+                <img src="/static/images/glowstone-logo.png">
+              </figure>
+            </div>
+            <div class="column is-hidden-desktop is-hidden-mobile">
+              <figure class="image" style="max-width: 150px;margin-right: 20px;margin-left: 20px">
+                <img src="/static/images/glowstone-logo.png">
+              </figure>
+            </div>
+            <div class="column is-three-quarters">
+              <p class="subtitle" style="margin-bottom: 18px; max-width: 90%; font-size: 30px">
+                <strong>Minecraft's future is bright.</strong>
+              </p>
+              <p class="subtitle" style="margin-bottom: 5px;max-width: 90%;font-size: 22px">
+                <strong>Meet Glowstone.</strong> It's open, fast, and compatible. <span style="color:#ffdaaf;cursor:pointer;" id="warning-link">*</span>
+              </p>
+              <p>
+                Glowstone is a completely open source Minecraft server that doesn't rely on any of Mojang's code - meaning we're free to develop for your needs, and you're free to change it however you want.
+              </p>
+              <br><br>
+              <div class="columns is-hidden-touch">
+                <div class="column is-3">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://github.com/GlowstoneMC/Glowstone/wiki/Installation">
+                    <span class="icon"><span class="fa fa-book"></span></span> <span>Instructions</span>
+                  </a>
+                </div>
+                <div class="column is-3">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://github.com/GlowstoneMC/Glowstone">
+                    <span class="icon" style=""><span class="fa fa-code-fork"></span></span> <span>Source Code</span>
+                  </a>
+                </div>
+                <div class="column is-3">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://forums.glowstone.net">
+                    <span class="icon"><span class="fa fa-comments"></span></span> <span>Forums</span>
+                  </a>
+                </div>
+                <div class="column is-3">
+                  <a class="button is-light is-outlined is-fullwidth" href="/docs">
+                    <span class="icon"><span class="fa fa-file-text-o"></span></span> <span>Javadocs</span>
+                  </a>
+                </div>
+              </div>
+              <div class="columns is-hidden-desktop is-hidden-mobile">
+                <div class="column is-half">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://github.com/GlowstoneMC/Glowstone/wiki/Installation">
+                    <span class="icon"><span class="fa fa-book"></span></span> <span>Instructions</span>
+                  </a>
+                </div>
+                <div class="column is-half">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://forums.glowstone.net">
+                    <span class="icon"><span class="fa fa-comments"></span></span> <span>Forums</span>
+                  </a>
+                </div>
+              </div>
+              <div class="columns is-hidden-desktop is-hidden-mobile">
+                <div class="column is-half">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://github.com/GlowstoneMC/Glowstone">
+                    <span class="icon" style=""><span class="fa fa-code-fork"></span></span> <span>Source Code</span>
+                  </a>
+                </div>
+                <div class="column is-half">
+                  <a class="button is-light is-outlined is-fullwidth" href="/docs">
+                    <span class="icon"><span class="fa fa-file-text-o"></span></span> <span>Javadocs</span></a>
+                </div>
+              </div>
+              <div class="columns is-hidden-desktop is-hidden-tablet">
+                <div class="column is-3">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://github.com/GlowstoneMC/Glowstone/wiki/Installation">
+                    <span class="icon"><span class="fa fa-book"></span></span> <span>Instructions</span>
+                  </a>
+                </div>
+                <div class="column is-3">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://github.com/GlowstoneMC/Glowstone">
+                    <span class="icon" style=""><span class="fa fa-code-fork"></span></span> <span>Source Code</span>
+                  </a>
+                </div>
+                <div class="column is-3">
+                  <a class="button is-light is-outlined is-fullwidth" href="https://forums.glowstone.net">
+                    <span class="icon"><span class="fa fa-comments"></span></span> <span>Forums</span>
+                  </a>
+                </div>
+                <div class="column is-3">
+                  <a class="button is-light is-outlined is-fullwidth" href="/docs">
+                    <span class="icon"><span class="fa fa-file-text-o"></span></span> <span>Javadocs</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    % endif
     <div class="hero-foot">
         <div class="container">
             <nav class="tabs is-boxed">
                 <ul>
-                    ## Index tab
-
                     % if self.attr.tab == "home":
                     <li class="is-active">
                     % else:
@@ -154,7 +202,6 @@
                         <a href="/">Home</a>
                     </li>
 
-                    ## Metrics tab
                     % if self.attr.tab == "news":
                     <li class="is-active">
                     % else:
@@ -163,23 +210,31 @@
                         <a href="/news">News</a>
                     </li>
 
-                    ## Extensions tab
-##                     % if self.attr.tab == "extensions":
-##                     <li class="is-active">
-##                     % else:
-##                     <li>
-##                     % endif
-##                         <a href="/extensions">Extensions</a>
-##                     </li>
-                </ul>
-
-                <ul class="is-right">
-                    % if self.attr.tab == "about":
+                    % if self.attr.tab == "docs":
                     <li class="is-active">
                     % else:
                     <li>
                     % endif
-                        <a href="/about">About</a>
+                        <a href="/docs">Docs</a>
+                    </li>
+                </ul>
+
+                <ul class="is-right">
+
+                    % if self.attr.tab == "community":
+                    <li class="is-active">
+                    % else:
+                    <li>
+                    % endif
+                        <a href="/community">Community</a>
+                    </li>
+
+                    % if self.attr.tab == "downloads":
+                    <li class="is-active">
+                    % else:
+                    <li>
+                    % endif
+                        <a href="/downloads">Downloads</a>
                     </li>
 ##                     % if self.attr.tab == "tos":
 ##                     <li class="is-active">
@@ -230,14 +285,18 @@ ${next.body()}
 ## Footer
 
 <footer class="footer">
-    <div class="container">
-        <div class="content has-text-centered">
-            <p>
-                &copy; 2014-2017 Gareth Coles and Sean Gordon <br/>
-##                 <a href="/tos">Terms of service</a>
-            </p>
-        </div>
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Made with &hearts; by the <a href="https://github.com/GlowstoneMC/">Glowstone project</a>. Our project is licensed under the <a href="https://github.com/GlowstoneMC/Glowstone/blob/master/LICENSE">MIT</a> license.
+      </p>
+      <p>
+        Glowstone would not be possible without <a target="_blank" href="https://github.com/GlowstoneMC/Glowstone#credits">these folks</a> &mdash; thanks for your time and passion!
+      </p>
+      <div>
+        <a aria-label="Star GlowstoneMC/Glowstone on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/GlowstoneMC/Glowstone#stargazers_count" data-count-href="/GlowstoneMC/Glowstone/stargazers" data-style="mega" data-icon="octicon-star" href="https://github.com/GlowstoneMC/Glowstone" class="github-button">Star</a>&nbsp;
+        <a href="https://discord.gg/TFJqhsC" target="_blank" style="border: none"><img src="https://img.shields.io/badge/discord-glowstone-738bd7.svg?style=flat-square"></a>&nbsp;
+      </div>
     </div>
+  </div>
 </footer>
-</body>
-</html>
