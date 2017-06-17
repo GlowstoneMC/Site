@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-    <title>Ultros: News</title>
-    <link rel="self" href="https://ultros.io/feeds/atom/news" />
+    <title>Glowstone: News</title>
+    <link rel="self" href="https://glowstone.net/feeds/atom/news" />
     <updated>${date}</updated>
-    <id>https://ultros.io/news</id>
+    <id>https://glowstone.net/news</id>
     <generator>ultros.io (Powered by Falcon and Mako on Python 3)</generator>
 
     % for post in news_posts:
     <entry>
         <title>${post.title}</title>
-        <link href="https://ultros.io/news/${post.id}"/>
+        <link href="https://glowstone.net/news/${post.id}"/>
         <id>https://ultros.io/news/${post.id}</id>
         <updated>${rfc2822(post.posted)}</updated>
         <content type="xhtml">
