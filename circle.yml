@@ -10,12 +10,12 @@ dependencies:
   - "pip install -U -r requirements.txt"
   - "pip install -U -r requirements-test.txt"
 
-deployment:
-  master:
-    branch: master
-    commands:
-      - "chmod +x .circle/*"
-      - "./.circle/deploy_site.sh"
+#deployment:
+#  master:
+#    branch: master
+#    commands:
+#      - "chmod +x .circle/*"
+#      - "./.circle/deploy_site.sh"
 
 test:
   override:
