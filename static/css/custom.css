@@ -104,3 +104,15 @@ td.is-grey {
 .mono {
     font-family: monospace;
 }
+
+.announcements-front a {
+    text-decoration: none;
+}
+
+.announcements-front a:hover {
+    color: blue;
+}
+
+.content pre {
+    padding: 0;
+}
