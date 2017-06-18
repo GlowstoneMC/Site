@@ -132,30 +132,40 @@ class RegisterRoute(BaseRoute):
 
         user = User(
             username=params["username"], password=hashed_password, created=datetime.datetime.now(),
-            email=params["email"], email_verified=False,
+            email=params["email"], email_verified=not self.db.config["email"]["use"],
             admin=(params["username"] == self.manager.database.config["admin_username"])
         )
 
-        key = secrets.token_urlsafe(32)
-        email_code = EmailCode(
-            user=user, code=key
-        )
-
         db_session.add(user)
-        db_session.add(email_code)
-
-        celery.send_task(
-            "send_email",
-            args=["email_verification", user.email, "Email verification"],
-            kwargs={"verify_url": "/login/verify/{}".format(key)}
-        )
 
         resp.append_header("Refresh", "10;url=/")
+
+        if self.db.config["email"]["use"]:
+            key = secrets.token_urlsafe(32)
+            email_code = EmailCode(
+                user=user, code=key
+            )
+
+            db_session.add(email_code)
+
+            celery.send_task(
+                "send_email",
+                args=["email_verification", user.email, "Email verification"],
+                kwargs={"verify_url": "/login/verify/{}".format(key)}
+            )
+
+            return self.render_template(
+                req, resp, "message_gate.html",
+                gate_message=Message(
+                    "info", "Registered", "Your account has been registered - please check your email to verify it!"
+                ),
+                redirect_uri="/"
+            )
 
         return self.render_template(
             req, resp, "message_gate.html",
             gate_message=Message(
-                "info", "Registered", "Your account has been registered - please check your email to verify it!"
+                "info", "Registered", "Your account has been registered successfully."
             ),
             redirect_uri="/"
         )
