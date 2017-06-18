@@ -18,6 +18,27 @@ Setting up
 4. Set up your WSGI server of choice; the app is `ultros_site.__main__.app`
 5. On your webserver, make sure you serve `/static` directly instead of proxying it to the WSGI app
 
+Step-by-step instructions
+-------------------------
+
+If you haven't worked with this kind of stack before, here's how you set up a development environment.
+
+* Install prerequisites
+    * Python 3.6
+    * `python3 -m pip install requirements.txt`
+        * If you're on Windows, `python3 -m pip install celery==3.1.25` (They dropped support for Windows in 4.x)
+    * `python3 -m pip install requirements-test.txt`
+    * Redis
+    * RabbitMQ
+    * PostgreSQL Server
+        * Optionally, install PGAdmin as well - we recommend PGAdmin 3 over 4 as it's much faster and easier to use
+* Copy `config.yml.example` to `config.yml`
+* Edit your machine's HOSTS file to point the hostname `storage` to `127.0.0.1` (or wherever you're running RabbitMQ and Redis)
+* Set up your runs - make sure you run everything from the root directory of the repo (the folder containing the README)
+    * To start your Celery workers: `celery -A ultros_site.tasks.__main__:app worker`
+    * To start the webapp with the Waitress development server: `python3 -m ultros_site --debug`
+* Before you commit your changes, run `flake8 ultros_site` from the repo root - this will check that all the Python code meets our coding standards
+
 Running migrations
 ------------------
 
