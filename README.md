@@ -35,9 +35,13 @@ If you haven't worked with this kind of stack before, here's how you set up a de
 * Copy `config.yml.example` to `config.yml`
 * Edit your machine's HOSTS file to point the hostname `storage` to `127.0.0.1` (or wherever you're running RabbitMQ and Redis)
 * Set up your runs - make sure you run everything from the root directory of the repo (the folder containing the README)
+    * To run the migrations: `python3 tools.py run-migrations` (Do this before you start up)
     * To start your Celery workers: `celery -A ultros_site.tasks.__main__:app worker`
     * To start the webapp with the Waitress development server: `python3 -m ultros_site --debug`
-* Before you commit your changes, run `flake8 ultros_site` from the repo root - this will check that all the Python code meets our coding standards
+* Before you commit your changes:
+    * Run `flake8 ultros_site` from the repo root - this will check that all the Python code meets our coding standards
+    * Run `python3 tools.py create-migrations "Summary of the migrations"` if you modified any of the database schema
+        * Note that this won't run the migrations for you - you'll have to do that yourself with `python3 tools.py run-migrations` after
 
 Running migrations
 ------------------
