@@ -8,7 +8,7 @@ def run_migrations(args):
     print("===============================\n")
 
     env = os.environ.copy()
-    env["PYTHONPATH"] = "."
+    env["PYTHONPATH"] = ".:{}".format(os.path.expanduser("~/.local/bin"))
 
     sp = subprocess.Popen(["alembic", "upgrade", "head"], env=env)
     sp.wait()
@@ -21,7 +21,7 @@ def create_migrations(args):
     message = args.message
 
     env = os.environ.copy()
-    env["PYTHONPATH"] = "."
+    env["PYTHONPATH"] = ".:{}".format(os.path.expanduser("~/.local/bin"))
 
     sp = subprocess.Popen(["alembic", "revision", "--autogenerate", "-m", message], env=env)
     sp.wait()
