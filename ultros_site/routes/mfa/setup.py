@@ -70,7 +70,7 @@ class MFASetupRoute(BaseRoute):
 
         user.mfa_token = pyotp.random_base32()
         totp = pyotp.TOTP(user.mfa_token)
-        uri = totp.provisioning_uri("{}@glowstone.net".format(user.username))
+        uri = totp.provisioning_uri("{}@glowstone.net".format(user.username), issuer_name="Glowstone")
 
         image = qrcode.make(uri)
         buffer = BytesIO()
@@ -90,7 +90,7 @@ class MFASetupRoute(BaseRoute):
         db_session = req.context["db_session"]
 
         if not code:
-            uri = totp.provisioning_uri("{}@glowstone.net".format(user.username))
+            uri = totp.provisioning_uri("{}@glowstone.net".format(user.username), issuer_name="Glowstone")
 
             image = qrcode.make(uri)
             buffer = BytesIO()
@@ -127,7 +127,7 @@ class MFASetupRoute(BaseRoute):
                 req, resp, "mfa/setup/complete.html"
             )
         else:
-            uri = totp.provisioning_uri("{}@glowstone.net".format(user.username))
+            uri = totp.provisioning_uri("{}@glowstone.net".format(user.username), issuer_name="Glowstone")
 
             image = qrcode.make(uri)
             buffer = BytesIO()
