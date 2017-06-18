@@ -32,6 +32,10 @@ If you haven't worked with this kind of stack before, here's how you set up a de
     * RabbitMQ
     * PostgreSQL Server
         * Optionally, install PGAdmin as well - we recommend PGAdmin 3 over 4 as it's much faster and easier to use
+        * Remember to set up a database and user for the site - here are the defaults for development:
+            * **Username**: `glowstone`
+            * **Database**: `glowstone`
+            * **Password**: `hunter2`
 * Copy `config.yml.example` to `config.yml`
 * Edit your machine's HOSTS file to point the hostname `storage` to `127.0.0.1` (or wherever you're running RabbitMQ and Redis)
 * Set up your runs - make sure you run everything from the root directory of the repo (the folder containing the README)
