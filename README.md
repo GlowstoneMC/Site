@@ -30,6 +30,8 @@ If you haven't worked with this kind of stack before, here's how you set up a de
     * `python3 -m pip install requirements-test.txt`
     * Redis
     * RabbitMQ
+        * Add the vhost: `rabbitmqctl add_vhost glowstone`
+        * Give a user access to it (replace guest with your user if you need to) `rabbitmqctl set_permissions -p glowstone guest ".*" ".*" ".*"`
     * PostgreSQL Server
         * Optionally, install PGAdmin as well - we recommend PGAdmin 3 over 4 as it's much faster and easier to use
         * Remember to set up a database and user for the site - here are the defaults for development:
