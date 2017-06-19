@@ -1,20 +1,14 @@
 <%inherit file="base.html"/>
 
 <section class="section" style="padding-bottom: 0;">
-    <div class="container">
-        <article class="message is-info" style="margin-left: 20%; margin-right: 20%;">
-            <div class="message-header">
-                <p>Backup codes</p>
-            </div>
-            <div class="message-body">
-                <p>You have just set up multi-factor authentication. Please keep a record of these backup codes,
-                    as you will need them if you lose the device you used to set up MFA.
-                </p>
-            </div>
-        </article>
+    <div class="content has-text-centered">
+        <h1 class="title">Backup codes</h1>
+        <p>You have just set up multi-factor authentication. Please keep a record of these backup codes,
+            as you will need them if you lose the device you used to set up MFA.
+        </p>
 
         <%text>
-        <pre class="pre box" style="margin-left: 5%; margin-right: 5%;">
+        <pre class="pre box has-text-centered" style="margin-left: 5%; margin-right: 5%;">
             % for code in codes:
 ${code}
             % endfor

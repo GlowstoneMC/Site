@@ -1,21 +1,18 @@
 <%inherit file="base.html"/>
 
 <section class="section" style="padding-bottom: 0;">
-    <div class="container">
-        <article class="message is-info" style="margin-left: 20%; margin-right: 20%;">
-            <div class="message-header">
-                <p>Email verification</p>
-            </div>
-            <div class="message-body">
-                <p>Thanks for registering! There's just one thing left to do before your account is created.</p>
-                <br />
-                <p>In order to verify your account, please click the following link or copy and paste it into your browser's address bar.</p>
-                <br />
-                <%text><a href="${verify_url}">https://glowstone.net${verify_url}</a></%text>
-                <br />
-                <br />
-                <p>Please note that new accounts expire after 24 hours if they haven't been verified, and are removed.</p>
-            </div>
-        </article>
+    <div class="content has-text-centered">
+        <h1 class="title">Email verification</h1>
+
+        <p>Thanks for registering! There's just one thing left to do before your account is created.</p>
+        <br />
+        <p>In order to verify your account, please click the following link or copy and paste it into your browser's address bar.</p>
+        <br />
+        <%text>
+            <a href="${verify_url}">https://glowstone.net${verify_url}</a>
+        </%text>
+        <br />
+        <br />
+        <p>Please note that new accounts expire after 24 hours if they haven't been verified, and are removed.</p>
     </div>
 </section>
