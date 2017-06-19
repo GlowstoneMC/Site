@@ -2,7 +2,7 @@
 
 ## Current tab for navigation
 <%!
-    tab = "home"
+tab = "home"
 %>
 
 ## SEO Stuff
@@ -23,261 +23,272 @@
 </nav>
 
 <section class="section">
-  <div class="container" id="announcements-front">
+    <div class="container" id="announcements-front">
         <article class="message is-info">
             <div class="message-body announcements-front" style="color: #3273dc;">
-                <strong><i class="fa fa-bullhorn" style="font-size: 150%; margin-right: 10px;"></i> Latest announcements:</strong> <span id="announcements-titles"><a class="announcement-link" target="_blank" data-balloon="8 days ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/66/glowstone-2017-6-0-and-1-12">Glowstone 2017.6.0 and 1.12</a>, <a class="announcement-link" target="_blank" data-balloon="16 days ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/65/glowstone-2017-5">Glowstone 2017.5</a>, <a class="announcement-link" target="_blank" data-balloon="a month ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/63/the-road-to-1-12">The Road to 1.12</a></span>
+                <strong>
+                    <i class="fa fa-bullhorn" style="font-size: 150%; margin-right: 10px;"></i>
+                    Latest announcements:
+                </strong>
+                <span id="announcements-titles">
+                    <a class="announcement-link" target="_blank" data-balloon="8 days ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/66/glowstone-2017-6-0-and-1-12">Glowstone 2017.6.0 and 1.12</a>,
+                    <a class="announcement-link" target="_blank" data-balloon="16 days ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/65/glowstone-2017-5">Glowstone 2017.5</a>,
+                    <a class="announcement-link" target="_blank" data-balloon="a month ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/63/the-road-to-1-12">The Road to 1.12</a>
+                </span>
             </div>
         </article>
     </div>
-  <div class="container" id="features" style="padding-top: 20px;">
-    <h1 class="title is-2">Features
-        <a href="#top" title="Jump to top">
-            <span class="icon is-pulled-right is-large">
-                <i class="fa fa-angle-up is-large"></i>
-            </span>
-        </a>
-    </h1>
-    <div class="tile is-ancestor" style="text-align: center;">
-      <div class="tile is-4 is-vertical is-parent">
-        <div class="tile is-child box">
-          <p class="title is-4" style="font-size: 20px;">The APIs you know and love</p>
-          <p style="font-size: 110%">Just because Glowstone is original doesn't mean it can't be familiar.</p>
-          <br>
-          <p style="text-align: justify;">Use or code Bukkit plugins and they'll work natively with Glowstone, and enjoy first-class Bukkit2Sponge support for your Sponge powered plugins.</p>
-          <br>
-          <a class="button is-outlined" href="https://github.com/GlowstoneMC/Glowstone/wiki/Why-Glowstone" target="_blank">Learn more</a>
+    <div class="container" id="features" style="padding-top: 20px;">
+        <h1 class="title is-2">Features
+            <a href="#top" title="Jump to top">
+                <span class="icon is-pulled-right is-large">
+                    <i class="fa fa-angle-up is-large"></i>
+                </span>
+            </a>
+        </h1>
+        <div class="tile is-ancestor" style="text-align: center;">
+            <div class="tile is-4 is-vertical is-parent">
+                <div class="tile is-child box">
+                <p class="title is-4" style="font-size: 20px;">The APIs you know and love</p>
+                <p style="font-size: 110%">Just because Glowstone is original doesn't mean it can't be familiar.</p>
+                <br>
+                <p style="text-align: justify;">Use or code Bukkit plugins and they'll work natively with Glowstone, and enjoy first-class Bukkit2Sponge support for your Sponge powered plugins.</p>
+                <br>
+                <a class="button is-outlined" href="https://github.com/GlowstoneMC/Glowstone/wiki/Why-Glowstone" target="_blank">Learn more</a>
+                </div>
+            </div>
+            <div class="tile is-4 is-vertical is-parent">
+                <div class="tile is-child box">
+                    <p class="title is-4" style="font-size: 20px;">Simplicity is the mother of performance</p>
+                    <p style="font-size: 110%">Glowstone's simplicity affords it a performance improvement over CraftBukkit and other servers.</p>
+                    <br>
+                    <p style="text-align: justify;">
+                    By design, our code is simple and doesn't have to work around the official Minecraft server in order to improve performance or functionality.</p>
+                    <br>
+                    <a class="button is-outlined is-disabled" disabled>Benchmarks (Soon)</a>
+                </div>
+            </div>
+            <div class="tile is-4 is-vertical is-parent">
+                <div class="tile is-child box">
+                <p class="title is-4" style="font-size: 20px;">Any way you want it</p>
+                <p style="font-size: 110%">Glowstone is open source and community centric.</p>
+                <br>
+                <p style="text-align: justify;">
+                Anyone can work on Glowstone, so it reflects what our community wants. And, with Glowstone's MIT license, you can modify it to suit your server's needs. Don't know code? Provide your input in the design process!</p>
+                <br>
+                <a class="button is-outlined" href="https://github.com/GlowstoneMC/Glowstone/wiki/How-to-Help" target="_blank">How to help</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="tile is-4 is-vertical is-parent">
-        <div class="tile is-child box">
-          <p class="title is-4" style="font-size: 20px;">Simplicity is the mother of performance</p>
-          <p style="font-size: 110%">Glowstone's simplicity affords it a performance improvement over CraftBukkit and other servers.</p>
-          <br>
-          <p style="text-align: justify;">
-          By design, our code is simple and doesn't have to work around the official Minecraft server in order to improve performance or functionality.</p>
-          <br>
-          <a class="button is-outlined is-disabled" disabled>Benchmarks (Soon)</a>
-        </div>
-      </div>
-      <div class="tile is-4 is-vertical is-parent">
-        <div class="tile is-child box">
-          <p class="title is-4" style="font-size: 20px;">Any way you want it</p>
-          <p style="font-size: 110%">Glowstone is open source and community centric.</p>
-          <br>
-          <p style="text-align: justify;">
-          Anyone can work on Glowstone, so it reflects what our community wants. And, with Glowstone's MIT license, you can modify it to suit your server's needs. Don't know code? Provide your input in the design process!</p>
-          <br>
-          <a class="button is-outlined" href="https://github.com/GlowstoneMC/Glowstone/wiki/How-to-Help" target="_blank">How to help</a>
-        </div>
-      </div>
-    </div>
 
-    <article class="message is-danger" id="warning-feature-completeness">
-      <div class="message-header">
-        Important warning
-      </div>
-      <div class="message-body">
-        <strong>Glowstone is a small project.</strong>
-        <p>
-          We put all of our efforts into providing efficient and quality software. While the project has been around for a few years, we are not feature-complete in comparison to the vanilla server software.
-        </p>
-        <p>
-          We update our project frequently enough to follow Mojang's updates, but Glowstone is simply not ready for some production servers. <strong>While Glowstone can be used at its best for lobbies, hubs, minigames and creative servers, it is not ready for survival.</strong>
-        </p>
-        <br>
-        <p>
-          More info can be found in the <a href="https://github.com/GlowstoneMC/Glowstone/wiki/Frequently-Asked-Questions#bugs--features">FAQ</a>. You can also ask questions on our <a href="https://forums.glowstone.net/">forums</a> or by <a id="warning-chat-link">chat</a>.
-        </p>
-      </div>
-    </article>
-  </div>
+        <article class="message is-danger" id="warning-feature-completeness">
+            <div class="message-header">
+                Important warning
+            </div>
+            <div class="message-body">
+                <strong>Glowstone is a small project.</strong>
+                <p>
+                We put all of our efforts into providing efficient and quality software. While the project has been around for a few years, we are not feature-complete in comparison to the vanilla server software.
+                </p>
+                <p>
+                We update our project frequently enough to follow Mojang's updates, but Glowstone is simply not ready for some production servers. <strong>While Glowstone can be used at its best for lobbies, hubs, minigames and creative servers, it is not ready for survival.</strong>
+                </p>
+                <br>
+                <p>
+                More info can be found in the <a href="https://github.com/GlowstoneMC/Glowstone/wiki/Frequently-Asked-Questions#bugs--features">FAQ</a>. You can also ask questions on our <a href="https://forums.glowstone.net/">forums</a> or by <a id="warning-chat-link">chat</a>.
+                </p>
+            </div>
+        </article>
+    </div>
 </section>
 
 <section class="hero is-info" id="sponsors" style="background-color: #2b87d3;">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-vcentered">
-        <div class="column is-4">
-          <a href="https://aternos.org/" title="Aternos - Minecraft servers. Free. Forever.">
-            <img src="/static/images/sponsors/aternos.png" />
-          </a>
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-4">
+                    <a href="https://aternos.org/" title="Aternos - Minecraft servers. Free. Forever.">
+                        <img src="/static/images/sponsors/aternos.png" />
+                    </a>
+                </div>
+                <div class="column is-8">
+                    <p class="title">We are proudly sponsored by <strong>Aternos</strong></p>
+                    <p class="subtitle">Minecraft Servers. Free. Forever.</p>
+                </div>
+            </div>
         </div>
-        <div class="column is-8">
-          <p class="title">We are proudly sponsored by <strong>Aternos</strong></p>
-          <p class="subtitle">Minecraft Servers. Free. Forever.</p>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
 
 <section class="section">
-  <div class="container" id="downloads" style="padding-top: 20px;">
-    <h1 class="title is-2">
-        Downloads
-        <a href="#top" title="Jump to top">
-            <span class="icon is-pulled-right is-large">
-                <i class="fa fa-angle-up is-large"></i>
-            </span>
-        </a>
-    </h1>
-    <div class="content">
-      <article class="message is-info">
-        <div class="message-header">
-          How to use
-        </div>
-        <div class="message-body">
-          Glowstone is a standalone Java server executable. You can run it from your terminal:<br>&nbsp;
-          <pre><code>java -Xms1G -Xmx1G -XX:+UseG1GC -jar glowstone.jar</code></pre>
-          <br>
-          You can read more about the installation instructions <a href="https://github.com/GlowstoneMC/Glowstone/wiki/Installation">here</a>.
-          <br><br>
-          <p><strong>Want to test Glowstone out before installing it?</strong> Hop on our test server (1.12): <code>mc.glowstone.net</code></p>
-        </div>
-      </article>
-      <br>
-      <div class="columns">
-        <div class="column is-half">
-          <h4 class="title is-4">Latest version</h4>
-          <a class="button is-primary is-medium" style="color: white;" href="https://bamboo.gserv.me/artifact/GSPP-SRV/shared/build-latestSuccessful/Version-Independent-Server-JAR/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.12</span></a>
-        </div>
-        <div class="column is-half">
-          <h4 class="title is-4">Previous versions</h4>
-          <p>These versions are no longer supported or developed. They may lack important fixes and features.</p>
-          <h4 class="title is-5">Previous Minecraft versions (not recommended)</h4>
+    <div class="container" id="downloads" style="padding-top: 20px;">
+        <h1 class="title is-2">
+            Downloads
+            <a href="#top" title="Jump to top">
+                <span class="icon is-pulled-right is-large">
+                    <i class="fa fa-angle-up is-large"></i>
+                </span>
+            </a>
+        </h1>
+        <div class="content">
+            <article class="message is-info">
+                <div class="message-header">
+                    How to use
+                </div>
+                <div class="message-body">
+                    Glowstone is a standalone Java server executable. You can run it from your terminal:<br>&nbsp;
+                    <pre><code>java -Xms1G -Xmx1G -XX:+UseG1GC -jar glowstone.jar</code></pre>
+                    <br>
+                    You can read more about the installation instructions <a href="https://github.com/GlowstoneMC/Glowstone/wiki/Installation">here</a>.
+                    <br><br>
+                    <p><strong>Want to test Glowstone out before installing it?</strong> Hop on our test server (1.12): <code>mc.glowstone.net</code></p>
+                </div>
+            </article>
+            <br>
+            <div class="columns">
+                <div class="column is-half">
+                    <h4 class="title is-4">Latest version</h4>
+                    <a class="button is-primary is-medium" style="color: white;" href="https://bamboo.gserv.me/artifact/GSPP-SRV/shared/build-latestSuccessful/Version-Independent-Server-JAR/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.12</span></a>
+                </div>
+                <div class="column is-half">
+                    <h4 class="title is-4">Previous versions</h4>
+                    <p>These versions are no longer supported or developed. They may lack important fixes and features.</p>
+                    <h4 class="title is-5">Previous Minecraft versions (not recommended)</h4>
 
-          <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://bamboo.gserv.me/browse/GSPP-SRV-540/artifact/shared/Version-Independent-Server-JAR/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.11.2</span></a>
-          <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/v1.10.2/glowstone-1.10.2-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.10.2</span></a>
-          <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/1.9.4/glowstone.-1.9.4-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.9.x</span></a>
+                    <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://bamboo.gserv.me/browse/GSPP-SRV-540/artifact/shared/Version-Independent-Server-JAR/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.11.2</span></a>
+                    <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/v1.10.2/glowstone-1.10.2-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.10.2</span></a>
+                    <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/1.9.4/glowstone.-1.9.4-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.9.x</span></a>
 
-          <br />
+                    <br />
 
-          <h4 class="title is-5">Legacy versions (not recommended)</h4>
-          <p>Legacy builds dating from the pre-Glowstone++ <a href="https://github.com/GlowstoneMC/Glowstone-Legacy">repository</a>.</p>
+                    <h4 class="title is-5">Legacy versions (not recommended)</h4>
+                    <p>Legacy builds dating from the pre-Glowstone++ <a href="https://github.com/GlowstoneMC/Glowstone-Legacy">repository</a>.</p>
 
-          <a class="button is-danger" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone-Legacy/releases/download/1.7.9/glowstone-1.7.9-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.7.9</span></a>
-          <a class="button is-danger" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone-Legacy/releases/download/1.7.2/glowstone-1.7.2-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.7.2</span></a>
+                    <a class="button is-danger" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone-Legacy/releases/download/1.7.9/glowstone-1.7.9-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.7.9</span></a>
+                    <a class="button is-danger" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone-Legacy/releases/download/1.7.2/glowstone-1.7.2-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.7.2</span></a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
+
 <section class="section">
-  <div class="container" id="builds" style="padding-top: 20px;">
-    <h1 class="title is-2">CI Builds
-        <a href="#top" title="Jump to top">
-            <span class="icon is-pulled-right is-large">
-                <i class="fa fa-angle-up is-large"></i>
-            </span>
-        </a>
-    </h1>
-    <p>The latest Glowstone builds from our <a href="https://bamboo.gserv.me/browse/GSPP-SRV">build server</a>.</p>
-    <br>
-    <div id="builds-parent">
-      <div class="loader" id="builds-loading" style="margin-top:25px;height:50px;width:50px;margin-bottom:300px;">
-      </div>
+    <div class="container" id="builds" style="padding-top: 20px;">
+        <h1 class="title is-2">
+            CI Builds
+            <a href="#top" title="Jump to top">
+                <span class="icon is-pulled-right is-large">
+                    <i class="fa fa-angle-up is-large"></i>
+                </span>
+            </a>
+        </h1>
+        <p>The latest Glowstone builds from our <a href="https://bamboo.gserv.me/browse/GSPP-SRV">build server</a>.</p>
+        <br>
+        <div id="builds-parent">
+            <div class="loader" id="builds-loading" style="margin-top:25px;height:50px;width:50px;margin-bottom:300px;"></div>
+        </div>
     </div>
-  </div>
 </section>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js" integrity="sha256-ihAoc6M/JPfrIiIeayPE9xjin4UWjsx2mjW/rtmxLM4=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-$(function() {
-  $.getJSON("https://bamboo.gserv.me/rest/api/latest/result/GSPP-SRV.json?expand=results.result.artifacts,results.result.labels&max-result=10", function(data) {
-    var results = data.results.result;
-    var base =
-    '<table class="table">' +
-      '<thead>' +
-        '<tr>' +
-          '<th><span class="icon"><i class="fa fa-server"></i></span></th>' +
-          '<th>Date</th>' +
-          '<th>Version</th>' +
-          '<th>Trigger</th>' +
-          '<th><span class="icon"><i class="fa fa-download"></i></span></th>' +
-        '</tr>' +
-      '</thead>' +
-      '<tbody>{builds}' +
-      '</tbody>' +
-    '</table>';
-    var model =
-    '<tr>' +
-      '<td>{buildnumber}</td>' +
-      '<td title="{absolute}">{date}</td>' +
-      '<td>{version}</td>' +
-      '<td>{reason}</td>' +
-      '<td>{download}</td>' +
-    '</tr>';
-    var content = "";
-    for (var i = 0; i < results.length; i++) {
-      var b = results[i];
-      var buildnumber = '<a href="https://bamboo.gserv.me/browse/GSPP-SRV-' + b.buildNumber.toString() + '">#' + b.buildNumber.toString() + '</a>';
-      var state = b.state.toLowerCase();
-      var stateIcon = '<span class="icon" style="color: #fce473;"><i class="fa fa-bolt"></i></span>';
-      if (state == "successful") {
-        stateIcon = '<span class="icon" style="color: #97cd76;"><i class="fa fa-check"></i></span>';
-      } else if (state == "failed") {
-        stateIcon = '<span class="icon" style="color: #ed6c63;"><i class="fa fa-check"></i></span>';
-      }
-      var reason = b.buildReason;
-      var date = b.buildRelativeTime;
-      var absoluteDate = b.prettyBuildCompletedTime;
-      if (b.buildReason.includes("Manual run ")) {
-        reason = b.buildReason;
-      } else if ("vcsRevisionKey" in b) {
-        if (b.buildReason.includes("Rebuilt ")) {
-          reason = '<a target="_blank" href="https://github.com/GlowstoneMC/Glowstone/commit/' + b.vcsRevisionKey + '"><span class="icon"><i class="fa fa-github"></i></span></a>&nbsp;Commit &nbsp;<a target="_blank" href="https://github.com/GlowstoneMC/Glowstone/commit/' + b.vcsRevisionKey + '"><code>' + b.vcsRevisionKey.substr(0, 7) + '</code></a>&nbsp;&nbsp;<span style="color: gray">(Rebuilt)</span>';
-        } else {
-          reason = '<a target="_blank" href="https://github.com/GlowstoneMC/Glowstone/commit/' + b.vcsRevisionKey + '"><span class="icon"><i class="fa fa-github"></i></span></a>&nbsp;Commit &nbsp;<a target="_blank" href="https://github.com/GlowstoneMC/Glowstone/commit/' + b.vcsRevisionKey + '"><code>' + b.vcsRevisionKey.substr(0, 7) + '</code></a>&nbsp;&nbsp;by&nbsp;' + b.buildReason.replace("Changes by ", "");
-        }
-      }
-      var version = '<span style="color: gray">N/A</span>';
-      if (b.labels.size > 0) {
-        version = b.labels.label[0].name.split("_").join(".");
-      }
-      if (b.labels.size > 1) {
-        version += " (<strong>" + b.labels.label[1].name.replace("mc", "").split("_").join(".") + "</strong>)";
-      }
-      var download = '<span class="icon" style="color: #ed6c63;"><i class="fa fa-times"></i></span>';
-      if (b.artifacts.artifact.length > 0) {
-        if (b.state.toLowerCase() == "successful") {
-          download = '<a href="' + b.artifacts.artifact[0].link.href + '"><span class="icon icon-success"><i class="fa fa-download"></i></span></a>';
-        } else {
-          download = '<a href="' + b.artifacts.artifact[0].link.href + '"><span class="icon icon-warning"><i class="fa fa-download"></i></span></a>';
-        }
-      }
-      content += model.replace("{buildnumber}", buildnumber).replace("{date}", date).replace("{reason}", reason).replace("{download}", download).replace("{version}", version).replace("{absolute}", absoluteDate);
-    }
-    $("#builds-parent").html(base.replace("{builds}", content));
-  });
-});
+    $(function () {
+        $.getJSON("https://bamboo.gserv.me/rest/api/latest/result/GSPP-SRV.json?expand=results.result.artifacts,results.result.labels&max-result=10", function (data) {
+            var results = data.results.result;
+            var base =
+                    '<table class="table">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th><span class="icon"><i class="fa fa-server"></i></span></th>' +
+                    '<th>Date</th>' +
+                    '<th>Version</th>' +
+                    '<th>Trigger</th>' +
+                    '<th><span class="icon"><i class="fa fa-download"></i></span></th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>{builds}' +
+                    '</tbody>' +
+                    '</table>';
+            var model =
+                    '<tr>' +
+                    '<td>{buildnumber}</td>' +
+                    '<td title="{absolute}">{date}</td>' +
+                    '<td>{version}</td>' +
+                    '<td>{reason}</td>' +
+                    '<td>{download}</td>' +
+                    '</tr>';
+            var content = "";
+            for (var i = 0; i < results.length; i++) {
+                var b = results[i];
+                var buildnumber = '<a href="https://bamboo.gserv.me/browse/GSPP-SRV-' + b.buildNumber.toString() + '">#' + b.buildNumber.toString() + '</a>';
+                var state = b.state.toLowerCase();
+                var stateIcon = '<span class="icon" style="color: #fce473;"><i class="fa fa-bolt"></i></span>';
+                if (state === "successful") {
+                    stateIcon = '<span class="icon" style="color: #97cd76;"><i class="fa fa-check"></i></span>';
+                } else if (state === "failed") {
+                    stateIcon = '<span class="icon" style="color: #ed6c63;"><i class="fa fa-check"></i></span>';
+                }
+                var reason = b.buildReason;
+                var date = b.buildRelativeTime;
+                var absoluteDate = b.prettyBuildCompletedTime;
+                if (b.buildReason.includes("Manual run ")) {
+                    reason = b.buildReason;
+                } else if ("vcsRevisionKey" in b) {
+                    if (b.buildReason.includes("Rebuilt ")) {
+                        reason = '<a target="_blank" href="https://github.com/GlowstoneMC/Glowstone/commit/' + b.vcsRevisionKey + '"><span class="icon"><i class="fa fa-github"></i></span></a>&nbsp;Commit &nbsp;<a target="_blank" href="https://github.com/GlowstoneMC/Glowstone/commit/' + b.vcsRevisionKey + '"><code>' + b.vcsRevisionKey.substr(0, 7) + '</code></a>&nbsp;&nbsp;<span style="color: gray">(Rebuilt)</span>';
+                    } else {
+                        reason = '<a target="_blank" href="https://github.com/GlowstoneMC/Glowstone/commit/' + b.vcsRevisionKey + '"><span class="icon"><i class="fa fa-github"></i></span></a>&nbsp;Commit &nbsp;<a target="_blank" href="https://github.com/GlowstoneMC/Glowstone/commit/' + b.vcsRevisionKey + '"><code>' + b.vcsRevisionKey.substr(0, 7) + '</code></a>&nbsp;&nbsp;by&nbsp;' + b.buildReason.replace("Changes by ", "");
+                    }
+                }
+                var version = '<span style="color: gray">N/A</span>';
+                if (b.labels.size > 0) {
+                    version = b.labels.label[0].name.split("_").join(".");
+                }
+                if (b.labels.size > 1) {
+                    version += " (<strong>" + b.labels.label[1].name.replace("mc", "").split("_").join(".") + "</strong>)";
+                }
+                var download = '<span class="icon" style="color: #ed6c63;"><i class="fa fa-times"></i></span>';
+                if (b.artifacts.artifact.length > 0) {
+                    if (b.state.toLowerCase() === "successful") {
+                        download = '<a href="' + b.artifacts.artifact[0].link.href + '"><span class="icon icon-success"><i class="fa fa-download"></i></span></a>';
+                    } else {
+                        download = '<a href="' + b.artifacts.artifact[0].link.href + '"><span class="icon icon-warning"><i class="fa fa-download"></i></span></a>';
+                    }
+                }
+                content += model.replace("{buildnumber}", buildnumber).replace("{date}", date).replace("{reason}", reason).replace("{download}", download).replace("{version}", version).replace("{absolute}", absoluteDate);
+            }
+            $("#builds-parent").html(base.replace("{builds}", content));
+        });
+    });
 </script>
 
 <script type="text/javascript">
-function loadAnnouncementsFront(count) {
-  $.getJSON("https://forums.glowstone.net/api/category/12/announcements", function(data) {
-    var topics = [];
-    var index = 0;
-    for (var i = 0; i < data.topics.length; i++) {
-      if (data.topics[i].deleted) {
-        continue;
-      }
-      topics[index++] = data.topics[i];
-    }
-    topics = _.sortBy(topics, "timestamp").reverse();
-    var build = "";
-    for (var i = 0; i < count; i++) {
-      var date = timeDifference(new Date().getTime(), topics[i].timestamp);
-      build += '<a class="announcement-link" target="_blank" data-balloon="' + date + '" data-balloon-pos="up"href="https://forums.glowstone.net/topic/' + topics[i].slug + '">' + topics[i].title + '</a>';
-      if (i < (count - 1)) {
-        build += ", ";
-      }
-    }
-    $("#announcements-titles").html(build);
-    $("#announcements-front").slideDown(500);
-  });
-}
+    function loadAnnouncementsFront(count) {
+        $.getJSON("https://forums.glowstone.net/api/category/12/announcements", function (data) {
+            var topics = [];
+            var index = 0;
+            var i;
 
-loadAnnouncementsFront(3);
+            for (i = 0; i < data.topics.length; i++) {
+                if (data.topics[i].deleted) {
+                    continue;
+                }
+                topics[index++] = data.topics[i];
+            }
+            topics = _.sortBy(topics, "timestamp").reverse();
+            var build = "";
+            for (i = 0; i < count; i++) {
+                var date = timeDifference(new Date().getTime(), topics[i].timestamp);
+                build += '<a class="announcement-link" target="_blank" data-balloon="' + date + '" data-balloon-pos="up"href="https://forums.glowstone.net/topic/' + topics[i].slug + '">' + topics[i].title + '</a>';
+                if (i < (count - 1)) {
+                    build += ", ";
+                }
+            }
+            $("#announcements-titles").html(build);
+            $("#announcements-front").slideDown(500);
+        });
+    }
+
+    loadAnnouncementsFront(3);
 </script>
