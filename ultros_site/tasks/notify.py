@@ -48,8 +48,8 @@ def notify_post(post: NewsPost):
 
     md = post.markdown.replace("\r", "")
 
-    if "\n\n" in md:
-        md = md.split("\n\n")[0].replace("\n", "")
+    if "\n" in md:
+        md = md.split("\n")[0]
 
     md += "\n\n"
     md += "[Click here for more]({})".format(post_url)
