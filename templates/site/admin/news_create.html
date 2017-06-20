@@ -34,6 +34,11 @@
 
         <h1 class="title">News post editor</h1>
 
+        <div class="notification is-warning">
+            Please don't use newlines instead of editor wrapping -
+            it'll break the formatting on external sites
+        </div>
+
         <form action="/admin/news/create" method="post" id="form">
             <input type="hidden" name="_csrf" value="${csrf}" id="csrf"/>
             <input type="hidden" name="content" value="" id="content-input" />
