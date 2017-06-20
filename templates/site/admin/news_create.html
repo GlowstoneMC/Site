@@ -65,7 +65,7 @@
             <div class="columns" id="editor-columns">
                 <div class="column is-half-desktop is-half-tablet is-full-mobile" id="editor"></div>
                 % if not post:
-                <div style="display: none !important;" id="editor_content">Markdown post editor
+                <pre style="display: none !important;" id="editor_content">Markdown post editor
 ====================
 
 If you have JavaScript disabled, **please enable it**.
@@ -86,9 +86,9 @@ Or a table:
 | -------- | --------------------------------- |
 | `Cell 1` | [Cell 2](http://example.com) link |
 | Cell 3   | **Cell 4**                        |
-</div>
+</pre>
                 % else:
-                <div style="display: none !important;" id="editor_content">${post.markdown}</div>
+                <pre style="display: none !important;" id="editor_content">${post.markdown}</pre>
                 % endif
 
                 <div class="column is-half-desktop is-half-tablet is-full-mobile">
