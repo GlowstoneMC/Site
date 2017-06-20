@@ -101,7 +101,6 @@ def send_twitter(title: str, url: str):
 
     for key in TWITTER_NEEDED_KEYS:
         if key not in settings:
-            logging.getLogger("send_twitter").error("Missing setting: {}".format(key))
             return
 
     twitter = twython.Twython(

@@ -11,7 +11,6 @@ class Markdown:
         self.markdown = markdown
         html = markdown2.markdown(
             markdown, extras={
-                "break-on-newline": {},
                 "fenced-code-blocks": {},
                 "header-ids": {},
                 "html-classes": {
