@@ -17,6 +17,17 @@ TWITTER_NEEDED_KEYS = [
     "twitter_oauth_token", "twitter_oauth_token_secret"
 ]
 
+NODEBB_NEEDED_KEYS = [
+    "nodebb_api_key", "nodebb_base_url",
+    "nodebb_category_id", "nodebb_default_user_id"
+]
+
+NODEBB_WRITE_API_PATH = "/api/v1"
+NODEBB_READ_API_PATH = "/api"
+
+NODEBB_READ_EMAIL = "%s/user/email/{}" % NODEBB_READ_API_PATH
+NODEBB_WRITE_POST = "%s/topics"
+
 
 class NotifyTask(Task):
     def __init__(self):
@@ -63,6 +74,13 @@ def notify_post(post: NewsPost):
     app.send_task(
         "send_twitter",
         args=[post.title, post_url]
+    )
+
+    # NodeBB
+
+    app.send_task(
+        "send_nodebb",
+        args=[post.title, post_url, post.markdown, post.user.username, post.user.email]
     )
 
 
@@ -121,3 +139,49 @@ def send_discord(embed: None):
     return session.post(hook_url, json={
         "embeds": embeds
     })
+
+
+@app.task(base=NotifyTask, name="send_nodebb")
+def send_nodebb(title, url, markdown, username, email):
+    session = send_nodebb.database.create_session()
+    settings = {}
+
+    # Load up all NodeBB settings
+
+    try:
+        for setting in session.query(Setting).filter(Setting.key.like("nodebb_%")).all():
+            settings[setting.key] = setting.value
+    except Exception as e:
+        logging.getLogger("send_nodebb").error("Failed to get NodeBB settings: {}".format(e))
+        return
+    finally:
+        session.close()
+
+    # Attempt to find a user object by email
+
+    try:
+        resp = requests.get(NODEBB_READ_EMAIL.format(email))
+    except Exception as e:
+        logging.getLogger("send_nodebb").warning("Failed to find a user for {}: {}".format(email, e))
+        uid = settings["nodebb_default_user_id"]
+        title = "{} (by {})".format(title, username)
+    else:
+        data = resp.json()
+        uid = data["uid"]
+
+    markdown = "{}\n\n*This post was mirrored from [the site]({}).*".format(markdown, url)
+
+    try:
+        resp = requests.post(
+            NODEBB_WRITE_POST, data={
+                "_uid": uid,
+                "cid": settings["nodebb_category_id"],
+                "title": title,
+                "content": markdown
+            },
+            headers={
+                "Authorization": "Bearer {}".format(settings["nodebb_api_key"])
+            }
+        )
+    except Exception as e:
+        logging.getLogger("send_nodebb").error("Unable to create post: {}".format(e))

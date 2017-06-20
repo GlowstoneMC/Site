@@ -84,7 +84,7 @@
                         <div class="field">
                             <label class="label" for="nodebb_api_key">Master API Key</label>
                             <p class="control">
-                                % if "nodebb_base_url" in settings:
+                                % if "nodebb_api_key" in settings:
                                 <input class="input" type="text" name="nodebb_api_key" id="nodebb_api_key" value="${settings["nodebb_api_key"]}" />
                                 % else:
                                 <input class="input" type="text" name="nodebb_api_key" id="nodebb_api_key" />
