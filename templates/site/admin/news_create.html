@@ -63,8 +63,9 @@
                 <br/>
             </div>
             <div class="columns" id="editor-columns">
+                <div class="column is-half-desktop is-half-tablet is-full-mobile" id="editor"></div>
                 % if not post:
-                <div class="column is-half-desktop is-half-tablet is-full-mobile" id="editor">Markdown post editor
+                <div style="display: none !important;" id="editor_content">Markdown post editor
 ====================
 
 If you have JavaScript disabled, **please enable it**.
@@ -87,7 +88,7 @@ Or a table:
 | Cell 3   | **Cell 4**                        |
 </div>
                 % else:
-                <div class="column is-half-desktop is-half-tablet is-full-mobile" id="editor">${post.markdown}</div>
+                <div style="display: none !important;" id="editor_content">${post.markdown}</div>
                 % endif
 
                 <div class="column is-half-desktop is-half-tablet is-full-mobile">
@@ -149,6 +150,10 @@ Or a table:
     editor.setTheme("ace/theme/chrome");
     editor.setOption("wrap", true);
     editor.getSession().setMode("ace/mode/markdown");
+
+    let content_element = document.getElementById("editor_content");
+    let text = content_element.innerText || content_element.textContent;
+    editor.setValue(text, -1)
 </script>
 
 <script type="text/javascript">
