@@ -79,6 +79,52 @@
 
                         <hr />
 
+                        <h2 class="subtitle is-4">NodeBB</h2>
+
+                        <div class="field">
+                            <label class="label" for="nodebb_api_key">Master API Key</label>
+                            <p class="control">
+                                % if "nodebb_base_url" in settings:
+                                <input class="input" type="text" name="nodebb_api_key" id="nodebb_api_key" value="${settings["nodebb_api_key"]}" />
+                                % else:
+                                <input class="input" type="text" name="nodebb_api_key" id="nodebb_api_key" />
+                                % endif
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="nodebb_base_url">Base URL</label>
+                            <p class="control">
+                                % if "nodebb_base_url" in settings:
+                                <input class="input" type="text" name="nodebb_base_url" id="nodebb_base_url" value="${settings["nodebb_base_url"]}" />
+                                % else:
+                                <input class="input" type="text" name="nodebb_base_url" id="nodebb_base_url" />
+                                % endif
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="nodebb_category_id">Category ID</label>
+                            <p class="control">
+                                % if "nodebb_category_id" in settings:
+                                <input class="input" type="text" name="nodebb_category_id" id="nodebb_category_id" value="${settings["nodebb_category_id"]}" />
+                                % else:
+                                <input class="input" type="text" name="nodebb_category_id" id="nodebb_category_id" />
+                                % endif
+                            </p>
+                        </div>
+
+                        <div class="field" title="New posts will be made as this user ID if your site email doesn't match an email on the forum.">
+                            <label class="label" for="nodebb_default_user_id">Default User ID</label>
+                            <p class="control">
+                                % if "nodebb_default_user_id" in settings:
+                                <input class="input" type="text" name="nodebb_default_user_id" id="nodebb_default_user_id" value="${settings["nodebb_default_user_id"]}" />
+                                % else:
+                                <input class="input" type="text" name="nodebb_default_user_id" id="nodebb_default_user_id" />
+                                % endif
+                            </p>
+                        </div>
+
                         <div class="field is-hidden-mobile">
                             <p class="control">
                                 <input type="submit" value="Save" class="button is-primary is-centered submit-button" style="width: 50%; margin: auto; display: block">

@@ -38,6 +38,11 @@ class SettingsRoute(BaseRoute):
         req.get_param("twitter_app_secret", store=params)
         req.get_param("discord_webhook_url", store=params)
 
+        req.get_param("nodebb_api_key", store=params)
+        req.get_param("nodebb_base_url", store=params)
+        req.get_param("nodebb_category_id", store=params)
+        req.get_param("nodebb_default_user_id", store=params)
+
         for key, value in params.items():
             if not value:
                 continue
