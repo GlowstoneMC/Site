@@ -28,12 +28,16 @@ tab = "home"
             <div class="message-body announcements-front" style="color: #3273dc;">
                 <strong>
                     <i class="fa fa-bullhorn" style="font-size: 150%; margin-right: 10px;"></i>
-                    Latest announcements:
+                    Latest news:
                 </strong>
                 <span id="announcements-titles">
-                    <a class="announcement-link" target="_blank" data-balloon="8 days ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/66/glowstone-2017-6-0-and-1-12">Glowstone 2017.6.0 and 1.12</a>,
-                    <a class="announcement-link" target="_blank" data-balloon="16 days ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/65/glowstone-2017-5">Glowstone 2017.5</a>,
-                    <a class="announcement-link" target="_blank" data-balloon="a month ago" data-balloon-pos="up" href="https://forums.glowstone.net/topic/63/the-road-to-1-12">The Road to 1.12</a>
+                    % if news_posts:
+                        % for post in news_posts:
+                            <a class="announcement-link" target="_blank" href="/news/${post.id}">${post.title}</a>
+                        % endfor
+                    % else:
+                        <span class="announcement-link">No news posts found.</span>
+                    % endif
                 </span>
             </div>
         </article>
@@ -261,34 +265,4 @@ tab = "home"
             $("#builds-parent").html(base.replace("{builds}", content));
         });
     });
-</script>
-
-<script type="text/javascript">
-    function loadAnnouncementsFront(count) {
-        $.getJSON("https://forums.glowstone.net/api/category/12/announcements", function (data) {
-            var topics = [];
-            var index = 0;
-            var i;
-
-            for (i = 0; i < data.topics.length; i++) {
-                if (data.topics[i].deleted) {
-                    continue;
-                }
-                topics[index++] = data.topics[i];
-            }
-            topics = _.sortBy(topics, "timestamp").reverse();
-            var build = "";
-            for (i = 0; i < count; i++) {
-                var date = timeDifference(new Date().getTime(), topics[i].timestamp);
-                build += '<a class="announcement-link" target="_blank" data-balloon="' + date + '" data-balloon-pos="up"href="https://forums.glowstone.net/topic/' + topics[i].slug + '">' + topics[i].title + '</a>';
-                if (i < (count - 1)) {
-                    build += ", ";
-                }
-            }
-            $("#announcements-titles").html(build);
-            $("#announcements-front").slideDown(500);
-        });
-    }
-
-    loadAnnouncementsFront(3);
 </script>
