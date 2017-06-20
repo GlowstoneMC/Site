@@ -26,7 +26,7 @@ NODEBB_WRITE_API_PATH = "/api/v1"
 NODEBB_READ_API_PATH = "/api"
 
 NODEBB_READ_EMAIL = "%s/user/email/{}" % NODEBB_READ_API_PATH
-NODEBB_WRITE_POST = "%s/topics"
+NODEBB_WRITE_POST = "%s/topics" % NODEBB_WRITE_API_PATH
 
 
 class NotifyTask(Task):
@@ -157,10 +157,16 @@ def send_nodebb(title, url, markdown, username, email):
     finally:
         session.close()
 
+    for key in NODEBB_NEEDED_KEYS:
+        if key not in settings:
+            return  # Not enough settings available
+
+    nodebb_url = settings["nodebb_base_url"] + "{}"
+
     # Attempt to find a user object by email
 
     try:
-        resp = requests.get(NODEBB_READ_EMAIL.format(email))
+        resp = requests.get(nodebb_url.format(NODEBB_READ_EMAIL.format(email)))
     except Exception as e:
         logging.getLogger("send_nodebb").warning("Failed to find a user for {}: {}".format(email, e))
         uid = settings["nodebb_default_user_id"]
@@ -173,7 +179,7 @@ def send_nodebb(title, url, markdown, username, email):
 
     try:
         resp = requests.post(
-            NODEBB_WRITE_POST, data={
+            nodebb_url.format(NODEBB_WRITE_POST), data={
                 "_uid": uid,
                 "cid": settings["nodebb_category_id"],
                 "title": title,
