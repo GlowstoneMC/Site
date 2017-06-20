@@ -42,7 +42,7 @@ class NotifyTask(Task):
 
 
 def notify_post(post: NewsPost):
-    post_url = "https://glowstone.net/news/{}".format(post.id)
+    post_url = "https://beta.glowstone.net/news/{}".format(post.id)
 
     # Discord
 
@@ -60,7 +60,7 @@ def notify_post(post: NewsPost):
         "url": post_url,
         "author": {
             "name": post.user.username,
-            "url": "https://glowstone.net/"
+            "url": "https://beta.glowstone.net/"
         }
     }
 
