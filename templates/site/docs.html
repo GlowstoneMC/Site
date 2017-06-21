@@ -15,83 +15,119 @@
 <nav class="nav has-shadow" style="padding-left: 1%">
     <div class="container">
         <div class="nav-left">
-            <a class="nav-item is-tab" href="#wiki">Wiki</a>
-            <a class="nav-item is-tab" href="#javadocs">JavaDocs</a>
+            <a class="nav-item is-tab" href="#users">Users</a>
+            <a class="nav-item is-tab" href="#developers">Developers</a>
         </div>
     </div>
 </nav>
 
 <section class="section">
     <div class="container">
-        <h1 class="title" id="wiki">
-            Wiki
-            <a href="#top" title="Jump to top">
-                <span class="icon is-pulled-right is-large">
-                    <i class="fa fa-angle-up is-large"></i>
-                </span>
-            </a>
-        </h1>
+        <h1 class="title" id="users">For Users</h1>
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <article class="tile is-child message is-primary" style="margin: 1rem !important; border: 1px solid #ffa000;">
+                    <div class="message-header">
+                        <p>Wiki</p>
+                        <a href="https://github.com/GlowstoneMC/Glowstone/wiki" style="text-decoration: none !important">
+                            <span class="icon">
+                                <i class="fa fa-link"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="message-body" style="border: none !important;">
+                        The wiki contains plenty of information for new users.
+                        <br /><br />
+                        If you're just setting up a new server or you're curious
+                        about what you can configure, feel free to
+                        <a href="https://github.com/GlowstoneMC/Glowstone/wiki">check it out</a>.
+                    </div>
+                </article>
 
-        <p>
-            The wiki contains information for both users and developers. If you're a new user and
-            you're looking to get set up, then the wiki is where you need to go.
-        </p>
-        <br />
-        <p>
-            Our wiki can be found <a href="https://github.com/GlowstoneMC/Glowstone/wiki">on GitHub</a>.
-        </p>
+                <article class="tile is-child message is-primary" style="margin: 1rem !important; border: 1px solid #ffa000;">
+                    <div class="message-header">
+                        <p>Resources Forum</p>
+                        <a href="https://forums.glowstone.net/category/16/resources" style="text-decoration: none !important">
+                            <span class="icon">
+                                <i class="fa fa-link"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="message-body" style="border: none !important;">
+                        The forum is an ideal place to share resources and find resources that
+                        other users have shared.
+                        <br /><br />
+                        Feel free to take a look at the <a href="https://forums.glowstone.net/category/16/resources">specific category</a>
+                        we created for this purpose.
+                    </div>
+                </article>
+
+                <article class="tile is-child message is-primary" style="margin: 1rem !important; background: none !important;">
+                    <div class="message-body" style="border: none !important;">&nbsp;</div>
+                </article>
+            </div>
+        </div>
     </div>
 </section>
 
 <section class="section">
     <div class="container">
-        <h1 class="title" id="javadocs">
-            JavaDocs
-            <a href="#top" title="Jump to top">
-                <span class="icon is-pulled-right is-large">
-                    <i class="fa fa-angle-up is-large"></i>
-                </span>
-            </a>
-        </h1>
-        <p>
-            JavaDocs are automatically-generated API documentation for developers wishing to work with
-            Glowstone. You can find links to the JavaDocs for each project below.
-        </p>
-        <br />
-        <div class="tile is-ancestor is-parent">
-            <div class="tile is-child is-6">
-                <h2 class="subtitle">
-                    Glowkit
-                    <a class="is-pulled-right" style="padding-right: 0.5rem;" href="#">
-                        JavaDocs
-                        <span class="icon">
-                            <i class="fa fa-link"></i>
-                        </span>
-                    </a>
-                </h2>
-                <p>
-                    Glowkit is our fork of PaperSpigot's fork of the Bukkit API. It provides
-                    developer-friendly APIs and allows plugins to target a myriad of
-                    Bukkit-supporting servers.
-                    <br />
-                    <br />
-                </p>
-            </div>
-            <div class="tile is-child is-6">
-                <h2 class="subtitle">
-                    Glowstone
-                    <a class="is-pulled-right" style="padding-right: 0.5rem;" href="#">
-                        JavaDocs
-                        <span class="icon">
-                            <i class="fa fa-link"></i>
-                        </span>
-                    </a>
-                </h2>
-                <p>
-                    Glowstone is our server software. The JavaDocs are provided here for developers
-                    of plugins which require access to server internals, and also for contributors
-                    to the main project.
-                </p>
+        <h1 class="title" id="developers">For Developers</h1>
+        <div class="tile is-ancestor">
+            <div class="tile is-parent">
+                <article class="tile is-child message is-primary" style="margin: 1rem !important; border: 1px solid #ffa000;">
+                    <div class="message-header">
+                        <p>Contributor Documentation</p>
+                        <a href="https://github.com/GlowstoneMC/Glowstone/wiki#contributing" style="text-decoration: none !important">
+                            <span class="icon">
+                                <i class="fa fa-link"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="message-body" style="border: none !important;">
+                        If you're interested in contributing to the project, there's a section on
+                        <a href="https://github.com/GlowstoneMC/Glowstone/wiki#contributing" >the wiki</a> just for you!
+                        <br /><br />
+                        Please remember that we're a small team though &mdash; please don't be offended if we
+                        take a while to respond to your pull requests!
+                    </div>
+                </article>
+
+                <article class="tile is-child message is-primary" style="margin: 1rem !important; border: 1px solid #ffa000;">
+                    <div class="message-header">
+                        <p>Glowkit JavaDocs</p>
+                        <a href="#" style="text-decoration: none !important">
+                            <span class="icon">
+                                <i class="fa fa-link"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="message-body" style="border: none !important;">
+                        If you're a plugin developer, you can have a look at
+                        <a href="#" >the JavaDocs</a> for our fork of the Bukkit API.
+                        <br /><br />
+                        Glowkit is based on PaperSpigot's Bukkit API fork, and it
+                        supports everything provided by that.
+                    </div>
+                </article>
+
+                <article class="tile is-child message is-primary" style="margin: 1rem !important; border: 1px solid #ffa000;">
+                    <div class="message-header">
+                        <p>Glowstone JavaDocs</p>
+                        <a href="#" style="text-decoration: none !important">
+                            <span class="icon">
+                                <i class="fa fa-link"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="message-body" style="border: none !important;">
+                        If you're interested in contributing or working with Glowstine
+                        internals, take a look at <a href="#" >the JavaDocs</a> for it.
+                        <br /><br />
+                        Please don't be afraid to <a href="http://localhost:8090/community">contact us</a> if you're not
+                        sure how you can contribute!
+                    </div>
+                </article>
             </div>
         </div>
     </div>
