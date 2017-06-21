@@ -1,3 +1,12 @@
+.is-blurple .message-header {
+    background-color: #7289DA !important;
+    color: white !important;
+}
+
+.is-blurple .message {
+    background-color: #7289DA !important;
+}
+
 .link-hover:hover {
     color: #ddd !important;
 }

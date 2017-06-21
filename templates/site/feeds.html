@@ -12,12 +12,129 @@
 <%block name="og_title">Feeds</%block>
 <%block name="og_description">Atom and RSS feeds for your feed reader</%block>
 
+<nav class="nav has-shadow" style="padding-left: 1%">
+    <div class="container">
+        <div class="nav-left">
+##             <a class="nav-item is-tab" h  f="#wiki">Wiki</a>
+##             <a class="nav-item is-tab" href="#javadocs">JavaDocs</a>
+        </div>
+    </div>
+</nav>
+
 <section class="section">
     <div class="container">
         <h1 class="title">
-            Atom/RSS Feeds
+            Feeds
         </h1>
+
         <div class="notification box is-primary feeds-row">
+            <a title="Add to NewsBlur" href="http://www.newsblur.com/?url=https%3A%2F%2Fforums.glowstone.net%2Fpopular.rss" class="button is-warning is-pulled-right">
+                <span class="icon">
+                    <img src="/static/images/newsblur-logo.png" />
+                </span>
+            </a>
+            <a href="https://forums.glowstone.net/popular.rss" class="button is-outlined is-light is-pulled-right">
+                <span class="icon">
+                    <i class="fa fa-rss"></i>
+                </span>
+                <span>
+                    RSS
+                </span>
+            </a>
+            <a class="button is-outlined is-light is-pulled-right is-static" disabled>
+                <span class="icon">
+                    <i class="fa fa-rss"></i>
+                </span>
+                <span>
+                    Atom
+                </span>
+            </a>
+            <a href="https://forums.glowstone.net/popular" class="button is-outlined is-light is-pulled-right">
+                <span class="icon">
+                    <i class="fa fa-link"></i>
+                </span>
+                <span>
+                    View
+                </span>
+            </a>
+
+            <h1 class="title">Forum: Popular Posts</h1>
+        </div>
+
+        <div class="notification box is-primary feeds-row">
+            <a title="Add to NewsBlur" href="http://www.newsblur.com/?url=https%3A%2F%2Fforums.glowstone.net%2Frecentposts.rss" class="button is-warning is-pulled-right">
+                <span class="icon">
+                    <img src="/static/images/newsblur-logo.png" />
+                </span>
+            </a>
+            <a href="https://forums.glowstone.net/recentposts.rss" class="button is-outlined is-light is-pulled-right">
+                <span class="icon">
+                    <i class="fa fa-rss"></i>
+                </span>
+                <span>
+                    RSS
+                </span>
+            </a>
+            <a class="button is-outlined is-light is-pulled-right is-static" disabled>
+                <span class="icon">
+                    <i class="fa fa-rss"></i>
+                </span>
+                <span>
+                    Atom
+                </span>
+            </a>
+            <a href="https://forums.glowstone.net/recent" class="button is-outlined is-light is-pulled-right">
+                <span class="icon">
+                    <i class="fa fa-link"></i>
+                </span>
+                <span>
+                    View
+                </span>
+            </a>
+
+            <h1 class="title">Forum: Recent Posts</h1>
+        </div>
+
+        <div class="notification box is-primary feeds-row">
+            <a title="Add to NewsBlur" href="http://www.newsblur.com/?url=https%3A%2F%2Fforums.glowstone.net%2Frecent.rss" class="button is-warning is-pulled-right">
+                <span class="icon">
+                    <img src="/static/images/newsblur-logo.png" />
+                </span>
+            </a>
+            <a href="https://forums.glowstone.net/recent.rss" class="button is-outlined is-light is-pulled-right">
+                <span class="icon">
+                    <i class="fa fa-rss"></i>
+                </span>
+                <span>
+                    RSS
+                </span>
+            </a>
+            <a class="button is-outlined is-light is-pulled-right is-static" disabled>
+                <span class="icon">
+                    <i class="fa fa-rss"></i>
+                </span>
+                <span>
+                    Atom
+                </span>
+            </a>
+            <a href="https://forums.glowstone.net/recent" class="button is-outlined is-light is-pulled-right">
+                <span class="icon">
+                    <i class="fa fa-link"></i>
+                </span>
+                <span>
+                    View
+                </span>
+            </a>
+
+            <h1 class="title">Forum: Recent Topics</h1>
+        </div>
+
+        <div class="notification box is-primary feeds-row">
+            <a title="Add to NewsBlur" href="http://www.newsblur.com/?url=https%3A%2F%2Fbeta.glowstone.net%2Ffeeds%2Fatom%2Fnews" class="button is-warning is-pulled-right">
+                <span class="icon">
+                    <img src="/static/images/newsblur-logo.png" />
+                </span>
+            </a>
             <a href="/feeds/rss/news" class="button is-outlined is-light is-pulled-right">
                 <span class="icon">
                     <i class="fa fa-rss"></i>
@@ -43,7 +160,7 @@
                 </span>
             </a>
 
-            <h1 class="title">News</h1>
+            <h1 class="title">Site: Latest News</h1>
         </div>
     </div>
 </section>
