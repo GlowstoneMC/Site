@@ -41,16 +41,11 @@
                         <span class="icon is-success">
                             <i class="fa fa-check"></i>
                         </span>
-                        <a class="button is-warning is-small is-pulled-right" title="Force verification (Already verified)" disabled>
-                            <span class="icon">
-                                <i class="fa fa-check-circle"></i>
-                            </span>
-                        </a>
                     % else:
                         <span class="icon is-danger">
                             <i class="fa fa-times"></i>
                         </span>
-                        <a class="button is-warning is-small is-pulled-right" href="/admin/users/verify/${user.id}?_csrf=${csrf}" title="Force verification">
+                        <a class="button is-success is-small is-pulled-right" href="/admin/users/verify/${user.id}?_csrf=${csrf}" title="Force verification">
                             <span class="icon">
                                 <i class="fa fa-check-circle"></i>
                             </span>
@@ -77,12 +72,6 @@
                                     <i class="fa fa-arrow-circle-down"></i>
                                 </span>
                             </a>
-                        % else:
-                            <a class="button is-danger is-small is-pulled-right" title="Demote (Protected user)" disabled>
-                                <span class="icon">
-                                    <i class="fa fa-arrow-circle-down"></i>
-                                </span>
-                            </a>
                         % endif
                     % endif
                 </td>
@@ -100,11 +89,6 @@
                     <span class="icon is-danger">
                         <i class="fa fa-times"></i>
                     </span>
-                    <a class="button is-danger is-small is-pulled-right" title="Disable MFA (Already disabled)" disabled>
-                        <span class="icon">
-                            <i class="fa fa-times-circle"></i>
-                        </span>
-                    </a>
                     % endif
                 </td>
                 <td>
@@ -129,13 +113,7 @@
                     % endif
                 </td>
                 <td>
-                    % if user.id == _context["user"].id or user.username == immune_user:
-                    <a class="button is-danger is-small" title="Delete (Protected user)" disabled>
-                        <span class="icon">
-                            <i class="fa fa-trash-o"></i>
-                        </span>
-                    </a>
-                    % else:
+                    % if user.id != _context["user"].id and user.username != immune_user:
                     <a class="button is-danger is-small" href="/admin/users/delete/${user.id}?_csrf=${csrf}" title="Delete" >
                         <span class="icon">
                             <i class="fa fa-trash-o"></i>
