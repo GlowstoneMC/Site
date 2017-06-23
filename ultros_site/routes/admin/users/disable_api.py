@@ -4,7 +4,6 @@ import re
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.base_sink import BaseSink
-from ultros_site.database.schema.backup_code import BackupCode
 from ultros_site.database.schema.user import User
 from ultros_site.decorators import check_csrf, check_admin
 from ultros_site.message import Message
