@@ -22,10 +22,11 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Created</th>
-                <th>Verified</th>
-                <th>Admin</th>
-                <th>MFA</th>
-                <th>Actions</th>
+                <th style="min-width: 6rem;">Verified</th>
+                <th style="min-width: 6rem;">Admin</th>
+                <th style="min-width: 6rem;">MFA</th>
+                <th style="min-width: 6rem;">API</th>
+                <th style="min-width: 6rem;"></th>
             </tr>
             </thead>
             <tbody>
@@ -40,113 +41,108 @@
                         <span class="icon is-success">
                             <i class="fa fa-check"></i>
                         </span>
+                        <a class="button is-warning is-small is-pulled-right" title="Force verification (Already verified)" disabled>
+                            <span class="icon">
+                                <i class="fa fa-check-circle"></i>
+                            </span>
+                        </a>
                     % else:
                         <span class="icon is-danger">
                             <i class="fa fa-times"></i>
                         </span>
+                        <a class="button is-warning is-small is-pulled-right" href="/admin/users/verify/${user.id}?_csrf=${csrf}" title="Force verification">
+                            <span class="icon">
+                                <i class="fa fa-check-circle"></i>
+                            </span>
+                        </a>
                     % endif
                 </td>
                 <td>
-                    % if user.admin:
+                    % if not user.admin:
+                    <span class="icon is-danger">
+                        <i class="fa fa-times"></i>
+                    </span>
+                    <a class="button is-success is-small is-pulled-right" href="/admin/users/promote/${user.id}?_csrf=${csrf}" title="Promote">
+                        <span class="icon">
+                            <i class="fa-arrow-circle-up"></i>
+                        </span>
+                    </a>
+                    % else:
                         <span class="icon is-success">
                             <i class="fa fa-check"></i>
                         </span>
-                    % else:
-                        <span class="icon is-danger">
-                            <i class="fa fa-times"></i>
-                        </span>
+                        % if user.username != immune_user and user.id != _context["user"].id:
+                            <a class="button is-danger is-small is-pulled-right" href="/admin/users/demote/${user.id}?_csrf=${csrf}" title="Demote">
+                                <span class="icon">
+                                    <i class="fa fa-arrow-circle-down"></i>
+                                </span>
+                            </a>
+                        % else:
+                            <a class="button is-danger is-small is-pulled-right" title="Demote (Protected user)" disabled>
+                                <span class="icon">
+                                    <i class="fa fa-arrow-circle-down"></i>
+                                </span>
+                            </a>
+                        % endif
                     % endif
                 </td>
                 <td>
                     % if user.mfa_token:
-                        <span class="icon is-success">
-                            <i class="fa fa-check"></i>
+                    <span class="icon is-success">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    <a class="button is-danger is-small is-pulled-right" href="/admin/users/disable_mfa/${user.id}?_csrf=${csrf}" title="Disable MFA">
+                        <span class="icon">
+                            <i class="fa fa-times-circle"></i>
                         </span>
+                    </a>
                     % else:
-                        <span class="icon is-danger">
-                            <i class="fa fa-times"></i>
+                    <span class="icon is-danger">
+                        <i class="fa fa-times"></i>
+                    </span>
+                    <a class="button is-danger is-small is-pulled-right" title="Disable MFA (Already disabled)" disabled>
+                        <span class="icon">
+                            <i class="fa fa-times-circle"></i>
                         </span>
+                    </a>
+                    % endif
+                </td>
+                <td>
+                    % if user.api_enabled:
+                    <span class="icon is-success">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    <a class="button is-danger is-small is-pulled-right" href="/admin/users/disable_api/${user.id}?_csrf=${csrf}" title="Revoke API access">
+                        <span class="icon">
+                            <i class="fa fa-times-circle"></i>
+                        </span>
+                    </a>
+                    % else:
+                    <span class="icon is-danger">
+                        <i class="fa fa-times"></i>
+                    </span>
+                    <a class="button is-success is-small is-pulled-right" href="/admin/users/enable_api/${user.id}?_csrf=${csrf}" title="Grant API access">
+                        <span class="icon">
+                            <i class="fa fa-check-circle"></i>
+                        </span>
+                    </a>
                     % endif
                 </td>
                 <td>
                     % if user.id == _context["user"].id or user.username == immune_user:
-                    <a class="button is-danger is-small" disabled>
+                    <a class="button is-danger is-small" title="Delete (Protected user)" disabled>
                         <span class="icon">
-                            <i class="fa fa-trash"></i>
+                            <i class="fa fa-trash-o"></i>
                         </span>
-                        <span>&nbsp;Delete</span>
                     </a>
                     % else:
-                    <a class="button is-danger is-small" href="/admin/users/delete/${user.id}?_csrf=${csrf}">
+                    <a class="button is-danger is-small" href="/admin/users/delete/${user.id}?_csrf=${csrf}" title="Delete" >
                         <span class="icon">
-                            <i class="fa fa-trash"></i>
+                            <i class="fa fa-trash-o"></i>
                         </span>
-                        <span>&nbsp;Delete</span>
                     </a>
                     % endif
 
-                    &nbsp;
-
-                    % if not user.admin:
-                    <a class="button is-info is-small" href="/admin/users/promote/${user.id}?_csrf=${csrf}">
-                        <span class="icon">
-                            <i class="fa fa-arrow-up"></i>
-                        </span>
-                        <span>&nbsp;Promote</span>
-                    </a>
-                    % else:
-                        % if user.username != immune_user and user.id != _context["user"].id:
-                            <a class="button is-info is-small" href="/admin/users/demote/${user.id}?_csrf=${csrf}">
-                                <span class="icon">
-                                    <i class="fa fa-arrow-down"></i>
-                                </span>
-                                <span>&nbsp;Demote&nbsp;</span>
-                            </a>
-                        % else:
-                            <a class="button is-info is-small is-disabled" disabled>
-                                <span class="icon">
-                                    <i class="fa fa-arrow-down"></i>
-                                </span>
-                                <span>&nbsp;Demote&nbsp;</span>
-                            </a>
-                        % endif
-                    % endif
-
-                    &nbsp;
-
-                    % if user.mfa_token:
-                    <a class="button is-warning is-small" href="/admin/users/disable_mfa/${user.id}?_csrf=${csrf}">
-                        <span class="icon">
-                            <i class="fa fa-times"></i>
-                        </span>
-                        <span>&nbsp;Disable MFA</span>
-                    </a>
-                    % else:
-                    <a class="button is-warning is-small is-disabled" disabled>
-                        <span class="icon">
-                            <i class="fa fa-times"></i>
-                        </span>
-                        <span>&nbsp;Disable MFA</span>
-                    </a>
-                    % endif
-
-                    &nbsp;
-
-                    % if not user.email_verified:
-                    <a class="button is-success is-small" href="/admin/users/verify/${user.id}?_csrf=${csrf}">
-                        <span class="icon">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span>&nbsp;Verify</span>
-                    </a>
-                    % else:
-                    <a class="button is-success is-small is-disabled" disabled>
-                        <span class="icon">
-                            <i class="fa fa-check"></i>
-                        </span>
-                        <span>&nbsp;Verify</span>
-                    </a>
-                    % endif
                 </td>
             </tr>
             % endfor
@@ -157,10 +153,11 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Created</th>
-                <th>Verified</th>
-                <th>Admin</th>
-                <th>MFA</th>
-                <th>Actions</th>
+                <th style="min-width: 6rem;">Verified</th>
+                <th style="min-width: 6rem;">Admin</th>
+                <th style="min-width: 6rem;">MFA</th>
+                <th style="min-width: 6rem;">API</th>
+                <th style="min-width: 6rem;"></th>
             </tr>
             </tfoot>
         </table>
