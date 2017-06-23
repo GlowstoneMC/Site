@@ -22,7 +22,7 @@ class User(DeclarativeBase):
     mfa_token = Column(String(length=16), nullable=True)
     mfa_enabled = Column(Boolean, default=False)
 
-    api_enabled = Column(Boolean, default=True)
+    api_enabled = Column(Boolean, default=False)
 
     sessions = relationship("Session", back_populates="user", cascade="all, delete, delete-orphan")
     backup_codes = relationship("BackupCode", back_populates="user", cascade="all, delete, delete-orphan")

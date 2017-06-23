@@ -25,7 +25,10 @@ class ProfileRoute(BaseRoute):
 
             return self.render_template(
                 req, resp, "message_gate.html",
-                gate_message=Message("danger", "Access revoked", "Your API access has been revoked by staff."),
+                gate_message=Message(
+                    "danger", "No access",
+                    "You don't have API access - please contact a member of staff if you need it."
+                ),
                 redirect_uri="/"
             )
 
@@ -59,7 +62,10 @@ class ProfileRoute(BaseRoute):
 
             return self.render_template(
                 req, resp, "message_gate.html",
-                gate_message=Message("danger", "Access revoked", "Your API access has been revoked by staff."),
+                gate_message=Message(
+                    "danger", "No access",
+                    "You don't have API access - please contact a member of staff if you need it."
+                ),
                 redirect_uri="/"
             )
 

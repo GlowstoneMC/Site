@@ -59,6 +59,7 @@
                                 Settings
                             </span>
                         </a>
+                        % if user.api_enabled:
                         <a class="button is-success" href="/profile/api_keys" style="margin: 0.25rem;">
                             <span class="icon">
                                 <i class="fa fa-key"></i>
@@ -67,6 +68,14 @@
                                 API Keys
                             </span>
                         </a>
+                        % else:
+                        <hr />
+                            % if user.admin:
+                            Your account doesn't have API access - grant it in <a href="/admin/users/">user management</a>.
+                            % else:
+                            Your account doesn't have API access - please contact a member of staff if you need
+                            % endif
+                        % endif
                     </div>
                     % endif
                 </div>
