@@ -22,14 +22,17 @@ class User(DeclarativeBase):
     mfa_token = Column(String(length=16), nullable=True)
     mfa_enabled = Column(Boolean, default=False)
 
+    api_enabled = Column(Boolean, default=True)
+
     sessions = relationship("Session", back_populates="user", cascade="all, delete, delete-orphan")
     backup_codes = relationship("BackupCode", back_populates="user", cascade="all, delete, delete-orphan")
     email_code = relationship("EmailCode", back_populates="user", uselist=False, cascade="all, delete, delete-orphan")
     news_posts = relationship("NewsPost", back_populates="user", cascade="all, delete, delete-orphan")
+    api_keys = relationship("APIKey", back_populates="user", cascade="all, delete, delete-orphan")
 
     def __repr__(self):
-        return "<{}(id={}, username={}, email={}, verified={}, sessions={}, news_posts={})>".format(
+        return "<{}(id={}, username={}, email={}, verified={}, sessions={}, news_posts={}, api_enabled={})>".format(
             self.__class__.__name__,
             self.id, self.username, self.email, self.email_verified, len(self.sessions),
-            len(self.news_posts)
+            len(self.news_posts), self.api_enabled
         )
