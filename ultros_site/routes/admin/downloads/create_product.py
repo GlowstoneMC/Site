@@ -2,7 +2,7 @@
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.base_route import BaseRoute
-from ultros_site.database.schema.builds import Product
+from ultros_site.database.schema.product import Product
 from ultros_site.decorators import check_admin, add_csrf, check_csrf
 from ultros_site.message import Message
 
@@ -10,7 +10,7 @@ __author__ = "Momo"
 
 
 class CreateProductRoute(BaseRoute):
-    route = "/admin/downloads/create-product"
+    route = "/admin/products/create"
 
     @check_admin
     @add_csrf
@@ -22,49 +22,72 @@ class CreateProductRoute(BaseRoute):
 
     @check_admin
     @check_csrf
+    @add_csrf
     def on_post(self, req, resp):
         params = {}
         db_session = req.context["db_session"]
 
         if not req.get_param("product_name", store=params) \
+                or not req.get_param("product_order", store=params) \
                 or not req.get_param("github_url", store=params) \
                 or not req.get_param("circleci_url", store=params) \
                 or not req.get_param("visibility", store=params):
+
+            if req.get_param("product_id", store=params):
+                resp.append_header("Refresh", "/admin/products/edit?product={}".format(params["product_id"]))
+
+                return self.render_template(
+                    req, resp, "admin/message_gate.html",
+                    gate_message=Message("danger", "Missing input", "Please fill out the entire form"),
+                    redirect_uri="/admin/products/edit?product={}".format(params["product_id"])
+                )
+
+            resp.append_header("Refresh", "/admin/products/create")
+
             return self.render_template(
-                req, resp, "admin/product_create.html",
-                message=Message("danger", "Missing input", "Please fill out the entire form"),
-                csrf=resp.csrf
+                req, resp, "admin/message_gate.html",
+                gate_message=Message("danger", "Missing input", "Please fill out the entire form"),
+                redirect_uri="/admin/products/create"
             )
 
-        try:
-            product = db_session.query(Product).filter_by(id=params["product_name"]).one()
-        except NoResultFound:
-            index = db_session.query(Product).count()
+        resp.append_header("Refresh", "5;url=/admin/products")
+
+        if not req.get_param("product_id", store=params):
             product = Product(
-                id=params["product_name"], index=index, hidden=params["visibility"] == "Hidden",
+                name=params["product_name"], order=params["product_order"], hidden=params["visibility"] == "Hidden",
                 url_github=params["github_url"], url_circleci=params["circleci_url"]
             )
             db_session.add(product)
-
-            resp.append_header("Refresh", "5;url=/admin/downloads")
 
             return self.render_template(
                 req, resp, "admin/message_gate.html",
                 gate_message=Message(
                     "info", "Product created", "Your product has been created."
                 ),
-                redirect_uri="/admin/downloads"
+                redirect_uri="/admin/products"
+            )
+
+        try:
+            product = db_session.query(Product).filter_by(id=int(params["product_id"])).one()
+        except NoResultFound:
+            return self.render_template(
+                req, resp, "admin/message_gate.html",
+                gate_message=Message(
+                    "danger", "Error", "No such product: {}".format(params["post_id"])
+                ),
+                redirect_uri="/admin/products"
             )
         else:
-            # edit
+            product.name = params["product_name"]
+            product.order = int(params["product_order"])
             product.hidden = params["visibility"] == "Hidden"
             product.url_github = params["github_url"]
             product.url_circleci = params["circleci_url"]
-            resp.append_header("Refresh", "5;url=/admin/downloads")
+
             return self.render_template(
                 req, resp, "admin/message_gate.html",
                 gate_message=Message(
                     "info", "Product edited", "Your product has been edited."
                 ),
-                redirect_uri="/admin/downloads"
+                redirect_uri="/admin/products"
             )

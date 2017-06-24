@@ -2,23 +2,25 @@
 
 ## Current tab for navigation
 <%!
-    tab = "admin_downloads"
+    tab = "admin_products"
 %>
 
 ## SEO Stuff
-<%block name="title">Admin/Downloads &middot; Glowstone</%block>
-<%block name="description">Administration area - Downloads</%block>
+<%block name="title">Admin/Products &middot; Glowstone</%block>
+<%block name="description">Administration area - Products</%block>
 
-<%block name="og_title">Admin/Downloads</%block>
-<%block name="og_description">Administration area - Downloads</%block>
+<%block name="og_title">Admin/Products</%block>
+<%block name="og_description">Administration area - Products</%block>
 
 <section class="section">
     <div class="container">
-        <h1 class="title">Products list</h1>
+        <h1 class="title">Products</h1>
         <table class="table is-bordered is-striped">
             <thead>
             <tr>
-                <th>Name (ID)</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Order</th>
                 <th>Visibility</th>
                 <th>Actions</th>
             </tr>
@@ -27,6 +29,8 @@
             % for p in products:
             <tr>
                 <td><strong>${p.id}</strong></td>
+                <td><strong>${p.name}</strong></td>
+                <td><strong>${p.order}</strong></td>
                 <td>
                     % if p.hidden:
                     <span class="icon is-danger">
@@ -39,12 +43,12 @@
                     % endif
                 </td>
                 <td style="max-width: 1rem">
-                    <a class="button is-danger is-small" href="/admin/downloads/delete-product/${p.id}?_csrf=${csrf}" title="Delete" >
+                    <a class="button is-danger is-small" href="/admin/products/delete/${p.id}?_csrf=${csrf}" title="Delete" >
                         <span class="icon">
                             <i class="fa fa-trash-o"></i>
                         </span>
                     </a>
-                    <a class="button is-warning is-small" href="/admin/downloads/edit-product/${p.id}" title="Edit" >
+                    <a class="button is-warning is-small" href="/admin/products/edit?product=${p.id}" title="Edit" >
                         <span class="icon">
                             <i class="fa fa-pencil"></i>
                         </span>
@@ -55,13 +59,15 @@
             </tbody>
             <tfoot>
             <tr>
-                <th>Name (ID)</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Order</th>
                 <th>Visibility</th>
                 <th>Actions</th>
             </tr>
             </tfoot>
         </table>
-        <a href="/admin/downloads/create-product?_csrf=${csrf}" title="Create product" >
+        <a href="/admin/products/create" title="Create product" >
             <button class="button is-primary"><span class="icon"><i class="fa fa-plus"></i></span> &nbsp; Create product</button>
         </a>
     </div>

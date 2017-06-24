@@ -37,6 +37,10 @@ def check_csrf(func):
 
         if post_token not in cookies:
             log.debug("CSRF tokens don't match")
+            log.debug("Given: {}".format(post_token))
+            log.debug("Expected: {}".format(" / ".join(cookies)))
+            log.debug("All cookies: {}".format(cookies_string))
+
             raise HTTPBadRequest(
                 "Missing CSRF token",
                 "The CSRF tokens do not match."
@@ -50,7 +54,7 @@ def add_csrf(func):
     def inner(self, req, resp, *args, **kwargs):
         token = secrets.token_urlsafe(32)
 
-        resp.set_cookie("_csrf", token, secure=False)
+        resp.set_cookie("_csrf", token, secure=False, http_only=False)
         resp.csrf = token
 
         return func(self, req, resp, *args, **kwargs)

@@ -6,11 +6,11 @@
 %>
 
 ## SEO Stuff
-<%block name="title">Downloads &middot; ${product.id}</%block>
-<%block name="description">Documentation for users and developers</%block>
+<%block name="title">Downloads/${product.name} &middot; Glowstone</%block>
+<%block name="description">Downloads for ${product.name}</%block>
 
-<%block name="og_title">Docs</%block>
-<%block name="og_description">Documentation for users and developers</%block>
+<%block name="og_title">Downloads/${product.name}</%block>
+<%block name="og_description">Downloads for ${product.name}</%block>
 
 <nav class="nav has-shadow" style="padding-left: 1%">
     <div class="container">
@@ -21,7 +21,7 @@
                     % if p == product:
                         is-active
                     % endif
-                >" href="/downloads/${p.id}">${p.id}</a>
+                >" href="/downloads/${p.id}">${p.name}</a>
                 % endif
             % endfor
         </div>

@@ -19,26 +19,42 @@
                 <div class="card-content">
                     <h1 class="title has-text-centered">
                         % if product:
-                            Edit Product
+                        Edit Product
                         % else:
-                            Create Product
+                        Create Product
                         % endif
                     </h1>
 
                     <hr />
 
-                    <form action="/admin/downloads/create-product" method="post" id="create-form">
+                    <form action="/admin/products/create" method="post" id="create-form">
                         <input type="hidden" name="_csrf" value="${csrf}" />
 
                         <h2 class="subtitle is-4">Identification</h2>
 
                         <div class="field">
-                            <label class="label" for="product_name">Name (ID)</label>
+                            % if product:
+                            <input class="input" type="hidden" name="product_id" id="product_id" value="${product.id}" />
+                            <label class="label" for="product_name">Name</label>
+                            % else:
+                            <label class="label" for="product_name">Name</label>
+                            % endif
                             <p class="control">
                                 % if product:
-                                    <input class="input" type="text" name="product_name" id="product_name" value="${product.id}" disabled />
+                                <input class="input" type="text" name="product_name" id="product_name" value="${product.name}" required />
                                 % else:
-                                    <input class="input" type="text" name="product_name" id="product_name" />
+                                <input class="input" type="text" name="product_name" id="product_name" required />
+                                % endif
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="product_order">Order</label>
+                            <p class="control">
+                                % if product:
+                                <input class="input" type="number" min="0" name="product_order" id="product_order" value="${product.order}" required />
+                                % else:
+                                <input class="input" type="number" min="0" name="product_order" id="product_order" value="1" required />
                                 % endif
                             </p>
                         </div>
@@ -51,9 +67,9 @@
                             <label class="label" for="github_url">Github Repository</label>
                             <p class="control">
                                 % if product:
-                                    <input class="input" type="text" name="github_url" id="github_url" value="${product.url_github}" />
+                                <input class="input" type="text" name="github_url" id="github_url" value="${product.url_github}" required />
                                 % else:
-                                    <input class="input" type="text" name="github_url" id="github_url" />
+                                <input class="input" type="text" name="github_url" id="github_url" required />
                                 % endif
                             </p>
                         </div>
@@ -62,9 +78,9 @@
                             <label class="label" for="circleci_url">CircleCI URL</label>
                             <p class="control">
                                 % if product:
-                                    <input class="input" type="text" name="circleci_url" id="circleci_url" value="${product.url_circleci}" />
+                                <input class="input" type="text" name="circleci_url" id="circleci_url" value="${product.url_circleci}" required />
                                 % else:
-                                    <input class="input" type="text" name="circleci_url" id="circleci_url" />
+                                <input class="input" type="text" name="circleci_url" id="circleci_url" required />
                                 % endif
                             </p>
                         </div>
@@ -78,15 +94,15 @@
                             <p class="control">
                                 % if product:
                                     % if product.hidden:
-                                        <input type="radio" name="visibility" value="Visible"> Visible<br>
-                                        <input type="radio" name="visibility" value="Hidden" checked> Hidden
+                                    <input type="radio" name="visibility" value="Visible"> Visible<br />
+                                    <input type="radio" name="visibility" value="Hidden" checked> Hidden
                                     % else:
-                                        <input type="radio" name="visibility" value="Visible" checked> Visible<br>
-                                        <input type="radio" name="visibility" value="Hidden"> Hidden
+                                    <input type="radio" name="visibility" value="Visible" checked> Visible<br />
+                                    <input type="radio" name="visibility" value="Hidden"> Hidden
                                     % endif
                                 % else:
-                                    <input type="radio" name="visibility" value="Visible" checked> Visible<br>
-                                    <input type="radio" name="visibility" value="Hidden"> Hidden
+                                <input type="radio" name="visibility" value="Visible" checked> Visible<br />
+                                <input type="radio" name="visibility" value="Hidden"> Hidden
                                 % endif
                             </p>
                         </div>
