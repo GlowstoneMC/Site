@@ -14,4 +14,3 @@ class Product(DeclarativeBase):
     hidden = Column(Boolean)
     url_github = Column(String)
     url_circleci = Column(String)
-
