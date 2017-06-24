@@ -50,7 +50,7 @@ class CreateNewsRoute(BaseRoute):
             post = NewsPost(
                 user=req.context["user"], posted=datetime.datetime.now(),
                 title=params["title"], markdown=markdown.markdown,
-                html=markdown.html
+                html=markdown.html, summary=markdown.summary
             )
 
             db_session.add(post)
@@ -80,6 +80,7 @@ class CreateNewsRoute(BaseRoute):
                 post.title = params["title"]
                 post.markdown = markdown.markdown
                 post.html = markdown.html
+                post.summary = markdown.summary
 
                 return self.render_template(
                     req, resp, "admin/message_gate.html",

@@ -22,6 +22,7 @@ class Markdown:
         )
 
         self.html = self.add_classes(html)
+        self.summary = self.get_summary(html)
 
     def add_classes(self, html):
         soup = BeautifulSoup(html, "html.parser")
@@ -35,3 +36,9 @@ class Markdown:
             tag["class"] = "subtitle"
 
         return str(soup)
+
+    def get_summary(self, html):
+        soup = BeautifulSoup(html, "html.parser")
+        text = soup.get_text(separator=" ")
+
+        return text.split("\n", 1)[0].strip()

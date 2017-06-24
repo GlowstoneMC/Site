@@ -46,10 +46,7 @@ def notify_post(post: NewsPost):
 
     # Discord
 
-    md = post.markdown.replace("\r", "")
-
-    if "\n" in md:
-        md = md.split("\n")[0]
+    md = post.summary
 
     md += "\n\n"
     md += "[Click here for more]({})".format(post_url)

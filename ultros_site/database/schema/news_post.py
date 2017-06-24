@@ -20,6 +20,7 @@ class NewsPost(DeclarativeBase):
     title = Column(String)
     markdown = Column(String)
     html = Column(String)
+    summary = Column(String, default=None)
 
     def __repr__(self):
         return "<{}(user={}, title={}. posted={})>".format(
