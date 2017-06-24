@@ -15,58 +15,63 @@
 <section class="section">
     <div class="container">
         <h1 class="title">Products</h1>
-        <table class="table is-bordered is-striped">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Order</th>
-                <th>Visibility</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            % for p in products:
-            <tr>
-                <td><strong>${p.id}</strong></td>
-                <td><strong>${p.name}</strong></td>
-                <td><strong>${p.order}</strong></td>
-                <td>
-                    % if p.hidden:
-                    <span class="icon is-danger">
-                        <i class="fa fa-eye-slash"></i>
-                    </span>
-                    % else:
-                    <span class="icon is-success">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                    % endif
-                </td>
-                <td style="max-width: 1rem">
-                    <a class="button is-danger is-small" href="/admin/products/delete/${p.id}?_csrf=${csrf}" title="Delete" >
-                        <span class="icon">
-                            <i class="fa fa-trash-o"></i>
+        % if not products:
+            <h2 class="subtitle">No products found</h2>
+        % else:
+            <table class="table is-bordered is-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Order</th>
+                    <th>Visibility</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                % for p in products:
+                <tr>
+                    <td><strong>${p.id}</strong></td>
+                    <td><strong>${p.name}</strong></td>
+                    <td><strong>${p.order}</strong></td>
+                    <td>
+                        % if p.hidden:
+                        <span class="icon is-danger">
+                            <i class="fa fa-eye-slash"></i>
                         </span>
-                    </a>
-                    <a class="button is-warning is-small" href="/admin/products/edit?product=${p.id}" title="Edit" >
-                        <span class="icon">
-                            <i class="fa fa-pencil"></i>
+                        % else:
+                        <span class="icon is-success">
+                            <i class="fa fa-eye"></i>
                         </span>
-                    </a>
-                </td>
-            </tr>
-            % endfor
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Order</th>
-                <th>Visibility</th>
-                <th>Actions</th>
-            </tr>
-            </tfoot>
-        </table>
+                        % endif
+                    </td>
+                    <td style="max-width: 1rem">
+                        <a class="button is-danger is-small" href="/admin/products/delete/${p.id}?_csrf=${csrf}" title="Delete" >
+                            <span class="icon">
+                                <i class="fa fa-trash-o"></i>
+                            </span>
+                        </a>
+                        <a class="button is-warning is-small" href="/admin/products/edit?product=${p.id}" title="Edit" >
+                            <span class="icon">
+                                <i class="fa fa-pencil"></i>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+                % endfor
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Order</th>
+                    <th>Visibility</th>
+                    <th>Actions</th>
+                </tr>
+                </tfoot>
+            </table>
+        % endif
+
         <a href="/admin/products/create" title="Create product" >
             <button class="button is-primary"><span class="icon"><i class="fa fa-plus"></i></span> &nbsp; Create product</button>
         </a>
