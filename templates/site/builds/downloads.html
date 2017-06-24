@@ -1,0 +1,37 @@
+<%inherit file="../base.html"/>
+
+## Current tab for navigation
+<%!
+    tab = "downloads"
+%>
+
+## SEO Stuff
+<%block name="title">Downloads &middot; ${product.id}</%block>
+<%block name="description">Documentation for users and developers</%block>
+
+<%block name="og_title">Docs</%block>
+<%block name="og_description">Documentation for users and developers</%block>
+
+<nav class="nav has-shadow" style="padding-left: 1%">
+    <div class="container">
+        <div class="nav-left">
+            % for p in products:
+                % if not p.hidden:
+                <a class="nav-item is-tab
+                    % if p == product:
+                        is-active
+                    % endif
+                >" href="/downloads/${p.id}">${p.id}</a>
+                % endif
+            % endfor
+        </div>
+    </div>
+</nav>
+
+<section class="section">
+    <div class="container">
+        
+    </div>
+</section>
+
+<%include file="../sponsors.html" />

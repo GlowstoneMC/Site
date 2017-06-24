@@ -1,0 +1,109 @@
+<%inherit file="base.html"/>
+
+## Current tab for navigation
+<%!
+    tab = "admin_downloads"
+%>
+
+## SEO Stuff
+<%block name="title">Admin/Create Product &middot; Glowstone</%block>
+<%block name="description">Administration area - Create Product</%block>
+
+<%block name="og_title">Admin/Create Product</%block>
+<%block name="og_description">Administration area - Create Product</%block>
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="box card column is-half is-offset-one-quarter">
+                <div class="card-content">
+                    <h1 class="title has-text-centered">
+                        % if product:
+                            Edit Product
+                        % else:
+                            Create Product
+                        % endif
+                    </h1>
+
+                    <hr />
+
+                    <form action="/admin/downloads/create-product" method="post" id="create-form">
+                        <input type="hidden" name="_csrf" value="${csrf}" />
+
+                        <h2 class="subtitle is-4">Identification</h2>
+
+                        <div class="field">
+                            <label class="label" for="product_name">Name (ID)</label>
+                            <p class="control">
+                                % if product:
+                                    <input class="input" type="text" name="product_name" id="product_name" value="${product.id}" disabled />
+                                % else:
+                                    <input class="input" type="text" name="product_name" id="product_name" />
+                                % endif
+                            </p>
+                        </div>
+
+                        <hr />
+
+                        <h2 class="subtitle is-4">External links</h2>
+
+                        <div class="field">
+                            <label class="label" for="github_url">Github Repository</label>
+                            <p class="control">
+                                % if product:
+                                    <input class="input" type="text" name="github_url" id="github_url" value="${product.url_github}" />
+                                % else:
+                                    <input class="input" type="text" name="github_url" id="github_url" />
+                                % endif
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="circleci_url">CircleCI URL</label>
+                            <p class="control">
+                                % if product:
+                                    <input class="input" type="text" name="circleci_url" id="circleci_url" value="${product.url_circleci}" />
+                                % else:
+                                    <input class="input" type="text" name="circleci_url" id="circleci_url" />
+                                % endif
+                            </p>
+                        </div>
+
+                        <hr />
+
+                        <h2 class="subtitle is-4">Display</h2>
+
+                        <div class="field">
+                            <label class="label" for="visibility">Visibility</label>
+                            <p class="control">
+                                % if product:
+                                    % if product.hidden:
+                                        <input type="radio" name="visibility" value="Visible"> Visible<br>
+                                        <input type="radio" name="visibility" value="Hidden" checked> Hidden
+                                    % else:
+                                        <input type="radio" name="visibility" value="Visible" checked> Visible<br>
+                                        <input type="radio" name="visibility" value="Hidden"> Hidden
+                                    % endif
+                                % else:
+                                    <input type="radio" name="visibility" value="Visible" checked> Visible<br>
+                                    <input type="radio" name="visibility" value="Hidden"> Hidden
+                                % endif
+                            </p>
+                        </div>
+
+                        <div class="field is-hidden-mobile">
+                            <p class="control">
+                                <input type="submit" value="Save" class="button is-primary is-centered submit-button" style="width: 50%; margin: auto; display: block">
+                            </p>
+                        </div>
+                        <div class="field is-hidden-tablet is-hidden-desktop">
+                            <p class="control">
+                                <input class="button is-primary is-fullwidth submit-button" value="Save" type="submit">
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

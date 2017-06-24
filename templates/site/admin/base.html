@@ -35,6 +35,14 @@
                         <a href="/admin/users">Users</a>
                     </li>
 
+                    % if self.attr.tab == "admin_downloads":
+                    <li class="is-active">
+                    % else:
+                    <li>
+                    % endif
+                        <a href="/admin/downloads">Downloads</a>
+                    </li>
+
                     % if self.attr.tab == "admin_celery":
                     <li class="is-active">
                     % else:
