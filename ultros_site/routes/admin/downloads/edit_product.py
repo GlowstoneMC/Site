@@ -1,6 +1,4 @@
 # coding=utf-8
-import re
-
 from falcon import HTTPNotFound
 from sqlalchemy.orm.exc import NoResultFound
 

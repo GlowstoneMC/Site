@@ -1,7 +1,6 @@
 # coding=utf-8
 import re
 
-from falcon import HTTPNotFound
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.base_sink import BaseSink
