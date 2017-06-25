@@ -17,14 +17,16 @@
         <div class="columns">
             <div class="box card column is-half is-offset-one-quarter">
                 <div class="card-content">
-                    <h1 class="title has-text-centered">
-                        Social Media
-                    </h1>
-
-                    <hr />
-
                     <form action="/admin/settings" method="post" id="settings-form">
                         <input type="hidden" name="_csrf" value="${csrf}" />
+
+                        ## Twitter
+
+                        <h1 class="title has-text-centered">
+                            Social Media
+                        </h1>
+
+                        <hr />
 
                         % if "twitter_username" in settings:
                         <a class="button is-pulled-right is-danger" href="/admin/oauth/twitter/unlink?_csrf=${csrf}">
@@ -64,6 +66,8 @@
 
                         <hr />
 
+                        ## Discord
+
                         <h2 class="subtitle is-4">Discord</h2>
 
                         <div class="field">
@@ -78,6 +82,8 @@
                         </div>
 
                         <hr />
+
+                        ## NodeBB
 
                         <h2 class="subtitle is-4">NodeBB</h2>
 
@@ -124,6 +130,48 @@
                                 % endif
                             </p>
                         </div>
+
+                        <h1 class="title has-text-centered">
+                            External Services
+                        </h1>
+
+                        % if "github_username" in settings:
+                        <a class="button is-pulled-right is-danger" href="/admin/oauth/github/unlink?_csrf=${csrf}">
+                            <span class="icon"><i class="fa fa-github"></i></span>
+                            <span>Unlink ${settings["github_username"]}</span>
+                        </a>
+                        % else:
+                        <a class="button is-pulled-right is-info" href="/admin/oauth/github/link">
+                            <span class="icon"><i class="fa fa-github"></i></span>
+                            <span>Link Account</span>
+                        </a>
+                        % endif
+
+                        <h2 class="subtitle">GitHub</h2>
+
+                        <div class="field">
+                            <label class="label" for="github_client_id">Client ID</label>
+                            <p class="control">
+                                % if "github_client_id" in settings:
+                                <input class="input" type="text" name="github_client_id" id="github_client_id" value="${settings["github_client_id"]}" />
+                                % else:
+                                <input class="input" type="text" name="github_client_id" id="github_client_id" />
+                                % endif
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="github_client_secret">Client Secret</label>
+                            <p class="control">
+                                % if "github_client_secret" in settings:
+                                <input class="input" type="text" name="github_client_secret" id="github_client_secret" value="${settings["github_client_secret"]}" />
+                                % else:
+                                <input class="input" type="text" name="github_client_secret" id="github_client_secret" />
+                                % endif
+                            </p>
+                        </div>
+
+                        <hr />
 
                         <div class="field is-hidden-mobile">
                             <p class="control">

@@ -2,6 +2,7 @@
 from sqlalchemy import Column, String, Integer, Boolean
 from sqlalchemy.orm import relationship
 
+from ultros_site.database.schema.product_branch import ProductBranch  # noqa: F401
 from ultros_site.database.common import DeclarativeBase
 
 __author__ = "Momo"
