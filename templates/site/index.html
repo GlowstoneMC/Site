@@ -12,6 +12,10 @@ tab = "home"
 <%block name="og_title">Home</%block>
 <%block name="og_description">Minecraft's future is bright</%block>
 
+<%def name="news_post_header(post)">
+    <a class="announcement-link" target="_blank" href="/news/${post.id}">${post.title}</a>
+</%def>
+
 <nav class="nav has-shadow" style="padding-left: 1%">
     <div class="container">
         <div class="nav-left">
@@ -33,11 +37,7 @@ tab = "home"
                 <span id="announcements-titles">
                     % if news_posts:
                         % for post in news_posts:
-                            % if post == news_posts[len(news_posts) - 1]:
-                                <a class="announcement-link" target="_blank" href="/news/${post.id}">${post.title}</a>
-                            % else:
-                                <a class="announcement-link" target="_blank" href="/news/${post.id}">${post.title}</a>,
-                            % endif
+                            ${", ".join(news_post_header(post))}
                         % endfor
                     % else:
                         <span class="announcement-link">No news posts found.</span>
