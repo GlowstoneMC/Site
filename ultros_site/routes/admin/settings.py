@@ -43,6 +43,9 @@ class SettingsRoute(BaseRoute):
         req.get_param("nodebb_category_id", store=params)
         req.get_param("nodebb_default_user_id", store=params)
 
+        req.get_param("github_client_id", store=params)
+        req.get_param("github_client_secret", store=params)
+
         if params["nodebb_base_url"][-1] == "/":
             params["nodebb_base_url"] = params["nodebb_base_url"][:-1]
 
@@ -56,7 +59,10 @@ class SettingsRoute(BaseRoute):
                 setting = Setting(key=key, value=value)
                 db_session.add(setting)
             else:
-                setting.value = value
+                if not value:
+                    db_session.delete(setting)
+                else:
+                    setting.value = value
 
         resp.append_header("Refresh", "5;url=/admin/settings")
 
