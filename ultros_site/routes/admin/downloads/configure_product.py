@@ -4,7 +4,6 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.base_route import BaseRoute
 from ultros_site.database.schema.product import Product
-from ultros_site.database.schema.product_branch import ProductBranch
 from ultros_site.decorators import check_admin, add_csrf
 
 __author__ = "Momo"

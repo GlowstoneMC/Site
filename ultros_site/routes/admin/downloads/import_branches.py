@@ -6,7 +6,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from ultros_site.base_route import BaseRoute
 from ultros_site.database.schema.product import Product
 from ultros_site.decorators import check_admin, add_csrf
-from ultros_site.tasks.__main__ import app as celery
+# from ultros_site.tasks.__main__ import app as celery
 
 __author__ = "Momo"
 
