@@ -33,7 +33,11 @@ tab = "home"
                 <span id="announcements-titles">
                     % if news_posts:
                         % for post in news_posts:
-                            <a class="announcement-link" target="_blank" href="/news/${post.id}">${post.title}</a>
+                            % if post == news_posts[len(news_posts) - 1]:
+                                <a class="announcement-link" target="_blank" href="/news/${post.id}">${post.title}</a>
+                            % else:
+                                <a class="announcement-link" target="_blank" href="/news/${post.id}">${post.title}</a>,
+                            % endif
                         % endfor
                     % else:
                         <span class="announcement-link">No news posts found.</span>
