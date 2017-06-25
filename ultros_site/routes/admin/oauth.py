@@ -96,7 +96,9 @@ class SettingsRoute(BaseSink):
         state = Setting(key="github_oauth_state", value=secrets.token_urlsafe(32))
 
         db_session.add(state)
-        db_session.add(Setting(key="github_oauth_token", value=None))
+        db_session.add(Setting(key="github_oauth_token", value=""))
+
+        db_session.commit()
 
         params = GITHUB_REDIRECT_PARAMS.copy()
         params["client_id"] = settings["github_client_id"]
