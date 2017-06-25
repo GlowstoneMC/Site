@@ -203,7 +203,8 @@ class SettingsRoute(BaseSink):
         params = {
             "client_id": settings["github_client_id"],
             "client_secret": settings["github_client_secret"],
-            "code": params["code"]
+            "code": params["code"],
+            "redirect_uri": "https://beta.glowstone.net/admin/oauth/github/auth"
         }
 
         response = http.post(GITHUB_TOKEN_URL, data=params, headers={"Accept": "application/json"}).json()
