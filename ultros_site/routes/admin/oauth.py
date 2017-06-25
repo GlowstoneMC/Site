@@ -22,15 +22,14 @@ TWITTER_NEEDED_KEYS = ["twitter_app_key", "twitter_app_secret"]
 TWITTER_OAUTH_KEYS = ["twitter_oauth_token", "twitter_oauth_token_secret"]
 
 GITHUB_NEEDED_KEYS = ["github_client_id", "github_client_secret"]
-GITHUB_OAUTH_KEYS = ["github_oauth_token", "github_oauth_state"]
+GITHUB_OAUTH_KEYS = ["github_oauth_token"]
 
 GITHUB_REDIRECT_URL = "https://github.com/login/oauth/authorize?{}"
 GITHUB_REDIRECT_PARAMS = {
     "allow_signup": "false",
     "scope": "repo",
     "redirect_uri": "https://beta.glowstone.net/admin/oauth/github/auth",
-    "client_id": None,
-    "state": None
+    "client_id": None
 }
 
 GITHUB_TOKEN_URL = "https://github.com/login/oauth/access_token"
@@ -93,16 +92,11 @@ class SettingsRoute(BaseSink):
                     redirect_uri="/admin/settings"
                 )
 
-        state = Setting(key="github_oauth_state", value=secrets.token_urlsafe(32))
-
-        db_session.add(state)
         db_session.add(Setting(key="github_oauth_token", value=""))
-
         db_session.commit()
 
         params = GITHUB_REDIRECT_PARAMS.copy()
         params["client_id"] = settings["github_client_id"]
-        params["state"] = state.value
 
         params_list = []
 
@@ -173,9 +167,6 @@ class SettingsRoute(BaseSink):
         if not req.get_param("code", store=params):
             raise HTTPBadRequest("Missing param: code")
 
-        if not req.get_param("state", store=params):
-            raise HTTPBadRequest("Missing param: state")
-
         settings = {}
 
         db_settings = db_session.query(Setting).filter(Setting.key.startswith("github_")).all()
@@ -207,16 +198,12 @@ class SettingsRoute(BaseSink):
                     redirect_uri="/admin/settings"
                 )
 
-        # if params["state"] != settings["github_oauth_state"]:
-        #     raise HTTPBadRequest("Invalid state")
-
         http = session()
 
         params = {
             "client_id": settings["github_client_id"],
             "client_secret": settings["github_client_secret"],
-            "code": params["code"],
-            "state": settings["github_oauth_state"]
+            "code": params["code"]
         }
 
         response = http.post(GITHUB_TOKEN_URL, data=params, headers={"Accept": "application/json"}).json()
