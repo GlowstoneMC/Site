@@ -15,7 +15,7 @@
 <section class="section">
     <div class="container">
         <h1 class="title">Branches: <strong>${product.name}</strong></h1>
-        % if not branches:
+        % if not product.branches:
             <h2 class="subtitle">No branches found, please import them from Github</h2>
         % else:
             <table class="table is-bordered is-striped">
