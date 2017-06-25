@@ -1,0 +1,62 @@
+<%inherit file="base.html"/>
+
+## Current tab for navigation
+<%!
+    tab = "admin_products"
+%>
+
+## SEO Stuff
+<%block name="title">Admin/Configure ${product.name} &middot; Glowstone</%block>
+<%block name="description">Administration area - Configure ${product.name}</%block>
+
+<%block name="og_title">Admin/Configure ${product.name}</%block>
+<%block name="og_description">Administration area - Configure ${product.name}</%block>
+
+<section class="section">
+    <div class="container">
+        <h1 class="title">Branches: <strong>${product.name}</strong></h1>
+        % if len(branches) == 0:
+            <h2 class="subtitle">No branches found, please import them from Github</h2>
+        % else:
+            <table class="table is-bordered is-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                % for branch in branches:
+                <tr>
+                    <td><strong>${branch.id}</strong></td>
+                    <td><strong>${branch.name}</strong></td>
+                    <td>
+                    % if branch.disabled:
+                        <a href="/admin/branch/enable?branch=${branch.id}&product=${product.id}" title="Enable branch" >
+                            <button class="button is-success is-small"><span class="icon"><i class="fa fa-check"></i></span></button>
+                        </a>
+                    % else:
+                        <a href="/admin/branch/disable?branch=${branch.id}&product=${product.id}" title="Disable branch" >
+                            <button class="button is-danger is-small"><span class="icon"><i class="fa fa-times"></i></span></button>
+                        </a>
+                    % endif
+                    </td>
+                </tr>
+                % endfor
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+                </tfoot>
+            </table>
+        % endif
+
+        <a href="/admin/products/import?product=${product.id}" title="Import branches" >
+            <button class="button is-primary"><span class="icon"><i class="fa fa-download"></i></span> &nbsp; Import branches</button>
+        </a>
+    </div>
+</section>

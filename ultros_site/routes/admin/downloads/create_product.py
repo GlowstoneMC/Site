@@ -55,7 +55,7 @@ class CreateProductRoute(BaseRoute):
         if not req.get_param("product_id", store=params):
             product = Product(
                 name=params["product_name"], order=params["product_order"], hidden=params["visibility"] == "Hidden",
-                url_github=params["github_url"], url_circleci=params["circleci_url"]
+                url_github=params["github_url"], url_circleci=params["circleci_url"], branches=[]
             )
             db_session.add(product)
 
