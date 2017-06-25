@@ -33,12 +33,12 @@ class EnableBranchRoute(BaseRoute):
             raise HTTPNotFound()
         else:
             # todo: GH-organization, GH-API user and token need to be configurable (token only needs "repo" permissions)
-            celery.send_task(
-                "github_import",
-                args=[self.callback_import, product, [], "GlowstoneMC", product.name, "<gh user>",
-                      "<gh access token>"],
-                kwargs={}
-            )
+            # celery.send_task(
+            #     "github_import",
+            #     args=[self.callback_import, product, [], "GlowstoneMC", product.name, "<gh user>",
+            #           "<gh access token>"],
+            #     kwargs={}
+            # )
             # endpoint = str.format("https://{}:{}@api.github.com/repos/{}/{}/branches", "xxx",
             #                      "xxx", "GlowstoneMC", product.name)
             # session = requests.session()

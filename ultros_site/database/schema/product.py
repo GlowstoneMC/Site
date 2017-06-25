@@ -1,5 +1,6 @@
 # coding=utf-8
-from sqlalchemy import Column, String, Integer, Boolean, ARRAY
+from sqlalchemy import Column, String, Integer, Boolean
+from sqlalchemy.orm import relationship
 
 from ultros_site.database.common import DeclarativeBase
 
@@ -18,7 +19,7 @@ class Product(DeclarativeBase):
     url_github = Column(String, unique=True)
     url_circleci = Column(String, unique=True)
 
-    branches = Column("branches", ARRAY(Integer))
+    branches = relationship("ProductBranch", secondary="product_branch_association")
 
     def __repr__(self):
         return "<{}(name={}>".format(

@@ -31,4 +31,7 @@ class DisableBranchRoute(BaseRoute):
         else:
             branch.disabled = True
             db_session.commit()
-            raise HTTPTemporaryRedirect(str.format("/admin/products/configure?product={}", product.id))
+
+            raise HTTPTemporaryRedirect(
+               "/admin/products/configure?product={}".format(product.id)
+            )

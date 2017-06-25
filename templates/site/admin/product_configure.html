@@ -15,7 +15,7 @@
 <section class="section">
     <div class="container">
         <h1 class="title">Branches: <strong>${product.name}</strong></h1>
-        % if len(branches) == 0:
+        % if not branches:
             <h2 class="subtitle">No branches found, please import them from Github</h2>
         % else:
             <table class="table is-bordered is-striped">
@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                % for branch in branches:
+                % for branch in product.branches:
                 <tr>
                     <td><strong>${branch.id}</strong></td>
                     <td><strong>${branch.name}</strong></td>

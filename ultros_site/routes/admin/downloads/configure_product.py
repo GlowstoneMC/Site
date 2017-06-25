@@ -27,17 +27,7 @@ class ConfigureProductRoute(BaseRoute):
         except NoResultFound:
             raise HTTPNotFound()
         else:
-            branches_ids = product.branches
-            branches = []
-            for branch_id in branches_ids:
-                try:
-                    branch = db_session.query(ProductBranch).filter_by(id=branch_id).one()
-                except NoResultFound:
-                    pass
-                else:
-                    branches.append(branch)
             self.render_template(
                 req, resp, "admin/product_configure.html",
-                product=product,
-                branches=tuple(branches)
+                product=product
             )

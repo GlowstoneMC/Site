@@ -11,6 +11,6 @@ class ProductBranch(DeclarativeBase):
     __tablename__ = "product_branch"
 
     id = Column(Integer, primary_key=True)
-    product_id = Column(Integer, primary_key=True)
-    name = Column(String, unique=True)
+    product_id = Column(Integer)
+    name = Column(String)
     disabled = Column(Boolean, default=False)
