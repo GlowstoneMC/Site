@@ -185,7 +185,7 @@ class SettingsRoute(BaseSink):
         github = OAuth2Session(settings["github_client_id"])
         response = github.fetch_token(
             GITHUB_TOKEN_URL, client_secret=settings["github_client_secret"],
-            code=params["code"]
+            authorization_response=req.uri
         )
 
         if "access_token" not in response:
