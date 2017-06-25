@@ -10,7 +10,7 @@ __author__ = "Momo"
 class ProductBranch(DeclarativeBase):
     __tablename__ = "product_branch"
     __table_args__ = (
-        UniqueConstraint("product_id", "name", name="_product_branch_uc")
+        UniqueConstraint("product_id", "name", name="_product_branch_uc"),
     )
 
     id = Column(Integer, primary_key=True)
