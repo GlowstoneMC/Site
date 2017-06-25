@@ -5,7 +5,7 @@ from urllib.parse import quote_plus
 
 import twython
 
-from falcon import HTTPBadRequest, HTTPTemporaryRedirect
+from falcon import HTTPBadRequest, HTTPFound
 from requests import session
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -109,7 +109,7 @@ class SettingsRoute(BaseSink):
                 "{}={}".format(param, quote_plus(value))
             )
 
-        return HTTPTemporaryRedirect(
+        raise HTTPFound(
             GITHUB_REDIRECT_URL.format("&".join(params_list))
         )
 
