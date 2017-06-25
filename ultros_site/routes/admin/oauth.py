@@ -1,5 +1,6 @@
 # coding=utf-8
 import re
+from pprint import pformat
 from urllib.parse import quote_plus
 
 import twython
@@ -206,6 +207,17 @@ class SettingsRoute(BaseSink):
         }
 
         response = http.post(GITHUB_TOKEN_URL, data=params, headers={"Accept": "application/json"}).json()
+
+        if "access_token" not in response:
+            resp.append_header("Refresh", "15;url=/admin/settings")
+
+            return self.render_template(
+                req, resp, "admin/message_gate.html",
+                gate_message=Message(
+                    "danger", "Error", "Given data: <pre>{}</pre>".format(pformat(response))
+                ),
+                redirect_uri="/admin/settings"
+            )
 
         oauth_token = db_session.query(Setting).filter_by(key="github_oauth_token").one()
         oauth_token.value = response["access_token"]
