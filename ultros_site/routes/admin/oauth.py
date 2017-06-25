@@ -7,6 +7,7 @@ import twython
 
 from falcon import HTTPBadRequest, HTTPFound
 from requests import session
+from requests_oauthlib import OAuth2Session
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.base_sink import BaseSink
@@ -24,14 +25,9 @@ TWITTER_OAUTH_KEYS = ["twitter_oauth_token", "twitter_oauth_token_secret"]
 GITHUB_NEEDED_KEYS = ["github_client_id", "github_client_secret"]
 GITHUB_OAUTH_KEYS = ["github_oauth_token"]
 
-GITHUB_REDIRECT_URL = "https://github.com/login/oauth/authorize?{}"
-GITHUB_REDIRECT_PARAMS = {
-    "allow_signup": "false",
-    "scope": "repo",
-    "client_id": None
-}
-
+GITHUB_REDIRECT_URL = "https://github.com/login/oauth/authorize"
 GITHUB_TOKEN_URL = "https://github.com/login/oauth/access_token"
+
 GITHUB_USER_URL = "https://api.github.com/user"
 
 
@@ -94,19 +90,10 @@ class SettingsRoute(BaseSink):
         db_session.add(Setting(key="github_oauth_token", value=""))
         db_session.commit()
 
-        params = GITHUB_REDIRECT_PARAMS.copy()
-        params["client_id"] = settings["github_client_id"]
+        github = OAuth2Session(settings["github_client_id"])
+        url, _ = github.authorization_url(GITHUB_REDIRECT_URL)
 
-        params_list = []
-
-        for param, value in params.items():
-            params_list.append(
-                "{}={}".format(param, quote_plus(value))
-            )
-
-        raise HTTPFound(
-            GITHUB_REDIRECT_URL.format("&".join(params_list))
-        )
+        raise HTTPFound(url)
 
     @check_csrf
     def do_unlink_github(self, req, resp):
@@ -197,15 +184,11 @@ class SettingsRoute(BaseSink):
                     redirect_uri="/admin/settings"
                 )
 
-        http = session()
-
-        params = {
-            "client_id": settings["github_client_id"],
-            "client_secret": settings["github_client_secret"],
-            "code": params["code"]
-        }
-
-        response = http.post(GITHUB_TOKEN_URL, data=params, headers={"Accept": "application/json"}).json()
+        github = OAuth2Session(settings["github_client_id"])
+        response = github.fetch_token(
+            GITHUB_TOKEN_URL, client_secret=settings["github_client_secret"],
+            code=params["code"]
+        )
 
         if "access_token" not in response:
             resp.append_header("Refresh", "15;url=/admin/settings")
@@ -213,7 +196,7 @@ class SettingsRoute(BaseSink):
             return self.render_template(
                 req, resp, "admin/message_gate.html",
                 gate_message=Message(
-                    "danger", "Error", "Given data: <pre>{}</pre>".format(pformat(response))
+                    "success", "Bad data", "Response: <pre>{}</pre>".format(pformat(response))
                 ),
                 redirect_uri="/admin/settings"
             )
@@ -221,7 +204,7 @@ class SettingsRoute(BaseSink):
         oauth_token = db_session.query(Setting).filter_by(key="github_oauth_token").one()
         oauth_token.value = response["access_token"]
 
-        user = http.get(GITHUB_USER_URL, headers={"Authorization", "token {}".format(oauth_token.value)}).json()
+        user = github.get(GITHUB_USER_URL).json()
 
         db_session.add(Setting(key="github_username", value=user["login"]))
 

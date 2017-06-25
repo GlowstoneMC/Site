@@ -18,3 +18,5 @@ pygments
 beautifulsoup4
 inflect
 twython
+oauthlib
+requests_oauthlib
