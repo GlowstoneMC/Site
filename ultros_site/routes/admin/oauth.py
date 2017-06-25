@@ -60,38 +60,49 @@ class SettingsRoute(BaseSink):
                 redirect_uri="/admin/settings"
             )
 
-        settings = {}
+        try:
+            settings = {}
 
-        db_settings = db_session.query(Setting).filter(Setting.key.startswith("github_")).all()
+            db_settings = db_session.query(Setting).filter(Setting.key.startswith("github_")).all()
 
-        for setting in db_settings:
-            if setting.key in GITHUB_OAUTH_KEYS or setting.key == "github_username":
-                db_session.delete(setting)
-                continue
+            for setting in db_settings:
+                if setting.key in GITHUB_OAUTH_KEYS or setting.key == "github_username":
+                    db_session.delete(setting)
+                    continue
 
-            settings[setting.key] = setting.value
+                settings[setting.key] = setting.value
 
-        db_session.commit()
+            db_session.commit()
 
-        for key in GITHUB_NEEDED_KEYS:
-            if key not in settings:
-                resp.append_header("Refresh", "5;url=/admin/settings")
+            for key in GITHUB_NEEDED_KEYS:
+                if key not in settings:
+                    resp.append_header("Refresh", "5;url=/admin/settings")
 
-                return self.render_template(
-                    req, resp, "admin/message_gate.html",
-                    gate_message=Message(
-                        "danger", "Missing setting", "Setting missing: {}".format(key)
-                    ),
-                    redirect_uri="/admin/settings"
-                )
+                    return self.render_template(
+                        req, resp, "admin/message_gate.html",
+                        gate_message=Message(
+                            "danger", "Missing setting", "Setting missing: {}".format(key)
+                        ),
+                        redirect_uri="/admin/settings"
+                    )
 
-        db_session.add(Setting(key="github_oauth_token", value=""))
-        db_session.commit()
+            db_session.add(Setting(key="github_oauth_token", value=""))
+            db_session.commit()
 
-        github = OAuth2Session(settings["github_client_id"], scope="repo")
-        url, _ = github.authorization_url(GITHUB_REDIRECT_URL)
+            github = OAuth2Session(settings["github_client_id"], scope="repo")
+            url, _ = github.authorization_url(GITHUB_REDIRECT_URL)
+        except Exception as e:
+            resp.append_header("Refresh", "15;url=/admin/settings")
 
-        raise HTTPFound(url)
+            return self.render_template(
+                req, resp, "admin/message_gate.html",
+                gate_message=Message(
+                    "danger", "Error", "{}".format(e)
+                ),
+                redirect_uri="/admin/settings"
+            )
+        else:
+            raise HTTPFound(url)
 
     @check_csrf
     def do_unlink_github(self, req, resp):
@@ -182,41 +193,52 @@ class SettingsRoute(BaseSink):
                     redirect_uri="/admin/settings"
                 )
 
-        github = OAuth2Session(settings["github_client_id"])
-        response = github.fetch_token(
-            GITHUB_TOKEN_URL, client_secret=settings["github_client_secret"],
-            authorization_response=req.uri
-        )
+        try:
+            github = OAuth2Session(settings["github_client_id"])
+            response = github.fetch_token(
+                GITHUB_TOKEN_URL, client_secret=settings["github_client_secret"],
+                authorization_response=req.uri
+            )
 
-        if "access_token" not in response:
+            if "access_token" not in response:
+                resp.append_header("Refresh", "15;url=/admin/settings")
+
+                return self.render_template(
+                    req, resp, "admin/message_gate.html",
+                    gate_message=Message(
+                        "success", "Bad data", "Response: <pre>{}</pre>".format(pformat(response))
+                    ),
+                    redirect_uri="/admin/settings"
+                )
+
+            oauth_token = db_session.query(Setting).filter_by(key="github_oauth_token").one()
+            oauth_token.value = response["access_token"]
+
+            user = github.get(GITHUB_USER_URL).json()
+
+            db_session.add(Setting(key="github_username", value=user["login"]))
+
+            resp.append_header("Refresh", "5;url=/admin/settings")
+
+            return self.render_template(
+                req, resp, "admin/message_gate.html",
+                gate_message=Message(
+                    "success", "Account linked", "GitHub account linked: {}".format(
+                        user["login"]
+                    )
+                ),
+                redirect_uri="/admin/settings"
+            )
+        except Exception as e:
             resp.append_header("Refresh", "15;url=/admin/settings")
 
             return self.render_template(
                 req, resp, "admin/message_gate.html",
                 gate_message=Message(
-                    "success", "Bad data", "Response: <pre>{}</pre>".format(pformat(response))
+                    "danger", "Error", "{}".format(e)
                 ),
                 redirect_uri="/admin/settings"
             )
-
-        oauth_token = db_session.query(Setting).filter_by(key="github_oauth_token").one()
-        oauth_token.value = response["access_token"]
-
-        user = github.get(GITHUB_USER_URL).json()
-
-        db_session.add(Setting(key="github_username", value=user["login"]))
-
-        resp.append_header("Refresh", "5;url=/admin/settings")
-
-        return self.render_template(
-            req, resp, "admin/message_gate.html",
-            gate_message=Message(
-                "success", "Account linked", "GitHub account linked: {}".format(
-                    user["login"]
-                )
-            ),
-            redirect_uri="/admin/settings"
-        )
 
     def do_link_twitter(self, req, resp):
         db_session = req.context["db_session"]
