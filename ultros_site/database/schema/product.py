@@ -2,6 +2,7 @@
 from sqlalchemy import Column, String, Integer, Boolean
 from sqlalchemy.orm import relationship
 
+# Imported so it loads first for the relationship below
 from ultros_site.database.schema.product_branch import ProductBranch  # noqa: F401
 from ultros_site.database.common import DeclarativeBase
 

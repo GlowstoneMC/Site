@@ -1,12 +1,10 @@
 # coding=utf-8
 import re
 from pprint import pformat
-from urllib.parse import quote_plus
 
 import twython
 
 from falcon import HTTPBadRequest, HTTPFound
-from requests import session
 from requests_oauthlib import OAuth2Session
 from sqlalchemy.orm.exc import NoResultFound
 
