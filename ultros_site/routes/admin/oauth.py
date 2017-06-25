@@ -89,7 +89,7 @@ class SettingsRoute(BaseSink):
         db_session.commit()
 
         github = OAuth2Session(settings["github_client_id"])
-        url, _ = github.authorization_url(GITHUB_REDIRECT_URL)
+        url, _ = github.authorization_url(GITHUB_REDIRECT_URL, scope="repo")
 
         raise HTTPFound(url)
 
