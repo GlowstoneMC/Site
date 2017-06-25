@@ -1,6 +1,5 @@
 # coding=utf-8
 import re
-import secrets
 from urllib.parse import quote_plus
 
 import twython
