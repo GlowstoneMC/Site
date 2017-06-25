@@ -207,8 +207,8 @@ class SettingsRoute(BaseSink):
                     redirect_uri="/admin/settings"
                 )
 
-        if not params["state"] == settings["github_oauth_state"]:
-            raise HTTPBadRequest("Invalid state")
+        # if params["state"] != settings["github_oauth_state"]:
+        #     raise HTTPBadRequest("Invalid state")
 
         http = session()
 
