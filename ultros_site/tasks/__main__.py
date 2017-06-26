@@ -18,6 +18,7 @@ app = Celery(
     ]
 )
 
+
 @task_prerun.connect()
 def task_prerun(signal=None, sender=None, task_id=None, task=None, args=None, kwargs=None):
     task_args = {
@@ -31,6 +32,7 @@ def task_prerun(signal=None, sender=None, task_id=None, task=None, args=None, kw
 @task_postrun.connect()
 def task_postrun(signal=None, sender=None, task_id=None, task=None, args=None, kwargs=None, retval=None, state=None):
     db_update_status(task_id, state)
+
 
 if __name__ == "__main__":
     app.start()
