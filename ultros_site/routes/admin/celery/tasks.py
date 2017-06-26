@@ -6,7 +6,7 @@ from ultros_site.decorators import check_admin
 __author__ = "Gareth Coles"
 
 
-class IndexRoute(BaseRoute):
+class CeleryTasksRoute(BaseRoute):
     route = "/admin/celery/tasks"
 
     @check_admin

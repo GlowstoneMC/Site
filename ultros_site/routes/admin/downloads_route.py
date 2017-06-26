@@ -7,7 +7,7 @@ from ultros_site.decorators import add_csrf, check_admin
 __author__ = "Momo"
 
 
-class UsersRoute(BaseRoute):
+class ProductsRoute(BaseRoute):
     route = "/admin/products"
 
     @check_admin

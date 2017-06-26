@@ -13,7 +13,7 @@ from ultros_site.tasks.__main__ import app as celery
 __author__ = "Momo"
 
 
-class EnableBranchRoute(BaseRoute):
+class ImportBranchesRoute(BaseRoute):
     route = "/admin/products/import"
 
     def callback_import(self, product, data):
