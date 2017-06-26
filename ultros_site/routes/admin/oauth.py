@@ -162,12 +162,15 @@ class SettingsRoute(BaseSink):
         if not req.get_param("code", store=params):
             raise HTTPBadRequest("Missing param: code")
 
+        if not req.get_param("state", store=params):
+            raise HTTPBadRequest("Missing param: state")
+
         settings = {}
 
         db_settings = db_session.query(Setting).filter(Setting.key.startswith("github_")).all()
 
         for setting in db_settings:
-            settings[setting.key] = setting
+            settings[setting.key] = setting.value
 
         for key in GITHUB_NEEDED_KEYS:
             if key not in settings:
@@ -197,7 +200,7 @@ class SettingsRoute(BaseSink):
             github = OAuth2Session(settings["github_client_id"])
             response = github.fetch_token(
                 GITHUB_TOKEN_URL, client_secret=settings["github_client_secret"],
-                authorization_response=req.uri
+                code=params["code"], state=params["state"]
             )
 
             if "access_token" not in response:
