@@ -11,6 +11,9 @@ class ErrorPageMiddleware:
         if req_succeeded:
             return
 
+        if req.path.startswith("/api"):
+            return
+
         if " " in resp.status:
             status_code, error_description = resp.status.split(" ", 1)
             status_code = int(status_code)

@@ -20,3 +20,4 @@ inflect
 twython
 oauthlib
 requests_oauthlib
+dicttoxml
