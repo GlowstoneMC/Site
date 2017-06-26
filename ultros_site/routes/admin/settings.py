@@ -46,7 +46,7 @@ class SettingsRoute(BaseRoute):
         req.get_param("github_client_id", store=params)
         req.get_param("github_client_secret", store=params)
 
-        if params["nodebb_base_url"][-1] == "/":
+        if "nodebb_base_url" in params and params["nodebb_base_url"][-1] == "/":
             params["nodebb_base_url"] = params["nodebb_base_url"][:-1]
 
         for key, value in params.items():
