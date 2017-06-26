@@ -34,52 +34,50 @@ class ImportTask(Task):
 
 @app.task(base=ImportTask, name="github_import")
 def github_import(product_id, gh_owner, gh_project):
-    db_session = github_import.database.create_session()
-    settings = {}
+    with github_import.database.session() as db_session:
+        settings = {}
 
-    try:
-        db_settings = db_session.query(Setting).filter(Setting.key.startswith("github_")).all()
+        try:
+            db_settings = db_session.query(Setting).filter(Setting.key.startswith("github_")).all()
 
-        for setting in db_settings:
-            settings[setting.key] = setting.value
-    except Exception as e:
-        logging.getLogger("github_import").error("Failed to get GitHub credentials: {}".format(e))
+            for setting in db_settings:
+                settings[setting.key] = setting.value
+        except Exception as e:
+            logging.getLogger("github_import").error("Failed to get GitHub credentials: {}".format(e))
 
-    for key in GITHUB_NEEDED_KEYS:
-        if key not in settings:
-            logging.getLogger("github_import").warning("Missing settings key: {}".format(key))
-            return
+        for key in GITHUB_NEEDED_KEYS:
+            if key not in settings:
+                logging.getLogger("github_import").warning("Missing settings key: {}".format(key))
+                return
 
-    session = requests.session()
+        session = requests.session()
 
-    data = session.get(
-        GITHUB_BRANCHES_URL.format(gh_owner, gh_project),
-        params={
-            "client_id": settings["github_client_id"],
-            "client_secret": settings["github_client_secret"]
-        },
-        headers={
-            "Authorization": "token {}".format(settings["github_oauth_token"])
-        }
-    ).json()
+        data = session.get(
+            GITHUB_BRANCHES_URL.format(gh_owner, gh_project),
+            params={
+                "client_id": settings["github_client_id"],
+                "client_secret": settings["github_client_secret"]
+            },
+            headers={
+                "Authorization": "token {}".format(settings["github_oauth_token"])
+            }
+        ).json()
 
-    logging.getLogger("github_import").info("Received {} branches.".format(len(data)))
+        logging.getLogger("github_import").info("Received {} branches.".format(len(data)))
 
-    branches = []
+        branches = []
 
-    for branch in data:
-        name = branch["name"]
+        for branch in data:
+            name = branch["name"]
 
-        logging.getLogger("github_import").debug("Upserting branch: {}".format(name))
+            logging.getLogger("github_import").debug("Upserting branch: {}".format(name))
 
-        branches.append(name)
-        upsert_branch(db_session, product_id, name)
+            branches.append(name)
+            upsert_branch(db_session, product_id, name)
 
-    for branch in db_session.query(ProductBranch).filter_by(product_id=product_id).all():
-        if branch.name not in branches:
-            branch.disabled = True  # TODO: Is this what Momo wanted?
-
-    db_session.commit()
+        for branch in db_session.query(ProductBranch).filter_by(product_id=product_id).all():
+            if branch.name not in branches:
+                branch.disabled = True  # TODO: Is this what Momo wanted?
 
 
 def upsert_branch(session, product_id, branch_name):

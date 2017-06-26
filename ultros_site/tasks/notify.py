@@ -83,107 +83,106 @@ def notify_post(post: NewsPost):
 
 @app.task(base=NotifyTask, name="send_twitter")
 def send_twitter(title: str, url: str):
-    session = send_discord.database.create_session()
-    settings = {}
+    with send_discord.database.session() as session:
+        settings = {}
 
-    try:
-        db_settings = session.query(Setting).filter(Setting.key.startswith("twitter_")).all()
+        try:
+            db_settings = session.query(Setting).filter(Setting.key.startswith("twitter_")).all()
 
-        for setting in db_settings:
-            settings[setting.key] = setting.value
-    except Exception as e:
-        logging.getLogger("send_twitter").error("Failed to get Twitter credentials: {}".format(e))
-    finally:
-        session.close()
+            for setting in db_settings:
+                settings[setting.key] = setting.value
+        except Exception as e:
+            logging.getLogger("send_twitter").error("Failed to get Twitter credentials: {}".format(e))
+        finally:
+            session.close()
 
-    for key in TWITTER_NEEDED_KEYS:
-        if key not in settings:
-            return
+        for key in TWITTER_NEEDED_KEYS:
+            if key not in settings:
+                return
 
-    twitter = twython.Twython(
-        settings["twitter_app_key"], settings["twitter_app_secret"],
-        settings["twitter_oauth_token"], settings["twitter_oauth_token_secret"]
-    )
+        twitter = twython.Twython(
+            settings["twitter_app_key"], settings["twitter_app_secret"],
+            settings["twitter_oauth_token"], settings["twitter_oauth_token_secret"]
+        )
 
-    post = "New post: {}\n{}".format(title, url)
+        post = "New post: {}\n{}".format(title, url)
 
-    twitter.update_status(
-        enable_dm_commands=False,
-        status=post
-    )
+        twitter.update_status(
+            enable_dm_commands=False,
+            status=post
+        )
 
 
 @app.task(base=NotifyTask, name="send_discord")
 def send_discord(embed: None):
-    session = send_discord.database.create_session()
+    with send_discord.database.session() as session:
+        try:
+            setting = session.query(Setting).filter_by(key="discord_webhook_url").one()
+            hook_url = setting.value
+        except Exception as e:
+            logging.getLogger("send_discord").error("Failed to get hook URL: {}".format(e))
+            return
+        finally:
+            session.close()
 
-    try:
-        setting = session.query(Setting).filter_by(key="discord_webhook_url").one()
-        hook_url = setting.value
-    except Exception as e:
-        logging.getLogger("send_discord").error("Failed to get hook URL: {}".format(e))
-        return
-    finally:
-        session.close()
+        if embed is None:
+            embeds = []
+        else:
+            embeds = [embed]
 
-    if embed is None:
-        embeds = []
-    else:
-        embeds = [embed]
-
-    session = requests.session()
-    return session.post(hook_url, json={
-        "embeds": embeds
-    })
+        session = requests.session()
+        return session.post(hook_url, json={
+            "embeds": embeds
+        })
 
 
 @app.task(base=NotifyTask, name="send_nodebb")
 def send_nodebb(title, url, markdown, username, email):
-    session = send_nodebb.database.create_session()
-    settings = {}
+    with send_discord.database.session() as session:
+        settings = {}
 
-    # Load up all NodeBB settings
+        # Load up all NodeBB settings
 
-    try:
-        for setting in session.query(Setting).filter(Setting.key.like("nodebb_%")).all():
-            settings[setting.key] = setting.value
-    except Exception as e:
-        logging.getLogger("send_nodebb").error("Failed to get NodeBB settings: {}".format(e))
-        return
-    finally:
-        session.close()
+        try:
+            for setting in session.query(Setting).filter(Setting.key.like("nodebb_%")).all():
+                settings[setting.key] = setting.value
+        except Exception as e:
+            logging.getLogger("send_nodebb").error("Failed to get NodeBB settings: {}".format(e))
+            return
+        finally:
+            session.close()
 
-    for key in NODEBB_NEEDED_KEYS:
-        if key not in settings:
-            return  # Not enough settings available
+        for key in NODEBB_NEEDED_KEYS:
+            if key not in settings:
+                return  # Not enough settings available
 
-    nodebb_url = settings["nodebb_base_url"] + "{}"
+        nodebb_url = settings["nodebb_base_url"] + "{}"
 
-    # Attempt to find a user object by email
+        # Attempt to find a user object by email
 
-    try:
-        resp = requests.get(nodebb_url.format(NODEBB_READ_EMAIL.format(email)))
-    except Exception as e:
-        logging.getLogger("send_nodebb").warning("Failed to find a user for {}: {}".format(email, e))
-        uid = settings["nodebb_default_user_id"]
-        title = "{} (by {})".format(title, username)
-    else:
-        data = resp.json()
-        uid = data["uid"]
+        try:
+            resp = requests.get(nodebb_url.format(NODEBB_READ_EMAIL.format(email)))
+        except Exception as e:
+            logging.getLogger("send_nodebb").warning("Failed to find a user for {}: {}".format(email, e))
+            uid = settings["nodebb_default_user_id"]
+            title = "{} (by {})".format(title, username)
+        else:
+            data = resp.json()
+            uid = data["uid"]
 
-    markdown = "{}\n\n*This post was mirrored from [the site]({}).*".format(markdown, url)
+        markdown = "{}\n\n*This post was mirrored from [the site]({}).*".format(markdown, url)
 
-    try:
-        resp = requests.post(
-            nodebb_url.format(NODEBB_WRITE_POST), data={
-                "_uid": uid,
-                "cid": settings["nodebb_category_id"],
-                "title": title,
-                "content": markdown
-            },
-            headers={
-                "Authorization": "Bearer {}".format(settings["nodebb_api_key"])
-            }
-        )
-    except Exception as e:
-        logging.getLogger("send_nodebb").error("Unable to create post: {}".format(e))
+        try:
+            requests.post(
+                nodebb_url.format(NODEBB_WRITE_POST), data={
+                    "_uid": uid,
+                    "cid": settings["nodebb_category_id"],
+                    "title": title,
+                    "content": markdown
+                },
+                headers={
+                    "Authorization": "Bearer {}".format(settings["nodebb_api_key"])
+                }
+            )
+        except Exception as e:
+            logging.getLogger("send_nodebb").error("Unable to create post: {}".format(e))
