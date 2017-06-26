@@ -5,6 +5,7 @@ import requests
 from celery import Task
 from sqlalchemy.orm.exc import NoResultFound
 
+from ultros_site.database.schema.product import Product
 from ultros_site.database.schema.product_branch import ProductBranch
 from ultros_site.database.schema.setting import Setting
 from ultros_site.database_manager import DatabaseManager
@@ -46,6 +47,7 @@ def github_import(product_id, gh_owner, gh_project):
 
     for key in GITHUB_NEEDED_KEYS:
         if key not in settings:
+            logging.getLogger("github_import").warning("Missing data key: {}".format(key))
             return
 
     session = requests.session()
@@ -61,15 +63,23 @@ def github_import(product_id, gh_owner, gh_project):
         }
     ).json()
 
+    logging.getLogger("github_import").info("Received  {} branches".format(len(data)))
+
     branches = []
 
     for branch in data:
-        branches.append(branch["name"])
-        upsert_branch(db_session, product_id, branch["name"])
+        name = branch["name"]
+
+        logging.getLogger("github_import").info("Upserting branch: {}".format(name))
+
+        branches.append(name)
+        upsert_branch(db_session, product_id, name)
 
     for branch in db_session.query(ProductBranch).filter_by(product_id=product_id).all():
         if branch.name not in branches:
             branch.disabled = True  # TODO: Is this what Momo wanted?
+
+    db_session.commit()
 
 
 def upsert_branch(session, product_id, branch_name):
@@ -78,5 +88,14 @@ def upsert_branch(session, product_id, branch_name):
     except NoResultFound:
         branch = ProductBranch(product_id=product_id, name=branch_name)
         session.add(branch)
-        return True
-    return False
+    else:
+        return False
+
+    try:
+        product = session.query(Product).filter_by(id=product_id).one()
+    except NoResultFound:
+        return None
+    else:
+        product.branches.append(branch)
+
+    return True

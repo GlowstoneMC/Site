@@ -27,18 +27,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                % for branch in product.branches:
+                % for branch in sorted(product.branches, key=lambda x: x.id):
                 <tr>
                     <td><strong>${branch.id}</strong></td>
-                    <td><strong>${branch.name}</strong></td>
+                    <td>${branch.name}</td>
                     <td>
                     % if branch.disabled:
-                        <a href="/admin/branch/enable?branch=${branch.id}&product=${product.id}" title="Enable branch" >
-                            <button class="button is-success is-small"><span class="icon"><i class="fa fa-check"></i></span></button>
+                        <a class="button is-success is-small" href="/admin/branch/enable?branch=${branch.id}&product=${product.id}" title="Enable branch" >
+                            <span class="icon"><i class="fa fa-check"></i></span>
                         </a>
                     % else:
-                        <a href="/admin/branch/disable?branch=${branch.id}&product=${product.id}" title="Disable branch" >
-                            <button class="button is-danger is-small"><span class="icon"><i class="fa fa-times"></i></span></button>
+                        <a class="button is-danger is-small" href="/admin/branch/disable?branch=${branch.id}&product=${product.id}" title="Disable branch" >
+                            <span class="icon"><i class="fa fa-times"></i></span>
                         </a>
                     % endif
                     </td>
