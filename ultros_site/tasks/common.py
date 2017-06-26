@@ -40,5 +40,6 @@ def task_prerun(signal=None, sender=None, task_id=None, task=None, args=None, kw
 
 
 @task_postrun.connect
-def task_postrun(signal=None, sender=None, task_id=None, task=None, args=None, kwargs=None, retval=None, state=None, **kw):
+def task_postrun(signal=None, sender=None, task_id=None, task=None, args=None, kwargs=None, retval=None, state=None,
+                 **kw):
     db_update_status(task_id, state)
