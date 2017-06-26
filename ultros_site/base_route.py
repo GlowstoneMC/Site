@@ -4,7 +4,6 @@ import json
 from email.utils import format_datetime
 
 from dicttoxml import dicttoxml
-from falcon import HTTPBadRequest
 from ruamel import yaml
 
 from ultros_site.utils import format_date_frontend
