@@ -63,4 +63,3 @@ class BaseSink:
             resp.content_type = "text"
             resp.body = "Unknown or unsupported content type: {}\n\n" \
                         "We support application/json, application/xml or application/x-yaml".format(accepts)
-
