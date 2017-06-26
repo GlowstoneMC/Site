@@ -1,4 +1,5 @@
 # coding=utf-8
+from celery.signals import task_prerun, task_postrun
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.database.schema.celery_task import CeleryTask
@@ -26,3 +27,18 @@ def db_update_status(task_id, status):
             pass
         else:
             row.status = status
+
+
+@task_prerun.connect
+def task_prerun(signal=None, sender=None, task_id=None, task=None, args=None, kwargs=None, **kw):
+    task_args = {
+        "args": args,
+        "kwargs": kwargs
+    }
+
+    db_add(task_id, task.name, task_args, "PENDING")
+
+
+@task_postrun.connect
+def task_postrun(signal=None, sender=None, task_id=None, task=None, args=None, kwargs=None, retval=None, state=None, **kw):
+    db_update_status(task_id, state)
