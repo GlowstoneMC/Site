@@ -1,6 +1,7 @@
 # coding=utf-8
 import datetime
 
+from ultros_site.database.schema.celery_task import CeleryTask
 from ultros_site.database.schema.user import User
 from ultros_site.database.schema.session import Session
 
@@ -52,6 +53,26 @@ except Exception as e:
     db_session.rollback()
 else:
     print("  {} users deleted.".format(users))
+    db_session.commit()
+
+db_session.close()
+
+print("")
+print("> Cleaning old celery tasks...")
+
+db_session = manager.create_session()
+tasks = 0
+
+try:
+    for task in db_session.query(CeleryTask).all():
+        if now - task.created_date > datetime.timedelta(hours=48):
+            db_session.delete(task)
+            tasks += 1
+except Exception as e:
+    print("  Failed: {}".format(e))
+    db_session.rollback()
+else:
+    print("  {} tasks deleted.".format(tasks))
     db_session.commit()
 
 db_session.close()

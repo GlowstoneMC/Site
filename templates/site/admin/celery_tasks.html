@@ -1,0 +1,78 @@
+<%inherit file="base.html"/>
+
+## Current tab for navigation
+<%!
+    tab = "admin_celery"
+%>
+
+## SEO Stuff
+<%block name="title">Admin/Celery/Tasks &middot; Glowstone</%block>
+<%block name="description">Administration area - Celery Tasks</%block>
+
+<%block name="og_title">Admin/Celery/Tasks</%block>
+<%block name="og_description">Administration area - Celery Tasks</%block>
+
+<section class="section">
+    <div class="container">
+
+        % if len(tasks):
+        <h1 class="title">Celery Tasks</h1>
+        <table class="table is-bordered is-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Arguments</th>
+            </tr>
+            </thead>
+            <tbody>
+            % for task in tasks:
+            <tr>
+                <td><strong>${task.task_id}</strong></td>
+                <td>${task.name}</td>
+                <td>
+                    % if task.status in ["PENDING", "RECEIVED", "RETRY"]:
+                    <span class="icon is-info">
+                        <i title="Waiting: ${task.status}" class="fa fa-ellipsis-h"></i>
+                    </span>
+                    % elif task.status in ["STARTED"]:
+                    <span class="icon is-warning">
+                        <i title="Running: ${task.status}" class="fa fa-refresh"></i>
+                    </span>
+                    % elif task.status in ["SUCCESS"]:
+                    <span class="icon is-success">
+                        <i title="Complete: ${task.status}" class="fa fa-check"></i>
+                    </span>
+                    % elif task.status in ["FAILURE"]:
+                    <span class="icon is-danger">
+                        <i title="Failed: ${task.status}" class="fa fa-times"></i>
+                    </span>
+                    % elif task.status in ["REVOKED"]:
+                    <span class="icon is-dark">
+                        <i title="Cancelled: ${task.status}" class="fa fa-times"></i>
+                    </span>
+                    % endif
+                </td>
+                <td>${format_date(task.created_date)}</td>
+                <td style="font-family: monospace;">${task.args}</td>
+            </tr>
+            % endfor
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Arguments</th>
+            </tr>
+            </tfoot>
+        </table>
+
+        % else:
+        <h1 class="title">No recent celery tasks found.</h1>
+        % endif
+    </div>
+</section>

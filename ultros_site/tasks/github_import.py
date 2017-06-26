@@ -47,7 +47,7 @@ def github_import(product_id, gh_owner, gh_project):
 
     for key in GITHUB_NEEDED_KEYS:
         if key not in settings:
-            logging.getLogger("github_import").warning("Missing data key: {}".format(key))
+            logging.getLogger("github_import").warning("Missing settings key: {}".format(key))
             return
 
     session = requests.session()
@@ -63,14 +63,14 @@ def github_import(product_id, gh_owner, gh_project):
         }
     ).json()
 
-    logging.getLogger("github_import").info("Received  {} branches".format(len(data)))
+    logging.getLogger("github_import").info("Received {} branches.".format(len(data)))
 
     branches = []
 
     for branch in data:
         name = branch["name"]
 
-        logging.getLogger("github_import").info("Upserting branch: {}".format(name))
+        logging.getLogger("github_import").debug("Upserting branch: {}".format(name))
 
         branches.append(name)
         upsert_branch(db_session, product_id, name)

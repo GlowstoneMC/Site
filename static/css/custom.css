@@ -41,6 +41,18 @@
     color: #23d160;
 }
 
+.icon.is-info {
+    color: #3273dc;
+}
+
+.icon.is-warning {
+    color: #ffdd57;
+}
+
+.icon.is-dark {
+    color: #363636;
+}
+
 th.is-primary {
     background-color: #ffa000 !important;
     color: white !important;
