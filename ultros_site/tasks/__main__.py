@@ -10,6 +10,7 @@ app = Celery(
     backend="redis://storage:6379/2",
     include=[
         "ultros_site.tasks.email",
+        "ultros_site.tasks.github_import",
         "ultros_site.tasks.notify"
     ]
 )

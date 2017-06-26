@@ -14,7 +14,8 @@ __author__ = "Momo"
 
 GITHUB_BRANCHES_URL = "https://api.github.com/repos/{}/{}/branches"
 GITHUB_NEEDED_KEYS = [
-    "github_client_id", "github_client_secret"
+    "github_client_id", "github_client_secret",
+    "github_oauth_token", "github_username"
 ]
 
 
@@ -54,6 +55,9 @@ def github_import(product_id, gh_owner, gh_project):
         params={
             "client_id": settings["github_client_id"],
             "client_secret": settings["github_client_secret"]
+        },
+        headers={
+            "Authorization": "token {}".format(settings["github_oauth_token"])
         }
     ).json()
 
