@@ -16,6 +16,7 @@ class APIMiddleware:
             return
 
         req.context["user"] = None
+        req.context["api_key"] = None
 
         params = {}
         api_key = None
