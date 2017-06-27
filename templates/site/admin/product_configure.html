@@ -23,7 +23,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +41,10 @@
                             <span class="icon"><i class="fa fa-times"></i></span>
                         </a>
                     % endif
+                    % if branch.id == product.branch.id:
+                        &nbsp;
+                        <span title="Default Branch" class="icon is-success"><i class="fa fa-check"></i></span>
+                    % endif
                     </td>
                 </tr>
                 % endfor
@@ -49,7 +53,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
                 </tfoot>
             </table>

@@ -14,6 +14,8 @@ from ultros_site.tasks.__main__ import app
 __author__ = "Momo"
 
 GITHUB_BRANCHES_URL = "https://api.github.com/repos/{}/{}/branches"
+GITHUB_REPO_URL = "https://api.github.com/repos/{}/{}"
+
 GITHUB_NEEDED_KEYS = [
     "github_client_id", "github_client_secret",
     "github_oauth_token", "github_username"
@@ -50,6 +52,12 @@ def github_import(product_id, gh_owner, gh_project):
                 logging.getLogger("github_import").warning("Missing settings key: {}".format(key))
                 return
 
+        try:
+            product = db_session.query(Product).filter(id=product_id).one()
+        except NoResultFound:
+            logging.getLogger("github_import").warning("No such product: {}".format(product_id))
+            return
+
         session = requests.session()
 
         data = session.get(
@@ -77,7 +85,29 @@ def github_import(product_id, gh_owner, gh_project):
 
         for branch in db_session.query(ProductBranch).filter_by(product_id=product_id).all():
             if branch.name not in branches:
-                branch.disabled = True  # TODO: Is this what Momo wanted?
+                branch.disabled = True
+
+        data = session.get(
+            GITHUB_REPO_URL.format(gh_owner, gh_project),
+            params={
+                "client_id": settings["github_client_id"],
+                "client_secret": settings["github_client_secret"]
+            },
+            headers={
+                "Authorization": "token {}".format(settings["github_oauth_token"])
+            }
+        ).json()
+
+        default_branch = data["default_branch"]
+
+        try:
+            db_branch = db_session.query(ProductBranch).filter_by(product_id=product_id, name=default_branch).one()
+            product.default_branch = db_branch
+        except NoResultFound:
+            logging.getLogger("github_import").warning("Failed to find default branch '{}' for product '{}'".format(
+                default_branch, product.name
+            ))
+            return
 
 
 def upsert_branch(session, product_id, branch_name):

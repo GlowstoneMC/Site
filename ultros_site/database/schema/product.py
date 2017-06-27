@@ -1,5 +1,5 @@
 # coding=utf-8
-from sqlalchemy import Column, String, Integer, Boolean
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 
 # Imported so it loads first for the relationship below
@@ -22,6 +22,9 @@ class Product(DeclarativeBase):
     url_circleci = Column(String, unique=True)
 
     branches = relationship("ProductBranch", secondary="product_branch_association")
+
+    default_branch_id = Column(Integer, ForeignKey("product_branch.id"))
+    default_branch = relationship("ProductBranch", foreign_keys=[default_branch_id])
 
     def __repr__(self):
         return "<{}(name={}>".format(

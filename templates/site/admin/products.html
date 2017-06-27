@@ -25,6 +25,7 @@
                     <th>Name</th>
                     <th>Order</th>
                     <th>Visibility</th>
+                    <th>Default Branch</th>
                     <th>Branches</th>
                     <th>Actions</th>
                 </tr>
@@ -44,6 +45,13 @@
                         <span class="icon is-success">
                             <i class="fa fa-eye"></i>
                         </span>
+                        % endif
+                    </td>
+                    <td>
+                        % if p.default_branch:
+                            ${p.default_branch.name}
+                        % else:
+                            None
                         % endif
                     </td>
                     <td>
@@ -75,6 +83,7 @@
                     <th>Name</th>
                     <th>Order</th>
                     <th>Visibility</th>
+                    <th>Default Branch</th>
                     <th>Branches</th>
                     <th>Actions</th>
                 </tr>
