@@ -70,3 +70,16 @@ def check_admin(func):
 
         raise HTTPForbidden()
     return inner
+
+
+def check_api(func):
+    def inner(self, req, resp, *args, **kwargs):
+        user = req.context["user"]
+
+        if user and user.api_enabled:
+            return func(self, req, resp, *args, **kwargs)
+
+        resp.status = "403 Bad Request"
+        resp.content_type = "text"
+        resp.body = "API access is disabled for your account"
+    return inner

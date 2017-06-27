@@ -3,6 +3,7 @@ import falcon
 import logging
 import sys
 
+from ultros_site.middleware.api import APIMiddleware
 from ultros_site.middleware.database import DatabaseMiddleware
 from ultros_site.middleware.error_pages import ErrorPageMiddleware
 from ultros_site.middleware.output_requests import OutputRequestsMiddleware
@@ -22,6 +23,7 @@ manager = RouteManager()
 
 middleware = [
     DatabaseMiddleware(manager.database),
+    APIMiddleware(),
     SessionMiddleware(),
     ErrorPageMiddleware(manager),
 ]

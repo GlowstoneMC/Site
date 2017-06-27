@@ -17,6 +17,10 @@ class SessionMiddleware:
             log.debug("Ignoring static file request")
             return
 
+        if req.path.startswith("/api"):
+            log.debug("Ignoring API route")
+            return
+
         req.context["user"] = None
         req.context["session"] = None
 
