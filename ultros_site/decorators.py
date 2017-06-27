@@ -2,7 +2,11 @@
 import logging
 import secrets
 
+import json
+
+from dicttoxml import dicttoxml
 from falcon import HTTPBadRequest, HTTPForbidden
+from ruamel import yaml
 
 __author__ = "Gareth Coles"
 log = logging.getLogger("Decorators")
@@ -82,4 +86,32 @@ def check_api(func):
         resp.status = "403 Bad Request"
         resp.content_type = "text"
         resp.body = "API access is disabled for your account"
+    return inner
+
+
+def render_api(func):
+    def inner(self, req, resp, *args, **kwargs):
+        data = func(self, req, resp, *args, **kwargs)
+
+        accepts = req.get_header("Accepts")
+
+        if not accepts:
+            accepts = "application/json"
+
+        accepts = accepts.lower()
+
+        if accepts == "application/x-yaml":
+            resp.content_type = accepts
+            resp.body = yaml.safe_dump(data)
+        elif accepts == "application/json":
+            resp.content_type = accepts
+            resp.body = json.dumps(data)
+        elif accepts == "application/xml":
+            resp.content_type = accepts
+            resp.body = dicttoxml(data)
+        else:
+            resp.status = "400 Bad Request"
+            resp.content_type = "text"
+            resp.body = "Unknown or unsupported content type: {}\n\n" \
+                        "We support application/json, application/xml or application/x-yaml".format(accepts)
     return inner
