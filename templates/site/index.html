@@ -36,9 +36,7 @@ tab = "home"
                 </strong>
                 <span id="announcements-titles">
                     % if news_posts:
-                        % for post in news_posts:
-                            ${", ".join(news_post_header(post))}
-                        % endfor
+                        ${", ".join(news_post_header(post) for post in news_posts)}
                     % else:
                         <span class="announcement-link">No news posts found.</span>
                     % endif
