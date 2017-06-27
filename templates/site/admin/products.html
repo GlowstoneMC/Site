@@ -34,8 +34,8 @@
                 % for p in products:
                 <tr>
                     <td><strong>${p.id}</strong></td>
-                    <td><strong>${p.name}</strong></td>
-                    <td><strong>${p.order}</strong></td>
+                    <td>${p.name}</td>
+                    <td>${p.order}</td>
                     <td>
                         % if p.hidden:
                         <span class="icon is-danger">
@@ -55,7 +55,7 @@
                         % endif
                     </td>
                     <td>
-                        <strong>${len(p.branches)}</strong>
+                        ${len(p.branches)}
                     </td>
                     <td style="max-width: 1rem">
                         <a class="button is-danger is-small" href="/admin/products/delete/${p.id}?_csrf=${csrf}" title="Delete" >
