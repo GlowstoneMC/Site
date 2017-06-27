@@ -53,7 +53,7 @@ def github_import(product_id, gh_owner, gh_project):
                 return
 
         try:
-            product = db_session.query(Product).filter(id=product_id).one()
+            product = db_session.query(Product).filter_by(id=product_id).one()
         except NoResultFound:
             logging.getLogger("github_import").warning("No such product: {}".format(product_id))
             return
