@@ -29,13 +29,24 @@ class APIMiddleware:
             api_key = params["api_key"]
 
         if not api_key:
+            self.log_call(req.uri, req.method)
             return  # Not authorized
 
         db_session = req.context["db_session"]
 
         try:
-            user = db_session.query(APIKey).filter_by(key=api_key).one()
+            api_key = db_session.query(APIKey).filter_by(key=api_key).one()
         except NoResultFound:
+            self.log_call(req.uri, req.method)
             return  # Not authorized
         else:
-            req.context["user"] = user
+            req.context["user"] = api_key.user
+            req.context["api_key"] = api_key
+
+            self.log_call(req.uri, req.method, api_key)
+
+    def log_call(self, path, method, api_key=None):
+        if not api_key:
+            log.info("{} {}".format(method, path))
+        else:
+            log.info("{}/{}: {} {}".format(api_key.user.name, api_key.name, method, path))
