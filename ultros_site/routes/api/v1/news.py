@@ -40,7 +40,10 @@ class APINewsRoute(BaseRoute):
             "posts": [
                 {
                     "id": int(post.id),
-                    "user": int(post.user_id),
+                    "user": {
+                        "id": int(post.user.id),
+                        "username": str(post.user.username)
+                    },
                     "posted": str(post.posted),
                     "title": str(post.title),
                     "summary": str(post.summary),
