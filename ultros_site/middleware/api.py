@@ -50,4 +50,4 @@ class APIMiddleware:
         if not api_key:
             log.info("{} {}".format(method, path))
         else:
-            log.info("{}/{}: {} {}".format(api_key.user.name, api_key.name, method, path))
+            log.info("{}/{}: {} {}".format(api_key.user.username, api_key.name, method, path))
