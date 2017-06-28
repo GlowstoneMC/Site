@@ -4,7 +4,7 @@ from ultros_site.base_route import BaseRoute
 __author__ = "Gareth Coles"
 
 
-class DocsRoute(BaseRoute):
+class APIDocsRoute(BaseRoute):
     route = "/docs/api"
 
     def on_get(self, req, resp):
