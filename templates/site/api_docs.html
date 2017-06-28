@@ -1,0 +1,247 @@
+<%inherit file="base.html"/>
+
+## Current tab for navigation
+<%!
+    tab = "docs"
+%>
+
+## SEO Stuff
+<%block name="title">API Docs &middot; Glowstone</%block>
+<%block name="description">Documentation for the site's API</%block>
+
+<%block name="og_title">API Docs</%block>
+<%block name="og_description">Documentation for the site's API</%block>
+
+<nav class="nav has-shadow" style="padding-left: 1%">
+    <div class="container">
+        <div class="nav-left">
+            <a class="nav-item is-tab" href="#info">Info</a>
+            <a class="nav-item is-tab" href="#endpoints">Endpoints</a>
+            <a class="nav-item is-tab" href="#objects">Objects</a>
+        </div>
+    </div>
+</nav>
+
+<section class="section">
+    <div class="container content">
+        <h1 class="title" id="info">Info</h1>
+
+        <article class="message content">
+            <div class="message-header">Partitioning</div>
+            <div class="message-body">
+                <p>
+                    Our API is divided into two distinct parts - public and private. Both
+                    are documented, but you will need an API key to access any private functions
+                    of the API. You can request access to it from us by contacting us directly
+                    as described on <a href="/community">the community page</a>.
+                </p>
+                <p>
+                    If you have been granted access, you may log into your account and manage
+                    your API keys <a href="/profile/api_keys">on this page</a>.
+                </p>
+                <p>
+                    Please note that some of the private APIs are only accessible by admins.
+                    They are documented below as well.
+                </p>
+            </div>
+        </article>
+        <div class="content">
+            <h2 class="subtitle is-4">Usage</h2>
+            <p>
+                Our API is relatively straightforward, and provides multiple data types and
+                methods of authentication. You use the following base URI for all API
+                requests:
+            </p>
+
+            <code class="notification box">https://beta.glowstone.net/api/{version}/</code>
+
+            <p>
+                The current API version is <code>v1</code>.
+            </p>
+
+            <h2 class="subtitle is-4">Authentication</h2>
+            <p>
+                For endpoints that require an API key, you have two options for authentication.
+            </p>
+
+            <ul>
+                <li>Set the <code>api_key</code> URI parameter or POST data key to your API key</li>
+                <li>Set the <code>Authorization</code> header to your API key</li>
+            </ul>
+
+            <h2 class="subtitle is-4">Data types</h2>
+
+            <p>
+                We support the following data types, which you can specify using the <code>Accepts</code>
+                header:
+            </p>
+
+            <ul>
+                <li><code>application/json</code></li>
+                <li><code>application/xml</code></li>
+                <li><code>application/x-yaml</code></li>
+            </ul>
+
+            <p>
+                If you don't specify this header, <code>application/json</code> will be assumed.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container content">
+        <h1 class="title" id="endpoints">Endpoints</h1>
+
+        <h2 class="subtitle is-4">Public</h2>
+        <p>
+            All public endpoints are read-only, and so only support the <code>GET</code> method.
+        </p>
+
+        <div class="message is-success">
+            <div class="message-header">
+                <code>GET /api/v1/news</code>
+            </div>
+            <div class="message-body content">
+                <p>
+                    Get the latest news posts as presented on the <a href="/news">news page</a>.
+                </p>
+
+                <h3 class="subtitle is-5">Parameters</h3>
+
+                <table class="table is-striped">
+                    <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Optional</th>
+                        <th>Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>page</code></td>
+                        <td><span class="icon is-success"><i class="fa fa-check"></i></span></td>
+                        <td>Request a specific page of news posts</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="subtitle is-5">Returned data</h3>
+
+                <table class="table is-striped">
+                    <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>page</code></td>
+                        <td><code>Integer</code></td>
+                        <td>Current page number</td>
+                    </tr>
+                    <tr>
+                        <td><code>pages</code></td>
+                        <td><code>Integer</code></td>
+                        <td>Total number of available pages</td>
+                    </tr>
+                    <tr>
+                        <td><code>posts</code></td>
+                        <td><code>List</code></td>
+                        <td>List of <a href="#object-news-post">News Post objects</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container content">
+        <h1 class="title" id="objects">Objects</h1>
+
+        <div class="message is-info">
+            <div class="message-header" id="object-news-post">News post</div>
+            <div class="message-body content" style="padding: 0 !important;">
+                <table class="table is-striped" style="margin-bottom: 0 !important;">
+                    <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>id</code></td>
+                        <td><code>Integer</code></td>
+                        <td>Post ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>html</code></td>
+                        <td><code>String</code></td>
+                        <td>Rendered HTML content</td>
+                    </tr>
+                    <tr>
+                        <td><code>markdown</code></td>
+                        <td><code>String</code></td>
+                        <td>Markdown source code</td>
+                    </tr>
+                    <tr>
+                        <td><code>posted</code></td>
+                        <td><code>String (Datetime)</code></td>
+                        <td>Date of posting</td>
+                    </tr>
+                    <tr>
+                        <td><code>summary</code></td>
+                        <td><code>String</code></td>
+                        <td>HTML-stripped summary</td>
+                    </tr>
+                    <tr>
+                        <td><code>title</code></td>
+                        <td><code>String</code></td>
+                        <td>Post title</td>
+                    </tr>
+                    <tr>
+                        <td><code>user</code></td>
+                        <td><a href="#object-user"><code>User object</code></a></td>
+                        <td>Post author</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="message is-info">
+            <div class="message-header" id="object-user">User</div>
+            <div class="message-body content" style="padding: 0 !important;">
+                <table class="table is-striped" style="margin-bottom: 0 !important;">
+                    <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>id</code></td>
+                        <td><code>Integer</code></td>
+                        <td>User ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>username</code></td>
+                        <td><code>String</code></td>
+                        <td>Username</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%include file="sponsors.html" />
