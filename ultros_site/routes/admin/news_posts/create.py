@@ -59,7 +59,8 @@ class CreateNewsRoute(BaseRoute):
             db_session.add(post)
             db_session.commit()
 
-            notify_post(post)
+            if post.published:
+                notify_post(post)
 
             if post.published:
                 message = "News post created: {}".format(params["title"])
