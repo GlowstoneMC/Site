@@ -27,6 +27,7 @@
             <tr>
                 <th>ID</th>
                 <th>Title</th>
+                <th>Status</th>
                 <th>Created</th>
                 <th>Author</th>
                 <th>Actions</th>
@@ -37,6 +38,19 @@
             <tr>
                 <td><strong>${post.id}</strong></td>
                 <td>${post.title}</td>
+                % if post.published:
+                    <td>
+                        <span style="color: green;">
+                            Published
+                        </span>
+                    </td>
+                % else:
+                    <td>
+                        <span style="color: red;">
+                            Unpublished
+                        </span>
+                    </td>
+                % endif
                 <td>${post.posted.strftime("%x at %X")}</td>
                 <td>${post.user.username}</td>
                 <td>
@@ -72,6 +86,7 @@
             <tr>
                 <th>ID</th>
                 <th>Title</th>
+                <th>Status</th>
                 <th>Created</th>
                 <th>Author</th>
                 <th>Actions</th>

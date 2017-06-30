@@ -1,5 +1,5 @@
 # coding=utf-8
-from sqlalchemy import Column, Integer, ForeignKey, String, DateTime
+from sqlalchemy import Column, Integer, ForeignKey, String, DateTime, Boolean
 from sqlalchemy.orm import relationship
 
 from ultros_site.database.common import DeclarativeBase
@@ -21,6 +21,7 @@ class NewsPost(DeclarativeBase):
     markdown = Column(String)
     html = Column(String)
     summary = Column(String, default=None)
+    published = Column(Boolean, default=True)
 
     def __repr__(self):
         return "<{}(user={}, title={}. posted={})>".format(

@@ -41,6 +41,8 @@ class CreateNewsRoute(BaseRoute):
                 redirect_uri="/admin/news/create"
             )
 
+        req.get_param("action", store=params)
+
         markdown = Markdown(params["content"])
         db_session = req.context["db_session"]
 
@@ -50,7 +52,8 @@ class CreateNewsRoute(BaseRoute):
             post = NewsPost(
                 user=req.context["user"], posted=datetime.datetime.now(),
                 title=params["title"], markdown=markdown.markdown,
-                html=markdown.html, summary=markdown.summary
+                html=markdown.html, summary=markdown.summary,
+                published=(params["action"] == "publish")
             )
 
             db_session.add(post)
@@ -58,10 +61,15 @@ class CreateNewsRoute(BaseRoute):
 
             notify_post(post)
 
+            if post.published:
+                message = "News post created: {}".format(params["title"])
+            else:
+                message = "Draft created: {}".format(params["title"])
+
             return self.render_template(
                 req, resp, "admin/message_gate.html",
                 gate_message=Message(
-                    "info", "Post created", "News post created: {}".format(params["title"])
+                    "info", "Post created", message
                 ),
                 redirect_uri="/admin/news"
             )
@@ -77,15 +85,29 @@ class CreateNewsRoute(BaseRoute):
                     redirect_uri="/admin/news"
                 )
             else:
+                was_published = bool(post.published)
+
                 post.title = params["title"]
                 post.markdown = markdown.markdown
                 post.html = markdown.html
                 post.summary = markdown.summary
+                post.published = params["action"] == "publish"
+
+                if was_published == post.published:
+                    if post.published:
+                        message = "News post edited: {}".format(params["title"])
+                    else:
+                        message = "Draft edited: {}".format(params["title"])
+                else:
+                    if was_published:
+                        message = "News post unpublished: {}".format(params["title"])
+                    else:
+                        message = "Draft published: {}".format(params["title"])
 
                 return self.render_template(
                     req, resp, "admin/message_gate.html",
                     gate_message=Message(
-                        "info", "Post edited", "News post edited: {}".format(params["title"])
+                        "info", "Post edited", message
                     ),
                     redirect_uri="/admin/news"
                 )

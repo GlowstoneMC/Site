@@ -18,7 +18,9 @@ class APINewsRoute(BaseRoute):
         last_index = page * 10
 
         db_session = req.context["db_session"]
-        news_posts = db_session.query(NewsPost).order_by(NewsPost.posted.desc())[first_index:last_index]
+        news_posts = db_session.query(NewsPost).filter_by(published=True).order_by(
+            NewsPost.posted.desc()
+        )[first_index:last_index]
         count = db_session.query(func.count(NewsPost.id)).scalar()
         pages = int(count / 10)
 

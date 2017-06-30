@@ -18,7 +18,7 @@ class NewsViewRoute(BaseSink):
         db_session = req.context["db_session"]
 
         try:
-            news_post = db_session.query(NewsPost).filter_by(id=post_id).one()
+            news_post = db_session.query(NewsPost).filter_by(id=post_id, published=True).one()
         except NoResultFound:
             raise HTTPNotFound()
 

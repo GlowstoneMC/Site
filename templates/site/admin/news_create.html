@@ -25,6 +25,22 @@
             <span>&nbsp; Publish</span>
         </a>
 
+        % if post and post.published:
+            <a class="button is-danger is-pulled-right" id="draft-button" style="margin-left: 1rem;">
+                <span class="icon">
+                    <i class="fa fa-warning"></i>
+                </span>
+                <span>&nbsp; Unpublish</span>
+            </a>
+        % else:
+            <a class="button is-info is-pulled-right" id="draft-button" style="margin-left: 1rem;">
+                <span class="icon">
+                    <i class="fa fa-save"></i>
+                </span>
+                <span>&nbsp; Safe Draft</span>
+            </a>
+        % endif
+
         <a class="button is-warning is-pulled-right" id="preview-button">
             <span class="icon">
                 <i class="fa fa-eye"></i>
@@ -43,6 +59,7 @@
 
         <form action="/admin/news/create" method="post" id="form">
             <input type="hidden" name="_csrf" value="${csrf}" id="csrf"/>
+            <input type="hidden" name="action" value="publish" id="action"/>
             <input type="hidden" name="content" value="" id="content-input" />
             % if not post:
             <input type="hidden" name="post_id" value="" />
@@ -184,6 +201,15 @@ Or a table:
     document.getElementById("publish-button").onclick = function () {
         let form = document.getElementById("form");
 
+        document.getElementById("action").value = "publish";
+        document.getElementById("content-input").value = editor.getValue();
+        form.submit()
+    }
+
+    document.getElementById("draft-button").onclick = function () {
+        let form = document.getElementById("form");
+
+        document.getElementById("action").value = "draft";
         document.getElementById("content-input").value = editor.getValue();
         form.submit()
     }
