@@ -21,21 +21,8 @@ class Markdown:
             },
         )
 
-        self.html = self.add_classes(html)
+        self.html = html
         self.summary = self.get_summary(html)
-
-    def add_classes(self, html):
-        soup = BeautifulSoup(html, "html.parser")
-        h1 = soup.find_all("h1")
-        h2 = soup.find_all("h2")
-
-        for tag in h1:
-            tag["class"] = "title"
-
-        for tag in h2:
-            tag["class"] = "subtitle"
-
-        return str(soup)
 
     def get_summary(self, html):
         soup = BeautifulSoup(html, "html.parser")
