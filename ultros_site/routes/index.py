@@ -10,7 +10,7 @@ class IndexRoute(BaseRoute):
 
     def on_get(self, req, resp):
         db_session = req.context["db_session"]
-        news_posts = db_session.query(NewsPost).order_by(NewsPost.posted.desc())[0:3]
+        news_posts = db_session.query(NewsPost).filter_by(published=True).order_by(NewsPost.posted.desc())[0:3]
 
         self.render_template(
             req, resp, "index.html",
