@@ -5,7 +5,10 @@ This is the code for the new downloads site for Glowstone, and potentially for a
 later. Based on the code for [the Ultros site](https://github.com/UltrosBot/Ultros-site).
 
 This project uses the Ace editor in the admin interface. The license for Ace
-can be found in [LICENSE_ACE](https://github.com/GlowstoneMC/Site/blob/falcon/LICENSE_ACE).
+can be found in [LICENSE_ACE](https://github.com/GlowstoneMC/Site/blob/master/LICENSE_ACE).
+
+This project uses Baguettebox for image lightboxes sitewide. The license for Baguettebox
+can be found in [LICENSE_BAGUETTEBOX](https://github.com/GlowstoneMC/Site/blob/master/LICENSE_BAGUETTEBOX).
 
 Setting up
 ----------

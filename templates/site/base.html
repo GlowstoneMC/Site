@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/custom.css">
     <link rel="stylesheet" href="/static/css/pygments-colourful.css">
+    <link rel="stylesheet" href="/static/css/baguettebox.css">
 
     <script src="/static/js/handlebars-v4.0.5.js"></script>
 
@@ -314,3 +315,11 @@ ${next.body()}
         </div>
     </div>
 </footer>
+
+<script src="/static/js/baguettebox.js"></script>
+<script type="text/javascript">
+    baguetteBox.run(".gallery", {
+        animation: "fadeIn",
+        noScrollbars: true
+    })
+</script>

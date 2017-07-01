@@ -21,8 +21,25 @@ class Markdown:
             },
         )
 
-        self.html = html
+        self.html = self.fix_html(html)
         self.summary = self.get_summary(html)
+
+    def fix_html(self, html):
+        soup = BeautifulSoup(html, "html.parser")
+        headers = soup.find_all("img")
+
+        for tag in headers:
+            attrs = {
+                "href": tag["src"],
+                "data-caption": tag["alt"]
+            }
+            anchor = soup.new_tag("a", **attrs)
+
+            tag["class"] = "image box"
+
+            tag.wrap(anchor)
+
+        return str(soup)
 
     def get_summary(self, html):
         soup = BeautifulSoup(html, "html.parser")
