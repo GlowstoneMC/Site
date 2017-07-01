@@ -131,7 +131,7 @@ def send_discord(embed: None):
             embeds = [embed]
 
         session = requests.session()
-        return session.post(hook_url, json={
+        session.post(hook_url, json={
             "embeds": embeds
         })
 
