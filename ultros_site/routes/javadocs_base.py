@@ -3,8 +3,6 @@ import falcon
 import os
 import re
 
-from mimetypes import guess_type
-
 from ultros_site.base_sink import BaseSink
 
 __author__ = "Gareth Coles"
