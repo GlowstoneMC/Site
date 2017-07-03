@@ -15,7 +15,7 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
     @render_api
     def on_post(self, req, resp):
         logger = logging.getLogger("GitHub")
-        data = json.load(req.bounded_stream())
+        data = json.load(req.bounded_stream)
 
         logger.info("\n{}\n".format(pprint.pformat(data)))
 
