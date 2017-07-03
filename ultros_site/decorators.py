@@ -91,7 +91,13 @@ def check_api(func):
 
 def render_api(func):
     def inner(self, req, resp, *args, **kwargs):
-        data = func(self, req, resp, *args, **kwargs)
+        try:
+            data = func(self, req, resp, *args, **kwargs)
+        except Exception as e:
+            resp.status = "500 Internal Server Error"
+            resp.content_type = "text"
+            resp.body = str(e)
+            return
 
         accepts = req.get_header("Accepts")
 

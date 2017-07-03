@@ -4,7 +4,7 @@ import logging
 import pprint
 
 from ultros_site.base_route import BaseRoute
-from ultros_site.decorators import render_api
+from ultros_site.decorators import render_api, check_admin, check_api
 
 __author__ = "Gareth Coles"
 
@@ -12,6 +12,8 @@ __author__ = "Gareth Coles"
 class APIBuildsNotifyGitHubRoute(BaseRoute):
     route = "/api/v1/builds/notify/github"
 
+    @check_api
+    @check_admin
     @render_api
     def on_post(self, req, resp):
         logger = logging.getLogger("GitHub")
