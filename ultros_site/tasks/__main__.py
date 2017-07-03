@@ -9,6 +9,7 @@ app = Celery(
     broker="amqp://storage:5672/glowstone",
     backend="redis://storage:6379/2",
     include=[
+        "ultros_site.tasks.comments",
         "ultros_site.tasks.common",
         "ultros_site.tasks.email",
         "ultros_site.tasks.github_import",
