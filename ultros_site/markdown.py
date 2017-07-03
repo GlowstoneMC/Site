@@ -32,7 +32,13 @@ class Markdown:
         self.summary = self.get_summary(html)
 
     def fix_markdown(self, markdown):
+        done_tags = []
+
         for tag in ISSUE_REGEX.findall(markdown):
+            if tag in done_tags:
+                continue
+
+            done_tags.append(tag)
             num = tag[1:]
             markdown = markdown.replace(
                 tag,
