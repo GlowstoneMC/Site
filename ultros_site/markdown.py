@@ -7,9 +7,9 @@ from bs4 import BeautifulSoup
 
 __author__ = "Gareth Coles"
 
-ISSUE_REGEX = re.compile(r"#[\d]+")
+ISSUE_REGEX = re.compile(r"([\s(])(#[\d]+)([\s)])")
 ISSUE_URL = "https://github.com/GlowstoneMC/Glowstone/issues/{}"
-ISSUE_HTML = """<a href="{}">#{}</a>"""
+ISSUE_HTML = """{}<a href="{}">{}</a>{}"""
 
 
 class Markdown:
@@ -34,15 +34,15 @@ class Markdown:
     def fix_markdown(self, markdown):
         done_tags = []
 
-        for tag in ISSUE_REGEX.findall(markdown):
+        for start, tag, end in ISSUE_REGEX.findall(markdown):
             if tag in done_tags:
                 continue
 
             done_tags.append(tag)
-            num = tag[1:]
+            num = tag[2:-1]
             markdown = markdown.replace(
-                tag,
-                ISSUE_HTML.format(ISSUE_URL.format(num), num)
+                "{}{}{}".format(start, tag, end),
+                ISSUE_HTML.format(start, ISSUE_URL.format(num), tag, end)
             )
 
         return markdown
