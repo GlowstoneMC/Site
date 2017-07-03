@@ -26,7 +26,11 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th></th>
+                <th>
+                    <span class="icon">
+                        <i class="fa fa-comment"></i>
+                    </span>
+                </th>
                 <th>Title</th>
                 <th>Status</th>
                 <th>Created</th>
@@ -40,7 +44,7 @@
                 <td><strong>${post.id}</strong></td>
                 <td>
                     % if post.comment_url:
-                    <a class="button is-primary is-small" href="${post.comment_url}">
+                    <a class="button is-primary is-small is-outlined" target="_blank" href="${post.comment_url}">
                         <span class="icon">
                             <i class="fa fa-comment"></i>
                         </span>
@@ -110,7 +114,11 @@
             <tfoot>
             <tr>
                 <th>ID</th>
-                <th></th>
+                <th>
+                    <span class="icon">
+                        <i class="fa fa-comment"></i>
+                    </span>
+                </th>
                 <th>Title</th>
                 <th>Status</th>
                 <th>Created</th>
