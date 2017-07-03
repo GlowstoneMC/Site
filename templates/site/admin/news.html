@@ -40,13 +40,13 @@
                 <td><strong>${post.id}</strong></td>
                 <td>
                     % if post.comment_url:
-                    <a class="button is-primary is-small" href="${post.id}">
+                    <a class="button is-primary is-small" href="${post.comment_url}">
                         <span class="icon">
                             <i class="fa fa-comment"></i>
                         </span>
                     </a>
                     % else:
-                    <a class="button is-static is-small" href="${post.id}">
+                    <a class="button is-static is-small" href="${post.comment_url}">
                         <span class="icon">
                             <i class="fa fa-comment"></i>
                         </span>

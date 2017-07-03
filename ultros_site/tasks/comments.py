@@ -47,7 +47,7 @@ def link_comments(post_id: int):
 
         for topic in topics:
             if topic["title"] == post.title:
-                location = NODEBB_LOCATION.format(topic["tid"])
+                location = NODEBB_LOCATION.format(topic["slug"])
 
                 if not session.query(NewsPost).filter_by(comment_url=location).count():
                     post.comment_url = location
