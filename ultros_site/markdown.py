@@ -1,16 +1,23 @@
 # coding=utf-8
+import re
+
 import markdown2
 
 from bs4 import BeautifulSoup
 
 __author__ = "Gareth Coles"
 
+ISSUE_REGEX = re.compile(r"#[\d]+")
+ISSUE_URL = "https://github.com/GlowstoneMC/Glowstone/issues/{}"
+ISSUE_HTML = """<a href="{}">#{}</a>"""
+
 
 class Markdown:
     def __init__(self, markdown):
-        self.markdown = markdown
+        self.markdown = self.fix_markdown(markdown)
+
         html = markdown2.markdown(
-            markdown, extras={
+            self.markdown, extras={
                 "fenced-code-blocks": {},
                 "header-ids": {},
                 "html-classes": {
@@ -23,6 +30,16 @@ class Markdown:
 
         self.html = self.fix_html(html)
         self.summary = self.get_summary(html)
+
+    def fix_markdown(self, markdown):
+        for tag in ISSUE_REGEX.findall(markdown):
+            num = tag[1:]
+            markdown = markdown.replace(
+                tag,
+                ISSUE_HTML.format(ISSUE_URL.format(num), num)
+            )
+
+        return markdown
 
     def fix_html(self, html):
         soup = BeautifulSoup(html, "html.parser")
