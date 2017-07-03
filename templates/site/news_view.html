@@ -30,6 +30,13 @@
                 </span>
                 <span>Back to list</span>
             </a>
+
+            % if post.comment_url:
+                <a href="${post.comment_url}" class="is-pulled-right button is-outlined is-light">
+                    <span class="icon"><i class="fa fa-comment"></i></span>
+                    <span>Comments</span>
+                </a>
+            % endif
         </p>
         <br />
         <article class="message is-primary">

@@ -93,6 +93,13 @@
                 <p class="pull-right">${format_date(post.posted)} | ${post.user.username}</p>
             </div>
             <div class="message-body content gallery">
+                % if post.comment_url:
+                    <a href="${post.comment_url}" class="is-pulled-right button is-outlined is-light">
+                        <span class="icon"><i class="fa fa-comment"></i></span>
+                        <span>Comments</span>
+                    </a>
+                % endif
+                <div style="clear: both;"></div>
                 ${post.html}
             </div>
         </article>

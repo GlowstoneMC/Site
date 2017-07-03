@@ -26,6 +26,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th></th>
                 <th>Title</th>
                 <th>Status</th>
                 <th>Created</th>
@@ -37,6 +38,21 @@
             % for post in posts:
             <tr>
                 <td><strong>${post.id}</strong></td>
+                <td>
+                    % if post.comment_url:
+                    <a class="button is-primary is-small" href="${post.id}">
+                        <span class="icon">
+                            <i class="fa fa-comment"></i>
+                        </span>
+                    </a>
+                    % else:
+                    <a class="button is-static is-small" href="${post.id}">
+                        <span class="icon">
+                            <i class="fa fa-comment"></i>
+                        </span>
+                    </a>
+                    % endif
+                </td>
                 <td>${post.title}</td>
                 % if post.published:
                     <td>
@@ -78,6 +94,15 @@
                         </span>
                         <span>&nbsp;Resend Notifications</span>
                     </a>
+
+                        &nbsp;
+
+                    <a class="button is-success is-small" href="/admin/news/relink?post=${post.id}&_csrf=${csrf}">
+                        <span class="icon">
+                            <i class="fa fa-comment"></i>
+                        </span>
+                        <span>&nbsp;Relink Comments</span>
+                    </a>
                 </td>
             </tr>
             % endfor
@@ -85,6 +110,7 @@
             <tfoot>
             <tr>
                 <th>ID</th>
+                <th></th>
                 <th>Title</th>
                 <th>Status</th>
                 <th>Created</th>

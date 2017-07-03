@@ -13,7 +13,7 @@ class EmailTask(Task):
     def __init__(self):
         logging.basicConfig(
             format="%(asctime)s | %(levelname)-8s | %(name)-10s | %(message)s",
-            level=logging.INFO
+            level=logging.WARNING
         )
 
         logging.getLogger("CSSUTILS").setLevel(logging.CRITICAL)

@@ -33,7 +33,7 @@ class NotifyTask(Task):
     def __init__(self):
         logging.basicConfig(
             format="%(asctime)s | %(levelname)-8s | %(name)-10s | %(message)s",
-            level=logging.INFO
+            level=logging.WARNING
         )
 
         self.database = DatabaseManager()
@@ -77,7 +77,7 @@ def notify_post(post: NewsPost):
 
     app.send_task(
         "send_nodebb",
-        args=[post.title, post_url, post.markdown, post.user.username, post.user.email]
+        args=[post.title, post_url, post.markdown, post.user.username, post.user.email, post.id]
     )
 
 
@@ -137,7 +137,7 @@ def send_discord(embed: None):
 
 
 @app.task(base=NotifyTask, name="send_nodebb")
-def send_nodebb(title, url, markdown, username, email):
+def send_nodebb(title, url, markdown, username, email, post_id):
     with send_discord.database.session() as session:
         settings = {}
 
@@ -183,6 +183,11 @@ def send_nodebb(title, url, markdown, username, email):
                 headers={
                     "Authorization": "Bearer {}".format(settings["nodebb_api_key"])
                 }
+            )
+
+            app.send_task(
+                "link_comments",
+                args=[post_id]
             )
         except Exception as e:
             logging.getLogger("send_nodebb").error("Unable to create post: {}".format(e))

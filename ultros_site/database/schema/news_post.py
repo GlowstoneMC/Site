@@ -23,6 +23,8 @@ class NewsPost(DeclarativeBase):
     summary = Column(String, default=None)
     published = Column(Boolean, default=True)
 
+    comment_url = Column(String, default=None)
+
     def __repr__(self):
         return "<{}(user={}, title={}. posted={})>".format(
             self.__class__.__name__,
