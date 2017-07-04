@@ -11,9 +11,12 @@ app = Celery(
     include=[
         "ultros_site.tasks.comments",
         "ultros_site.tasks.common",
+        "ultros_site.tasks.discord",
         "ultros_site.tasks.email",
         "ultros_site.tasks.github_import",
+        "ultros_site.tasks.nodebb"
         "ultros_site.tasks.notify"
+        "ultros_site.tasks.twitter"
     ]
 )
 

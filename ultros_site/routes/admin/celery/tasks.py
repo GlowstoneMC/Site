@@ -12,7 +12,9 @@ class CeleryTasksRoute(BaseRoute):
     @check_admin
     def on_get(self, req, resp):
         db_session = req.context["db_session"]
-        tasks = db_session.query(CeleryTask).all()
+        tasks = db_session.query(CeleryTask).order_by(
+            CeleryTask.created_date.desc()
+        ).all()
 
         self.render_template(
             req, resp, "admin/celery_tasks.html",

@@ -2,14 +2,14 @@
 import logging
 import requests
 
-from celery import Task
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.database.schema.product import Product
 from ultros_site.database.schema.product_branch import ProductBranch
 from ultros_site.database.schema.setting import Setting
-from ultros_site.database_manager import DatabaseManager
+
 from ultros_site.tasks.__main__ import app
+from ultros_site.tasks.base import DatabaseTask
 
 __author__ = "Momo"
 
@@ -22,19 +22,7 @@ GITHUB_NEEDED_KEYS = [
 ]
 
 
-class ImportTask(Task):
-    def __init__(self):
-        logging.basicConfig(
-            format="%(asctime)s | %(levelname)-8s | %(name)-10s | %(message)s",
-            level=logging.WARNING
-        )
-
-        self.database = DatabaseManager()
-        self.database.load_schema()
-        self.database.create_engine()
-
-
-@app.task(base=ImportTask, name="github_import")
+@app.task(base=DatabaseTask, name="github_import")
 def github_import(product_id, gh_owner, gh_project):
     with github_import.database.session() as db_session:
         settings = {}
