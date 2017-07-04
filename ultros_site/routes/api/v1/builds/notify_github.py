@@ -16,7 +16,10 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
     @render_api
     def on_post(self, req, resp):
         if req.get_header("content-type") != "application/json":
-            return {"error": "Data was not of type 'application/json'"}
+            resp.status = "400 Bad Request"
+            resp.content_type = "text"
+            resp.body = "Data was not of type 'application/json'"
+            return
 
         event_type = req.get_header("X-GitHub-Event")
         data = json.load(req.bounded_stream)
@@ -28,20 +31,20 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
         branches = [b["name"] for b in data["branches"]]
 
         if event_type != "status":
-            return {}
+            return
 
         if not project.startswith("GlowstoneMC/"):
-            return {}
+            return
         if context != "ci/circleci":
-            return {}
+            return
         if state != "success":
-            return {}
+            return
         if "master" not in branches:
-            return {}
+            return
 
         celery.send_task(
             "download_javadocs",
             args=[project, target_url]
         )
 
-        return {}
+        return

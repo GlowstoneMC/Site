@@ -101,6 +101,9 @@ def render_api(func):
             resp.body = str(e)
             return
 
+        if not data:
+            return
+
         accepts = req.get_header("Accepts")
 
         if not accepts:
