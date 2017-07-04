@@ -15,6 +15,7 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
     @check_admin
     @render_api
     def on_post(self, req, resp):
+        event_type = req.get_header("X-GitHub-Event")
         data = json.load(req.bounded_stream)
 
         state = data["state"]
@@ -22,6 +23,9 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
         context = data["context"]
         target_url = data["target_url"]
         branches = [b["name"] for b in data["branches"]]
+
+        if event_type != "status":
+            return {}
 
         if not project.startswith("GlowstoneMC/"):
             return {}
