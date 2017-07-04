@@ -14,9 +14,9 @@ app = Celery(
         "ultros_site.tasks.discord",
         "ultros_site.tasks.email",
         "ultros_site.tasks.github_import",
-        "ultros_site.tasks.nodebb"
-        "ultros_site.tasks.notify"
-        "ultros_site.tasks.scheduled"
+        "ultros_site.tasks.nodebb",
+        "ultros_site.tasks.notify",
+        "ultros_site.tasks.scheduled",
         "ultros_site.tasks.twitter"
     ]
 )
