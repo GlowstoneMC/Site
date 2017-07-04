@@ -15,6 +15,9 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
     @check_admin
     @render_api
     def on_post(self, req, resp):
+        if req.get_header("content-type") != "application/json":
+            return {"error": "Data was not of type 'application/json'"}
+
         event_type = req.get_header("X-GitHub-Event")
         data = json.load(req.bounded_stream)
 
