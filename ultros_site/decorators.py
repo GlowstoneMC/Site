@@ -94,6 +94,8 @@ def render_api(func):
         try:
             data = func(self, req, resp, *args, **kwargs)
         except Exception as e:
+            log.exception("Error in API call")
+
             resp.status = "500 Internal Server Error"
             resp.content_type = "text"
             resp.body = str(e)
