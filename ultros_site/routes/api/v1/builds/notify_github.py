@@ -1,10 +1,9 @@
 # coding=utf-8
 import json
-import logging
-import pprint
 
 from ultros_site.base_route import BaseRoute
 from ultros_site.decorators import render_api, check_admin, check_api
+from ultros_site.tasks.__main__ import app as celery
 
 __author__ = "Gareth Coles"
 
@@ -16,9 +15,26 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
     @check_admin
     @render_api
     def on_post(self, req, resp):
-        logger = logging.getLogger("GitHub")
         data = json.load(req.bounded_stream)
 
-        logger.info("\n{}\n".format(pprint.pformat(data)))
+        state = data["state"]
+        project = data["name"]
+        context = data["context"]
+        target_url = data["target_url"]
+        branches = [b["name"] for b in data["branches"]]
+
+        if not project.startswith("GlowstoneMC/"):
+            return {}
+        if context != "ci/circleci":
+            return {}
+        if state != "success":
+            return {}
+        if "master" not in branches:
+            return {}
+
+        celery.send_task(
+            "download_javadocs",
+            args=[project, target_url]
+        )
 
         return {}

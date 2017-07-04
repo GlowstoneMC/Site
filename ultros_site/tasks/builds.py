@@ -1,7 +1,13 @@
 # coding=utf-8
 import logging
-import requests
+import os
 
+import requests
+import zipfile
+
+from io import BytesIO
+
+import shutil
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.database.schema.product import Product
@@ -20,6 +26,34 @@ GITHUB_NEEDED_KEYS = [
     "github_client_id", "github_client_secret",
     "github_oauth_token", "github_username"
 ]
+
+CIRCLECI_BASE_URL = "https://circleci.com/api/v1.1/project/github/GlowstoneMC/{}/{}/artifacts/0/$CIRCLE_ARTIFACTS/{}"
+JD_BASE_PATH = "./jd/{}"
+
+
+@app.task(base=DatabaseTask, name="download_javadocs")
+def download_javadocs(project, circleci_url):
+    if "/" in project:
+        project = project.split("/")[-1]
+
+    jd_path = JD_BASE_PATH.format(project.lower())
+
+    if "?" in circleci_url:
+        circleci_url = circleci_url.split("?")[0]
+
+    build_number = circleci_url.split("/")[-1]
+    artifact_url = CIRCLECI_BASE_URL.format(project, build_number, "javadocs.zip")
+
+    session = requests.session()
+    data = session.get(artifact_url).content
+    session.close()
+
+    if os.path.isdir(jd_path):
+        shutil.rmtree(jd_path)
+        os.mkdir(jd_path)
+
+    with zipfile.ZipFile(BytesIO(data)) as zip_data:
+        zip_data.extractall(jd_path)
 
 
 @app.task(base=DatabaseTask, name="github_import")

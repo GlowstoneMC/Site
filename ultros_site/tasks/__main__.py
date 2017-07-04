@@ -10,10 +10,10 @@ app = Celery(
     broker="amqp://storage:5672/glowstone",
     backend="redis://storage:6379/2",
     include=[
+        "ultros_site.tasks.builds",
         "ultros_site.tasks.common",
         "ultros_site.tasks.discord",
         "ultros_site.tasks.email",
-        "ultros_site.tasks.github_import",
         "ultros_site.tasks.nodebb",
         "ultros_site.tasks.notify",
         "ultros_site.tasks.scheduled",
