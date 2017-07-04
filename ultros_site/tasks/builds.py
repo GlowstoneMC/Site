@@ -28,15 +28,13 @@ GITHUB_NEEDED_KEYS = [
 ]
 
 CIRCLECI_BASE_URL = "https://circleci.com/api/v1.1/project/github/GlowstoneMC/{}/{}/artifacts/0/$CIRCLE_ARTIFACTS/{}"
-JD_BASE_PATH = "./jd/{}"
+JD_BASE_PATH = "./jd/"
 
 
 @app.task(base=DatabaseTask, name="download_javadocs")
 def download_javadocs(project, circleci_url):
     if "/" in project:
         project = project.split("/")[-1]
-
-    jd_path = JD_BASE_PATH.format(project.lower())
 
     if "?" in circleci_url:
         circleci_url = circleci_url.split("?")[0]
@@ -48,12 +46,11 @@ def download_javadocs(project, circleci_url):
     data = session.get(artifact_url).content
     session.close()
 
-    if os.path.isdir(jd_path):
-        shutil.rmtree(jd_path)
-        os.mkdir(jd_path)
+    if os.path.isdir(JD_BASE_PATH + project.lower()):
+        shutil.rmtree(JD_BASE_PATH + project.lower())
 
     with zipfile.ZipFile(BytesIO(data)) as zip_data:
-        zip_data.extractall(jd_path)
+        zip_data.extractall(JD_BASE_PATH)
 
 
 @app.task(base=DatabaseTask, name="github_import")
