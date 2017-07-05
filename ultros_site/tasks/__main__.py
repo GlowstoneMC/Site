@@ -24,19 +24,19 @@ app = Celery(
 app.conf.beat_schedule = {
     "clean_sessions": {
         "task": "scheduled_clean_sessions",
-        "schedule": crontab(hour=0),
+        "schedule": crontab(hour=0, minute=0),
         "args": ()
     },
 
     "clean_users": {
         "task": "scheduled_clean_users",
-        "schedule": crontab(hour=1),
+        "schedule": crontab(hour=1, minute=0),
         "args": ()
     },
 
     "clean_tasks": {
         "task": "scheduled_clean_tasks",
-        "schedule": crontab(hour=2),
+        "schedule": crontab(hour=2, minute=0),
         "args": ()
     }
 }
