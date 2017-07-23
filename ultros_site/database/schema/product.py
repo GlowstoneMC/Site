@@ -26,6 +26,8 @@ class Product(DeclarativeBase):
     default_branch_id = Column(Integer, ForeignKey("product_branch.id"))
     default_branch = relationship("ProductBranch", foreign_keys=[default_branch_id])
 
+    builds = relationship("ProductBuild", back_populates="product", cascade="all, delete, delete-orphan")
+
     def __repr__(self):
         return "<{}(name={}>".format(
             self.__class__.__name__,

@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from sqlalchemy import Column, String, Integer, Boolean, UniqueConstraint, ForeignKey
+from sqlalchemy.orm import relationship
 
 from ultros_site.database.common import DeclarativeBase
 
@@ -18,3 +19,11 @@ class ProductBranch(DeclarativeBase):
 
     name = Column(String)
     disabled = Column(Boolean, default=False)
+
+    builds = relationship("ProductBuild", back_populates="product", cascade="all, delete, delete-orphan")
+
+    def __repr__(self):
+        return "<{}(name={}>".format(
+            self.__class__.__name__,
+            self.name
+        )
