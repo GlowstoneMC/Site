@@ -20,7 +20,7 @@ class ProductBranch(DeclarativeBase):
     name = Column(String)
     disabled = Column(Boolean, default=False)
 
-    builds = relationship("ProductBuild", back_populates="product", cascade="all, delete, delete-orphan")
+    builds = relationship("ProductBuild", back_populates="branch", cascade="all, delete, delete-orphan")
 
     def __repr__(self):
         return "<{}(name={}>".format(
