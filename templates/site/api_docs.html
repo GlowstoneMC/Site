@@ -157,6 +157,61 @@
                 </table>
             </div>
         </div>
+
+        <div class="message is-success">
+            <div class="message-header">
+                <code>GET /api/v1/news/:id</code>
+            </div>
+            <div class="message-body content">
+                <p>
+                    Get a particular news post by ID. This is an integer that represents the
+                    news post uniquely, and you can also find this used for the display page
+                    for each individual news post.
+                </p>
+
+                <h3 class="subtitle is-5">Parameters</h3>
+
+                <table class="table is-striped">
+                    <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Optional</th>
+                        <th>Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>:id</code></td>
+                        <td><span class="icon is-danger"><i class="fa fa-times"></i></span></td>
+                        <td>The post ID. Part of the URL.</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="subtitle is-5">Returned data</h3>
+
+                This endpoint returns a single <a href="#object-news-post">News Post object</a>.
+            </div>
+        </div>
+
+        <div class="message is-success">
+            <div class="message-header">
+                <code>GET /api/v1/news/latest</code>
+            </div>
+            <div class="message-body content">
+                <p>
+                    Get the latest news post.
+                </p>
+
+                <h3 class="subtitle is-5">Parameters</h3>
+
+                This endpoint has no parameters.
+
+                <h3 class="subtitle is-5">Returned data</h3>
+
+                This endpoint returns a single <a href="#object-news-post">News Post object</a>.
+            </div>
+        </div>
     </div>
 </section>
 
@@ -176,6 +231,15 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td><code>comment_url</code></td>
+                        <td><code>String</code> or <code>None</code></td>
+                        <td>
+                            URL pointing to a forum post that may be used for comments.
+                            May be <code>null</code>/<code>None</code> if a post isn't linked
+                            yet.
+                        </td>
+                    </tr>
                     <tr>
                         <td><code>id</code></td>
                         <td><code>Integer</code></td>

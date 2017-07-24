@@ -50,7 +50,8 @@ class APINewsRoute(BaseRoute):
                     "title": str(post.title),
                     "summary": str(post.summary),
                     "markdown": str(post.markdown),
-                    "html": str(post.html)
+                    "html": str(post.html),
+                    "comment_url": str(post.comment_url) if post.comment_url else None
                 } for post in news_posts
             ]
         }
