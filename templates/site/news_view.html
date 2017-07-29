@@ -53,34 +53,17 @@
                 <span>Back to list</span>
             </a>
 
-            % if post.comment_url:
-                <a class="button is-primary is-pulled-right" href="${post.comment_url}">
+            % if _context["user"] is not None and _context["user"].admin:
+                <a class="button is-primary is-pulled-right" href="/admin/news/edit?post=${post.id}">
                     <span class="icon">
-                        <i class="fa fa-comments"></i>
+                        <i class="fa fa-pencil"></i>
                     </span>
-                    <span>Comments</span>
+                    <span>Edit</span>
                 </a>
-            % else:
-            <button disabled class="button is-primary is-pulled-right">
-                    <span class="icon">
-                        <i class="fa fa-comments"></i>
-                    </span>
-                    <span>Comments</span>
-                </button>
             % endif
-
-
         </p>
         <br />
         <div class="box news-view content gallery">
-##             <div class="box news-poster">
-##                 <img class="news-poster-avatar" src="${get_poster_avatar(post)}">
-##                 <div class="news-poster-info">
-##                     <span class="username">${post.user.username}</span>
-##                     <br>
-##                     <span class="date">${format_date(post.posted)}</span>
-##                 </div>
-##             </div>
             <div class="news-title-section">
                 <div class="is-pulled-right" style="display: block;">
                     <img src="${get_poster_avatar(post)}"
