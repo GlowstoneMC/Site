@@ -44,13 +44,21 @@ def link_comments(post_id: int):
 
         topics = sorted(resp["topics"], key=itemgetter("tid"))
 
+        found = False
+
         for topic in topics:
             if topic["title"] == post.title:
+                found = True
+
                 location = NODEBB_LOCATION.format(topic["slug"])
 
                 if not session.query(NewsPost).filter_by(comment_url=location).count():
                     post.comment_url = location
-                    return
+                    break
+
+        if not found:
+            post.comment_url = None
+            return
 
         logging.getLogger("link_comments").warning(
             "Unable to find an unlinked topic for post: {} ({})".format(post.title, post.id)
