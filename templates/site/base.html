@@ -64,34 +64,34 @@
                     <span class="nav-item">
                         % if _context["user"] is None:
                             % if self.attr.tab == "login":
-                        <a class="button is-light" href="/login">
+                        <a class="button is-light" href="/login" id="login-button">
                             <span class="icon">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-key"></i>
                             </span>
-                            <span>Login / Register</span>
+                            <span id="login-button-text">Login / Register</span>
                         </a>
                             % else:
-                        <a class="button is-light is-outlined" href="/login">
+                        <a class="button is-light is-outlined" href="/login" id="login-button">
                             <span class="icon">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-key"></i>
                             </span>
-                            <span>Login / Register</span>
+                            <span id="login-button-text">Login / Register</span>
                         </a>
                             % endif
                         % else:
                             % if self.attr.tab == "profile":
-                        <a class="button is-light" href="/profile">
+                        <a class="button is-light" href="/profile" id="login-button">
                             <span class="icon">
                                 <i class="fa fa-user"></i>
                             </span>
-                            <span>${_context["user"].username}</span>
+                            <span id="login-button-text">${_context["user"].username}</span>
                         </a>
                             % else:
-                        <a class="button is-light is-outlined" href="/profile">
+                        <a class="button is-light is-outlined" href="/profile" id="login-button">
                             <span class="icon">
                                 <i class="fa fa-user"></i>
                             </span>
-                            <span>${_context["user"].username}</span>
+                            <span id="login-button-text">${_context["user"].username}</span>
                         </a>
                             % endif
                         % endif

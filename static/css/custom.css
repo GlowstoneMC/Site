@@ -132,3 +132,14 @@ td.is-grey {
 .content pre {
     padding: 0;
 }
+
+
+@media screen and (max-width: 768px) {
+    #login-button-text { display: none }
+    #login-button { padding-right: 2px }
+}
+
+@media screen and (min-width: 769px), print {
+    #login-button-text { display: inline }
+    #login-button { padding-right: 12px }
+}
