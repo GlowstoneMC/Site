@@ -38,6 +38,7 @@ nosetests.xml
 
 # Configuration
 *.yml
+ultros_site/tasks/config.py
 !circle.yml
 !.landscape.yml
 
