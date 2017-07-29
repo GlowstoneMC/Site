@@ -3,6 +3,7 @@
 ## Current tab for navigation
 <%!
     tab = "news"
+    stylesheets = ["/static/css/news_view.css"]
 %>
 
 ## SEO Stuff
@@ -12,11 +13,32 @@
 <%block name="og_title">${post.title}</%block>
 <%block name="og_description">${post.summary}</%block>
 
+<%
+    import hashlib
+
+    def news_post_tabs(posts):
+        return "".join(["""<a class="nav-item is-tab" href="/news/{}">{}</a>""".format(post.id, post.title) for post in posts])
+
+    def gravatar_hash(email):
+        email = email.strip()
+        email = email.lower()
+        email = email.encode("UTF-8")
+
+        return hashlib.md5(email).hexdigest()
+
+    def get_poster_avatar(post):
+        return "https://www.gravatar.com/avatar/{}".format(gravatar_hash(post.user.email))
+%>
+
 <nav class="nav has-shadow" style="padding-left: 1%">
     <div class="container">
         <div class="nav-left">
-##             <a class="nav-item is-tab" h  f="#wiki">Wiki</a>
-##             <a class="nav-item is-tab" href="#javadocs">JavaDocs</a>
+            % if news_posts and len(news_posts):
+            <span class="nav-item">Latest news:</span>
+            ${news_post_tabs(news_posts)}
+            % else:
+            <span class="nav-item">No news found</span>
+            % endif
         </div>
     </div>
 </nav>
@@ -30,26 +52,34 @@
                 </span>
                 <span>Back to list</span>
             </a>
-
-            % if post.comment_url:
-                <a href="${post.comment_url}" target="_blank" class="is-pulled-right button is-outlined is-info">
-                    <span class="icon"><i class="fa fa-comment"></i></span>
-                    <span>Comments</span>
-                </a>
-            % endif
         </p>
         <br />
-        <article class="message is-primary">
-            <div class="message-header">
+        <div class="box news-view content gallery">
+            <div class="box news-poster">
+                <img class="news-poster-avatar" src="${get_poster_avatar(post)}">
+                <div class="news-poster-info">
+                    <span class="username">${post.user.username}</span>
+                    <br>
+                    <span class="date">${format_date(post.posted)}</span>
+                    <br>
+                    % if post.comment_url:
+                    <a href="${post.comment_url}" target="_blank" class="button is-outlined is-small comments">
+                        <span>Comments</span>
+                    </a>
+                    % else:
+                    <button disabled class="button is-outlined is-small comments">
+                        <span>Comments</span>
+                    </button>
+                    % endif
+                </div>
+            </div>
+            <div class="news-title-section">
                 <a href="/news/${post.id}">
-                    <p>${post.title}</p>
+                    <h1 class="news-title">${post.title}</h1>
                 </a>
-                <p class="pull-right">${format_date(post.posted)} | ${post.user.username}</p>
             </div>
-            <div class="message-body content gallery">
-                ${post.html}
-            </div>
-        </article>
+            ${post.html}
+        </div>
     </div>
 </section>
 

@@ -16,6 +16,7 @@ class NewsViewRoute(BaseSink):
 
     def __call__(self, req, resp, post_id):
         db_session = req.context["db_session"]
+        news_posts = db_session.query(NewsPost).filter_by(published=True).order_by(NewsPost.posted.desc())[0:3]
 
         try:
             news_post = db_session.query(NewsPost).filter_by(id=post_id, published=True).one()
@@ -28,5 +29,6 @@ class NewsViewRoute(BaseSink):
 
         self.render_template(
             req, resp, "news_view.html",
-            post=news_post
+            post=news_post,
+            news_posts=news_posts
         )

@@ -132,23 +132,3 @@ td.is-grey {
 .content pre {
     padding: 0;
 }
-
-
-@media screen and (max-width: 768px) {
-    .message-body img {
-        width: 20rem;
-        padding: 0;
-        display: block;
-        margin: auto;
-    }
-}
-
-@media screen and (min-width: 769px), print {
-    .message-body img {
-        float: right;
-        width: 25rem;
-        padding: 0;
-        display: block;
-        margin: 0.25rem;
-    }
-}

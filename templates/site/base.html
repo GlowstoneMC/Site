@@ -2,6 +2,7 @@
 
 <%!
     tab = "error"
+    stylesheets = []
 %>
 
 <!DOCTYPE html>
@@ -36,6 +37,9 @@
     <link rel="stylesheet" href="/static/css/custom.css">
     <link rel="stylesheet" href="/static/css/pygments-colourful.css">
     <link rel="stylesheet" href="/static/css/baguettebox.css">
+    % for stylesheet in self.attr.stylesheets:
+    <link rel="stylesheet" href="${stylesheet}">
+    % endfor
 
     <script src="/static/js/handlebars-v4.0.5.js"></script>
 
