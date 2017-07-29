@@ -68,6 +68,10 @@
     color: gray;
 }
 
+.news-title-section .news-subtitle a {
+    text-transform: none;
+}
+
 .news-view hr {
     margin: 1rem 0;
 }

@@ -127,14 +127,14 @@
                     <h1 class="news-title" style="display: inline">
                         ${post.title}
                     </h1>
-                    <br>
-                    <span class="news-subtitle" style="display: inline" class="title is-3">
-                        ${format_date(post.posted)}
-                        % if post.comment_url:
-                            &nbsp;&mdash;&nbsp; <a href="#">Comments</a>
-                        % endif
-                    </span>
                 </a>
+                <br>
+                <span class="news-subtitle" style="display: inline" class="title is-3">
+                    ${format_date(post.posted)}
+                    % if post.comment_url:
+                    &nbsp;&mdash;&nbsp; <a href="${post.comment_url}">Comments</a>
+                    % endif
+                </span>
             </div>
             <hr>
             ${post.html}
