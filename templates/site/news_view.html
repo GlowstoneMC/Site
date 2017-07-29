@@ -52,32 +52,53 @@
                 </span>
                 <span>Back to list</span>
             </a>
+
+            % if post.comment_url:
+                <a class="button is-primary is-pulled-right" href="${post.comment_url}">
+                    <span class="icon">
+                        <i class="fa fa-comments"></i>
+                    </span>
+                    <span>Comments</span>
+                </a>
+            % else:
+            <button disabled class="button is-primary is-pulled-right">
+                    <span class="icon">
+                        <i class="fa fa-comments"></i>
+                    </span>
+                    <span>Comments</span>
+                </button>
+            % endif
+
+
         </p>
         <br />
         <div class="box news-view content gallery">
-            <div class="box news-poster">
-                <img class="news-poster-avatar" src="${get_poster_avatar(post)}">
-                <div class="news-poster-info">
-                    <span class="username">${post.user.username}</span>
-                    <br>
-                    <span class="date">${format_date(post.posted)}</span>
-                    <br>
-                    % if post.comment_url:
-                    <a href="${post.comment_url}" target="_blank" class="button is-outlined is-small comments">
-                        <span>Comments</span>
-                    </a>
-                    % else:
-                    <button disabled class="button is-outlined is-small comments">
-                        <span>Comments</span>
-                    </button>
-                    % endif
-                </div>
-            </div>
+##             <div class="box news-poster">
+##                 <img class="news-poster-avatar" src="${get_poster_avatar(post)}">
+##                 <div class="news-poster-info">
+##                     <span class="username">${post.user.username}</span>
+##                     <br>
+##                     <span class="date">${format_date(post.posted)}</span>
+##                 </div>
+##             </div>
             <div class="news-title-section">
+                <div class="is-pulled-right" style="display: block;">
+                    <h1 style="display: inline" class="title is-3">
+                        ${format_date(post.posted)}
+                    </h1>
+                    &nbsp;
+                    <img src="${get_poster_avatar(post)}"
+                         class="box image is-32x32"
+                         title="Posted by ${post.user.username}"
+                    />
+                </div>
                 <a href="/news/${post.id}">
-                    <h1 class="news-title">${post.title}</h1>
+                    <h1 class="news-title" style="display: inline">
+                        ${post.title}
+                    </h1>
                 </a>
             </div>
+            <span class="clear:both;">&nbsp;</span>
             ${post.html}
         </div>
     </div>

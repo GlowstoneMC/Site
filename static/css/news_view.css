@@ -62,3 +62,8 @@
     letter-spacing: 1px;
     font-weight: 400;
 }
+
+.news-title-section {
+    padding-bottom: 0.5em;
+    border-bottom: 1px rgba(10, 10, 10, 0.1) solid;
+}
