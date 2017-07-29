@@ -2,7 +2,6 @@
 from ultros_site.tasks import config
 
 from celery import Celery
-from celery.schedules import crontab
 
 __author__ = "Gareth Coles"
 
