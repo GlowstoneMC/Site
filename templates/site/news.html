@@ -118,10 +118,6 @@
 ##             </div>
             <div class="news-title-section">
                 <div class="is-pulled-right" style="display: block;">
-                    <h1 style="display: inline" class="title is-3">
-                        ${format_date(post.posted)}
-                    </h1>
-                    &nbsp;
                     <img src="${get_poster_avatar(post)}"
                          class="box image is-32x32"
                          title="Posted by ${post.user.username}"
@@ -131,9 +127,16 @@
                     <h1 class="news-title" style="display: inline">
                         ${post.title}
                     </h1>
+                    <br>
+                    <span class="news-subtitle" style="display: inline" class="title is-3">
+                        ${format_date(post.posted)}
+                        % if post.comment_url:
+                            &nbsp;&mdash;&nbsp; <a href="#">Comments</a>
+                        % endif
+                    </span>
                 </a>
             </div>
-            <span class="clear:both;">&nbsp;</span>
+            <hr>
             ${post.html}
         </div>
             % endfor

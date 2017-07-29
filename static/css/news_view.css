@@ -63,7 +63,11 @@
     font-weight: 400;
 }
 
-.news-title-section {
-    padding-bottom: 0.5em;
-    border-bottom: 1px rgba(10, 10, 10, 0.1) solid;
+.news-title-section .news-subtitle {
+    text-transform: uppercase;
+    color: gray;
+}
+
+.news-view hr {
+    margin: 1rem 0;
 }
