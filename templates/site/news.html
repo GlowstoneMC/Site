@@ -45,11 +45,20 @@
 
 <section class="section">
     <div class="container">
-        <a href="/feeds" class="button is-primary is-pulled-right">
+        <a href="/feeds" class="button is-primary is-pulled-right news-action-button">
             <span class="icon">
                 <i class="fa fa-rss"></i>
             </span>
         </a>
+        % if _context["user"] is not None and _context["user"].admin:
+        <a class="button is-success is-pulled-right news-action-button" href="/admin/news/create">
+            <span class="icon">
+                <i class="fa fa-plus"></i>
+            </span>
+            <span>Create</span>
+        </a>
+        % endif
+
         <h1 class="title">
             News
         </h1>

@@ -75,3 +75,7 @@
 .news-view hr {
     margin: 1rem 0;
 }
+
+.news-action-button {
+    margin-left: 0.5rem;
+}
