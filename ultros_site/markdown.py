@@ -39,7 +39,7 @@ class Markdown:
                 continue
 
             done_tags.append(tag)
-            num = tag[2:-1]
+            num = tag[1:]
             markdown = markdown.replace(
                 "{}{}{}".format(start, tag, end),
                 ISSUE_HTML.format(start, ISSUE_URL.format(num), tag, end)
