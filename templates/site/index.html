@@ -135,11 +135,20 @@ tab = "home"
                     <p><strong>Want to test Glowstone out before installing it?</strong> Hop on our test server (1.12): <code>mc.glowstone.net</code></p>
                 </div>
             </article>
-            <br>
             <div class="columns">
                 <div class="column is-half">
                     <h4 class="title is-4" style="margin-top: 1.5rem; margin-bottom: 0.5rem">Latest version</h4>
                     <a class="button is-primary is-medium" style="color: white;" href="https://circleci.com/api/v1.1/project/github/GlowstoneMC/Glowstone/latest/artifacts/0/$CIRCLE_ARTIFACTS/glowstone.jar?branch=master&filter=successful"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.12</span></a>
+                    <div class="" style="margin-top: 2rem">
+                        <h4>Maven</h4>
+                        <p>You can use Glowstone and Glowkit as Maven dependencies directly from our <a href="https://repo.glowstone.net/#browse~snapshots/net.glowstone" target="_blank">repository</a>:</p>
+                        <pre><code style="padding: 0 1.5rem">
+&lt;repository&gt;
+    &lt;id&gt;glowstone-repo&lt;/id&gt;
+    &lt;url&gt;https://repo.glowstone.net/content/repositories/snapshots/&lt;/url&gt;
+&lt;/repository&gt;
+                        </code></pre>
+                    </div>
                 </div>
                 <div class="column is-half">
                     <h4 class="title is-4" style="margin-top: 1.5rem; margin-bottom: 0.5rem">Previous versions</h4>
@@ -173,6 +182,10 @@ tab = "home"
                 </span>
             </a>
         </h1>
-        <p>Under Construction - watch this space!</p>
+        <p>
+            Under Construction - watch this space!
+            <br>
+            In the meantime, you can view our latest CI builds on <a href="https://circleci.com/gh/GlowstoneMC/Glowstone/tree/master">CircleCI</a>.
+        </p>
     </div>
 </section>
