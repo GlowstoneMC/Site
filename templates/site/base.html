@@ -253,7 +253,12 @@
                     % else:
                     <li>
                     % endif
+                        ## Remove this if-statement when the Downloads center is ready for production/public testing
+                        % if _context["user"] is not None and _context["user"].admin:
                         <a href="/downloads">Downloads</a>
+                        % else:
+                        <a href="/#downloads">Downloads</a>
+                        % endif
                     </li>
 ##                     % if self.attr.tab == "tos":
 ##                     <li class="is-active">
