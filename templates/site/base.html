@@ -229,23 +229,23 @@
                         <a href="/news">News</a>
                     </li>
 
-                    % if self.attr.tab == "docs":
-                    <li class="is-active">
-                    % else:
-                    <li>
-                    % endif
-                        <a href="/docs">Docs</a>
-                    </li>
-                </ul>
-
-                <ul class="is-right">
-
                     % if self.attr.tab == "community":
                     <li class="is-active">
                     % else:
                     <li>
                     % endif
                         <a href="/community">Community</a>
+                    </li>
+                </ul>
+
+                <ul class="is-right">
+
+                    % if self.attr.tab == "docs":
+                    <li class="is-active">
+                    % else:
+                    <li>
+                    % endif
+                        <a href="/docs">Docs</a>
                     </li>
 
                     % if self.attr.tab == "downloads":
