@@ -290,7 +290,7 @@ class OAuthRoute(BaseSink):
             settings["twitter_app_key"], settings["twitter_app_secret"]
         )
 
-        callback_url = "https://beta.glowstone.net/admin/oauth/twitter/auth"
+        callback_url = "https://glowstone.net/admin/oauth/twitter/auth"
 
         # "twitter_oauth_token", "twitter_oauth_token_secret"
 
