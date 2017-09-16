@@ -93,9 +93,37 @@
 
                     <hr>
                     <h2 class="subtitle is-4">Integration</h2>
-                    <label class="label">Redirect URI</label>
-                    <pre style="height: 60px;">
-                        <code style="padding: 0px 1.5rem;">/login/oauth?client_id=${application.app_id}&response_type=code</code>
+                    <label class="label">OAuth Authorization URL (<code>GET</code>)</label>
+                    <span></span>
+                    <pre>
+                        <code style="padding: 0px 1.5rem; margin-bottom: -1.25rem;">/login/oauth?client_id=${application.app_id}&response_type=code</code>
+                    </pre>
+                    <br>
+                    <label class="label">Authorization Confirmation Redirect (<code>GET</code>)</label>
+                    <pre>
+                        <code style="padding: 0px 1.5rem; margin-bottom: -1.25rem;">${application.redirect_uri}/?code=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code>
+                    </pre>
+                    <br>
+                    <label class="label">Token Grant Request (<code>POST</code>)</label>
+                    <pre>
+                        <code style="padding: 0px 1.5rem; margin-bottom: -1.25rem;">/api/v1/oauth/token<br>
+{
+    "grant_type": "authorization_code",
+    "code": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "client_id": "${application.app_id}",
+    "client_secret": "${application.app_secret}",
+    "redirect_uri": "${application.redirect_uri}",
+}
+</code>
+                    </pre>
+                    <br>
+                    <label class="label">Token Grant Response</label>
+                    <pre>
+                        <code style="padding: 0px 1.5rem; margin-bottom: -1.25rem;">{
+    "token_type": "Bearer",
+    "access_token": "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+}
+</code>
                     </pre>
                 </div>
             </div>
