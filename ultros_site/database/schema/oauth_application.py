@@ -23,8 +23,7 @@ class OauthApplication(DeclarativeBase):
     scopes = Column(ARRAY(String), default=["user:username"])
 
     def __repr__(self):
-        return "<{}(id={}, name={}, display_name={}, display_description={}, display_icon={}, app_id={}, " \
-               "redirect_uri={}>".format(
+        return "<{}(id={}, name={}, display_name={}, description={}, icon={}, app_id={}, redirect_uri={}>".format(
             self.__class__.__name__,
             self.id,
             self.name,

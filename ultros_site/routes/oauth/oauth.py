@@ -9,7 +9,6 @@ from ultros_site.decorators import add_csrf
 __author__ = "Momo"
 
 
-
 class OauthLoginRoute(BaseRoute):
     route = "/login/oauth"
 
