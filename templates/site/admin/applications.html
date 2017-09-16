@@ -1,0 +1,133 @@
+<%inherit file="base.html"/>
+
+## Current tab for navigation
+<%!
+    tab = "admin_applications"
+%>
+
+## SEO Stuff
+<%block name="title">Admin/Applications &middot; Glowstone</%block>
+<%block name="description">Administration area - Applications</%block>
+
+<%block name="og_title">Admin/Applications</%block>
+<%block name="og_description">Administration area - Applications</%block>
+
+<section class="section">
+    <div class="container">
+        <a class="button is-success is-pulled-right" href="/admin/applications/create">
+            <span class="icon">
+                <i class="fa fa-plus"></i>
+            </span>
+            <span>&nbsp; Create application</span>
+        </a>
+        % if len(applications):
+        <h1 class="title">Applications</h1>
+        <table class="table is-bordered is-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Icon</th>
+                <th>Name</th>
+                <th>Display Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            % for application in applications:
+            <tr>
+                <td style="vertical-align: middle;"><strong>${application.id}</strong></td>
+                <td>
+                    <img src="${application.display_icon}" style="max-height: 50px; vertical-align: middle;">
+                </td>
+                <td style="vertical-align: middle;">${application.name}</td>
+                <td style="vertical-align: middle;">${application.display_name}</td>
+                <td style="vertical-align: middle;">${application.display_description}</td>
+                <td style="vertical-align: middle;">
+                    <a class="button is-info is-small" href="/admin/applications/view?id=${application.id}">
+                        <span class="icon">
+                            <i class="fa fa-eye"></i>
+                        </span>
+                        <span>&nbsp;Details</span>
+                    </a>
+
+                        &nbsp;
+
+                    <a class="button is-warning is-small" href="/admin/applications/edit?id=${application.id}">
+                        <span class="icon">
+                            <i class="fa fa-pencil"></i>
+                        </span>
+                        <span>&nbsp;Edit</span>
+                    </a>
+                </td>
+            </tr>
+            % endfor
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Icon</th>
+                <th>Name</th>
+                <th>Display Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </tfoot>
+        </table>
+
+        % else:
+        <h1 class="title">No applications found.</h1>
+        % endif
+
+
+        <nav class="pagination is-centered">
+            % if page > 1:
+            <a class="pagination-previous" href="/admin/news?page=${(page - 1)}">Previous page</a>
+            % else:
+            <a class="pagination-previous" disabled>Previous page</a>
+            % endif
+
+            % if page < pages:
+            <a class="pagination-next" href="/admin/news?page=${(page + 1)}">Next page</a>
+            % else:
+            <a class="pagination-next" disabled>Next page</a>
+            % endif
+
+            <ul class="pagination-list">
+                % if page > 1:
+                <li>
+                    <a class="pagination-link" href="/admin/news?page=1">1</a>
+                </li>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+                % endif
+
+                % if page - 1 > 1:
+                <li>
+                    <a class="pagination-link" href="/admin/news?page=${(page - 1)}">${(page - 1)}</a>
+                </li>
+                % endif
+                <li>
+                    <a class="pagination-link is-current">${page}</a>
+                </li>
+                % if page + 1 < pages:
+                <li>
+                    <a class="pagination-link" href="/admin/news?page=${(page +1)}">${(page +1)}</a>
+                </li>
+                % endif
+
+                % if page < pages:
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+
+                <li>
+                    <a class="pagination-link" href="/admin/news?page=${pages}">${pages}</a>
+                </li>
+                % endif
+              </ul>
+        </nav>
+    </div>
+</section>

@@ -1,0 +1,97 @@
+<%inherit file="base.html"/>
+
+## Current tab for navigation
+<%!
+    tab = "admin_applications"
+%>
+
+## SEO Stuff
+<%block name="title">Admin/Applications &middot; ${application.display_name}</%block>
+<%block name="description">Administration area - ${application.display_name}</%block>
+
+<%block name="og_title">Admin/Applications/${application.display_name}</%block>
+<%block name="og_description">Administration area - ${application.display_name}</%block>
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="box card column is-half is-offset-one-quarter">
+                <div class="card-content">
+                    <h1 class="title has-text-centered">
+                        Application Details
+                    </h1>
+
+                    <hr>
+                    <img src="${application.display_icon}" style="max-height: 100px; float: right;">
+                    <h2 class="subtitle is-4">Identification</h2>
+
+                    <div class="field">
+                        <label class="label">Identifier</label>
+                        <p>${application.name} (${application.id})</p>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Display Name</label>
+                        <p>${application.display_name}</p>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Description</label>
+                        <p>${application.display_description}</p>
+                    </div>
+
+                    <hr>
+
+                    <h2 class="subtitle is-4">OAuth Credentials</h2>
+
+                    <div class="field">
+                        <label class="label">Client ID</label>
+                        <p class="control">
+                            <input class="input" readonly value="${application.app_id}">
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Client Secret</label>
+                        <p class="control">
+                            <input class="input" readonly value="${application.app_secret}">
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Redirect URI</label>
+                        <p class="control">
+                            <input class="input" readonly value="${application.redirect_uri}">
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Scopes</label>
+                        <p class="control">
+                            % for s in scopes:
+                                % if s in application.scopes:
+                                    &nbsp; <input type="checkbox" disabled checked> ${s}<br>
+                                %else:
+                                    &nbsp; <input type="checkbox" disabled> ${s}<br>
+                                % endif
+                            % endfor
+                        </p>
+                    </div>
+
+                    <div class="field is-hidden-mobile">
+                        <p class="control">
+                            <a type="submit" class="button is-warning is-centered submit-button"
+                               style="width: 50%; margin: auto; display: block" href="/admin/applications/edit?id=${application.id}">Configure</a>
+                        </p>
+                    </div>
+                    <div class="field is-hidden-tablet is-hidden-desktop">
+                        <p class="control">
+                            <a type="submit" class="button is-warning is-centered submit-button"
+                               style="width: 50%; margin: auto; display: block" href="/admin/applications/edit?id=${application.id}">Configure</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

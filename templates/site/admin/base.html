@@ -43,6 +43,14 @@
                         <a href="/admin/products">Products</a>
                     </li>
 
+                    % if self.attr.tab == "admin_applications":
+                    <li class="is-active">
+                    % else:
+                    <li>
+                    % endif
+                        <a href="/admin/applications">Applications</a>
+                    </li>
+
                     % if self.attr.tab == "admin_celery":
                     <li class="is-active">
                     % else:
