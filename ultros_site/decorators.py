@@ -58,7 +58,7 @@ def add_csrf(func):
     def inner(self, req, resp, *args, **kwargs):
         token = secrets.token_urlsafe(32)
 
-        resp.set_cookie("_csrf", token, secure=False, http_only=False)
+        resp.set_cookie("_csrf", token, secure=False, http_only=False, path="/")
         resp.csrf = token
 
         return func(self, req, resp, *args, **kwargs)

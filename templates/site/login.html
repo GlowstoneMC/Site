@@ -2,7 +2,18 @@
 
 ## Current tab for navigation
 <%!
+    import hashlib
     tab = "login"
+
+    def gravatar_hash(email):
+        email = email.strip()
+        email = email.lower()
+        email = email.encode("UTF-8")
+
+        return hashlib.md5(email).hexdigest()
+
+    def get_avatar(user):
+        return "https://www.gravatar.com/avatar/{}".format(gravatar_hash(user.email))
 %>
 
 ## SEO Stuff
@@ -11,13 +22,51 @@
 
 <%block name="og_title">Login</%block>
 <%block name="og_description">Login or register an account</%block>
-
 <section class="section">
+
     <div class="container">
+        % if oauth and application:
+                <div class="columns">
+                    <div class="box card column is-half is-offset-one-quarter" style="margin-bottom: 1.5rem; text-align: center">
+                        <p style="text-align: center">This application would like to sign you in using your Glowstone account.</p>
+                        <br>
+                        % if _context['user'] is not None:
+                        <img src="${get_avatar(_context['user'])}" class="oauth-icon">
+                        % else:
+
+                        % endif
+                        <img src="${application.display_icon}" class="oauth-icon">
+                        <div style="margin-top: 0.5rem;">
+                            <p style="font-size: 150%;">${application.display_name}</p>
+                            <p style="font-size: 100%;">${application.display_description}</p>
+                        </div>
+                        <br><br>
+                        It will strictly receive the following information: <i>username, email address</i>.
+                        <br>
+                        % if not _context["user"]:
+                        <strong>Please login to authorize this.</strong>
+                        % else:
+                            <br>
+                            <form action="/oauth/confirm" method="post">
+                                <input type="hidden" name="_csrf" value="${csrf}" />
+                                <input name="application" type="hidden" value="${application.app_id}">
+                                <input name="redirect_uri" type="hidden" value="${redirect_uri}">
+                                <input name="state" type="hidden" value="${oauth_state}">
+                                <input type="submit" value="Authorize as ${_context['user'].username}" class="button is-primary is-centered" style="width: 50%; margin: auto; display: block">
+                            </form>
+                        % endif
+                    </div>
+                </div>
+        % endif
+        % if _context["user"] is None:
         <div class="columns">
             <div class="box card column is-half is-offset-one-quarter">
                 <form action="/login" method="post">
                     <input type="hidden" name="_csrf" value="${csrf}" />
+                    <input type="hidden" name="oauth" value="${int(oauth == True)}" />
+                    % if oauth:
+                        <input type="hidden" name="redirect_uri" value="${redirect_uri}" />
+                    % endif
                     <div class="card-content">
                         <div class="field">
                             <p class="control has-icon">
@@ -38,7 +87,11 @@
 
                         <div class="field is-hidden-mobile">
                             <p class="control">
-                                <input type="submit" value="Login" class="button is-primary is-centered" style="width: 50%; margin: auto; display: block">
+                                % if oauth:
+                                    <input type="submit" value="Login and Authorize" class="button is-primary is-centered" style="width: 50%; margin: auto; display: block">
+                                % else:
+                                    <input type="submit" value="Login" class="button is-primary is-centered" style="width: 50%; margin: auto; display: block">
+                                % endif
                             </p>
 
                             <hr />
@@ -57,7 +110,12 @@
                         </div>
                         <div class="field is-hidden-tablet is-hidden-desktop">
                             <p class="control">
-                                <input class="button is-primary is-fullwidth" value="Login" type="submit">
+                                % if oauth:
+                                    <input class="button is-primary is-fullwidth" value="Login and Authorize" type="submit">
+                                % else:
+                                    <input class="button is-primary is-fullwidth" value="Login" type="submit">
+                                % endif
+
                             </p>
 
                             <hr />
@@ -78,5 +136,6 @@
                 </form>
             </div>
         </div>
+        %endif
     </div>
 </section>

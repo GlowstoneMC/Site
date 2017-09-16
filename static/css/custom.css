@@ -143,3 +143,11 @@ td.is-grey {
     #login-button-text { display: inline }
     #login-button { padding-right: 12px }
 }
+
+.oauth-icon {
+    height: 100px;
+    border-style: solid;
+    border-color: rgb(200, 200, 200);
+    border-radius: 10px;
+    border-width: 1px;
+}

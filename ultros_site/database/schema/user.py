@@ -29,6 +29,8 @@ class User(DeclarativeBase):
     email_code = relationship("EmailCode", back_populates="user", uselist=False, cascade="all, delete, delete-orphan")
     news_posts = relationship("NewsPost", back_populates="user", cascade="all, delete, delete-orphan")
     api_keys = relationship("APIKey", back_populates="user", cascade="all, delete, delete-orphan")
+    oauth_clients = relationship("OauthClient", back_populates="user", cascade="all, delete, delete-orphan")
+    oauth_tokens = relationship("OauthAccessToken", back_populates="user", cascade="all, delete, delete-orphan")
 
     def __repr__(self):
         return "<{}(id={}, username={}, email={}, verified={}, sessions={}, news_posts={}, api_enabled={})>".format(

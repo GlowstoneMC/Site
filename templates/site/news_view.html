@@ -26,8 +26,8 @@
 
         return hashlib.md5(email).hexdigest()
 
-    def get_poster_avatar(post):
-        return "https://www.gravatar.com/avatar/{}".format(gravatar_hash(post.user.email))
+    def get_avatar(user):
+        return "https://www.gravatar.com/avatar/{}".format(gravatar_hash(user.email))
 %>
 
 <nav class="nav has-shadow" style="padding-left: 1%">

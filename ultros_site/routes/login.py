@@ -87,7 +87,7 @@ class LoginRoute(BaseRoute):
             session = Session(user=user, token=token, expires=expires, awaiting_mfa=user.mfa_enabled)
             db_session.add(session)
 
-            resp.set_cookie("token", token, max_age=age, secure=False)
+            resp.set_cookie("token", token, max_age=age, secure=False, path="/")
             req.context["user"] = user
 
             if not user.mfa_enabled:

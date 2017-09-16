@@ -51,7 +51,7 @@ class SessionMiddleware:
                 req.context["session"] = session_obj
                 age = datetime.timedelta(days=30).seconds
 
-                resp.set_cookie("token", token, max_age=age, secure=False)
+                resp.set_cookie("token", token, max_age=age, secure=False, path="/")
 
                 if session_obj.awaiting_mfa:
                     if req.path not in ["/mfa/challenge", "/logout"]:
