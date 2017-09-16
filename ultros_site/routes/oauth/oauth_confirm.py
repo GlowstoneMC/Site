@@ -1,8 +1,8 @@
 # coding=utf-8
 
 import secrets
-
 from urllib.parse import urlparse, urlencode
+
 from falcon import HTTPNotFound, HTTPBadRequest
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -13,7 +13,6 @@ from ultros_site.decorators import add_csrf, check_csrf
 from ultros_site.message import Message
 
 __author__ = "Momo"
-
 
 
 class OauthConfirmRoute(BaseRoute):
@@ -62,6 +61,9 @@ class OauthConfirmRoute(BaseRoute):
         resp.append_header("Refresh", "5;url={}".format(redirect_uri))
         return self.render_template(
             req, resp, "message_gate.html",
-            gate_message=Message("info", "Application access authorized", "You have authorized the application to access information about your account.<br>You may revoke this access in your account settings at any time."),
+            gate_message=Message("info", "Application access authorized",
+                                 "You have authorized the application to access information about your account."
+                                 "<br>"
+                                 "You may revoke this access in your account settings at any time."),
             redirect_uri=redirect_uri
         )

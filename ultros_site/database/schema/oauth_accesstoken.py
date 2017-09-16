@@ -5,6 +5,7 @@ from ultros_site.database.common import DeclarativeBase
 
 __author__ = "Momo"
 
+
 class OauthAccessToken(DeclarativeBase):
     __tablename__ = "oauth_accesstoken"
 

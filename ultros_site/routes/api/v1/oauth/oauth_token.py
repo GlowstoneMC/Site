@@ -5,7 +5,7 @@ import json
 import logging
 import secrets
 
-from falcon import HTTPNotFound, HTTPBadRequest, HTTPUnauthorized
+from falcon import HTTPNotFound
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.base_route import BaseRoute
@@ -16,7 +16,6 @@ from ultros_site.decorators import render_api
 
 __author__ = "Momo"
 log = logging.getLogger("OAuth")
-
 
 
 class OauthConfirmRoute(BaseRoute):
@@ -42,7 +41,8 @@ class OauthConfirmRoute(BaseRoute):
         redirect_uri = data["redirect_uri"]
         authorization_code = data["code"]
 
-        if grant_type is None or client_id is None or client_secret is None or redirect_uri is None or authorization_code is None:
+        if grant_type is None or client_id is None or client_secret is None or redirect_uri is None \
+                or authorization_code is None:
             resp.status = "400 Bad Request"
             resp.content_type = "text"
             resp.body = "Request was incomplete."
@@ -64,7 +64,8 @@ class OauthConfirmRoute(BaseRoute):
             return
 
         try:
-            client = db_session.query(OauthClient).filter_by(application_id=client_id, authorization_code=authorization_code).one()
+            client = db_session.query(OauthClient).filter_by(application_id=client_id,
+                                                             authorization_code=authorization_code).one()
         except NoResultFound:
             resp.status = "401 Unauthorized"
             resp.content_type = "text"
@@ -76,7 +77,6 @@ class OauthConfirmRoute(BaseRoute):
             resp.content_type = "text"
             resp.body = "Invalid client secret."
             return
-
 
         # create token
         token = secrets.token_urlsafe(32)

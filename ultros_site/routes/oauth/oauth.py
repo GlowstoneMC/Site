@@ -1,5 +1,5 @@
 # coding=utf-8
-from falcon import HTTPNotFound, HTTPBadRequest
+from falcon import HTTPNotFound
 from sqlalchemy.orm.exc import NoResultFound
 
 from ultros_site.base_route import BaseRoute
@@ -46,8 +46,8 @@ class OauthLoginRoute(BaseRoute):
         else:
             # validate if specified scopes are allowed with application
             for scope in scopes:
-                if not scope in application.scopes:
-                    #raise HTTPBadRequest('Scope "{}" is not allowed for this application'.format(scope))
+                if scope not in application.scopes:
+                    # raise HTTPBadRequest('Scope "{}" is not allowed for this application'.format(scope))
                     pass
 
         if not redirect_uri:
