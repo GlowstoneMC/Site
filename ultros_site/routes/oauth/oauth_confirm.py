@@ -47,8 +47,7 @@ class OauthConfirmRoute(BaseRoute):
             application_id=application_id,
             redirect_uri=redirect_uri,
             scopes=['user:username'],
-            authorization_code=authorization_code,
-            defunct=False
+            authorization_code=authorization_code
         )
         db_session.add(client)
         # add parameters to redirect URI

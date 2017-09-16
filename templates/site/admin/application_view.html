@@ -90,6 +90,13 @@
                                style="width: 50%; margin: auto; display: block" href="/admin/applications/edit?id=${application.id}">Configure</a>
                         </p>
                     </div>
+
+                    <hr>
+                    <h2 class="subtitle is-4">Integration</h2>
+                    <label class="label">Redirect URI</label>
+                    <pre style="height: 60px;">
+                        <code style="padding: 0px 1.5rem;">/login/oauth?client_id=${application.app_id}&response_type=code</code>
+                    </pre>
                 </div>
             </div>
         </div>
