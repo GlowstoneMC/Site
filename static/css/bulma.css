@@ -3999,7 +3999,7 @@ label.panel-block {
       .hero.is-dark .nav-menu .nav-item {
         border-top-color: rgba(245, 245, 245, 0.2); } }
   .hero.is-primary {
-    background-color: #ffa000;
+    background-color: #e8970b;
     color: #fff; }
     .hero.is-primary a:not(.button),
     .hero.is-primary strong {
@@ -4037,12 +4037,12 @@ label.panel-block {
     .hero.is-primary .tabs.is-boxed li.is-active a, .hero.is-primary .tabs.is-boxed li.is-active a:hover, .hero.is-primary .tabs.is-toggle li.is-active a, .hero.is-primary .tabs.is-toggle li.is-active a:hover {
       background-color: #fff;
       border-color: #fff;
-      color: #ffa000; }
+      color: #e8970b; }
     .hero.is-primary.is-bold {
-      background-image: linear-gradient(141deg, #cc5e00 0%, #ffa000 71%, #ffd01a 100%); }
+      background-image: linear-gradient(141deg, #cc5e00 0%, #e8970b 71%, #ffd01a 100%); }
       @media screen and (max-width: 768px) {
         .hero.is-primary.is-bold .nav-menu {
-          background-image: linear-gradient(141deg, #cc5e00 0%, #ffa000 71%, #ffd01a 100%); } }
+          background-image: linear-gradient(141deg, #cc5e00 0%, #e8970b 71%, #ffd01a 100%); } }
     @media screen and (max-width: 768px) {
       .hero.is-primary .nav-toggle span {
         background-color: #fff; }
