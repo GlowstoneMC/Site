@@ -27,23 +27,17 @@ GITHUB_NEEDED_KEYS = [
     "github_oauth_token", "github_username"
 ]
 
-CIRCLECI_BASE_URL = "https://circleci.com/api/v1.1/project/github/GlowstoneMC/{}/{}/artifacts/0/$CIRCLE_ARTIFACTS/{}"
+JD_DOWNLOAD_URL = "https://repo.glowstone.net/restServices/archivaServices/searchService/artifact?g=net.glowstone&a=glowstone&v=LATEST&c=javadoc&r=snapshots"
 JD_BASE_PATH = "./jd/"
 
 
 @app.task(base=DatabaseTask, name="download_javadocs")
-def download_javadocs(project, circleci_url):
+def download_javadocs(project):
     if "/" in project:
         project = project.split("/")[-1]
 
-    if "?" in circleci_url:
-        circleci_url = circleci_url.split("?")[0]
-
-    build_number = circleci_url.split("/")[-1]
-    artifact_url = CIRCLECI_BASE_URL.format(project, build_number, "javadocs.zip")
-
     session = requests.session()
-    data = session.get(artifact_url).content
+    data = session.get(JD_DOWNLOAD_URL).content
     session.close()
 
     if os.path.isdir(JD_BASE_PATH + project.lower()):

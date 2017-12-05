@@ -27,7 +27,6 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
         state = data["state"]
         project = data["name"]
         context = data["context"]
-        target_url = data["target_url"]
         branches = [b["name"] for b in data["branches"]]
 
         if event_type != "status":
@@ -39,12 +38,12 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
             return
         if state != "success":
             return
-        if "master" not in branches:
+        if "dev" not in branches:
             return
 
         celery.send_task(
             "download_javadocs",
-            args=[project, target_url]
+            args=[project]
         )
 
         return
