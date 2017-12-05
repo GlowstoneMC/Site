@@ -27,8 +27,8 @@ GITHUB_NEEDED_KEYS = [
     "github_oauth_token", "github_username"
 ]
 
-JD_DOWNLOAD_URL = "https://repo.glowstone.net/restServices/archivaServices/searchService/artifact?g=net.glowstone&a" \
-                  "=glowstone&v=LATEST&c=javadoc&r=snapshots"
+JD_DOWNLOAD_URL = "https://repo.glowstone.net/restServices/archivaServices/searchService/artifact?g=net.glowstone&a=" \
+                  "{}&v=LATEST&c=javadoc&r=snapshots"
 JD_BASE_PATH = "./jd/"
 
 
@@ -36,9 +36,10 @@ JD_BASE_PATH = "./jd/"
 def download_javadocs(project):
     if "/" in project:
         project = project.split("/")[-1]
+    artifact_url = JD_DOWNLOAD_URL.format(project)
 
     session = requests.session()
-    data = session.get(JD_DOWNLOAD_URL).content
+    data = session.get(artifact_url).content
     session.close()
 
     if os.path.isdir(JD_BASE_PATH + project.lower()):
