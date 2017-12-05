@@ -46,7 +46,7 @@ def download_javadocs(project):
         shutil.rmtree(JD_BASE_PATH + project.lower())
 
     with zipfile.ZipFile(BytesIO(data)) as zip_data:
-        zip_data.extractall(JD_BASE_PATH)
+        zip_data.extractall(JD_BASE_PATH + project.lower())
 
 
 @app.task(base=DatabaseTask, name="github_import")
