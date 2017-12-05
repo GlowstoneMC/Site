@@ -27,7 +27,8 @@ GITHUB_NEEDED_KEYS = [
     "github_oauth_token", "github_username"
 ]
 
-JD_DOWNLOAD_URL = "https://repo.glowstone.net/restServices/archivaServices/searchService/artifact?g=net.glowstone&a=glowstone&v=LATEST&c=javadoc&r=snapshots"
+JD_DOWNLOAD_URL = "https://repo.glowstone.net/restServices/archivaServices/searchService/artifact?g=net.glowstone&a" \
+                  "=glowstone&v=LATEST&c=javadoc&r=snapshots"
 JD_BASE_PATH = "./jd/"
 
 
