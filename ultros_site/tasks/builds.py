@@ -36,7 +36,7 @@ JD_BASE_PATH = "./jd/"
 def download_javadocs(project):
     if "/" in project:
         project = project.split("/")[-1]
-    artifact_url = JD_DOWNLOAD_URL.format(project)
+    artifact_url = JD_DOWNLOAD_URL.format(project.lower())
 
     session = requests.session()
     data = session.get(artifact_url).content
