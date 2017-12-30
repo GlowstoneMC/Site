@@ -133,6 +133,17 @@ td.is-grey {
     padding: 0;
 }
 
+.latest-downloads {
+}
+
+.latest-downloads-group {
+    display: inline-block;
+    line-height: 1rem;
+}
+
+.latest-downloads-group-sub {
+    font-size: 0.8rem;
+}
 
 @media screen and (max-width: 768px) {
     #login-button-text { display: none }

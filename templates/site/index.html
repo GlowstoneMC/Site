@@ -137,10 +137,29 @@ tab = "home"
             </article>
             <div class="columns">
                 <div class="column is-half">
-                    <h4 class="title is-4" style="margin-top: 1.5rem; margin-bottom: 0.5rem">Latest version</h4>
-                    <a class="button is-primary is-medium" style="color: white;" href="https://repo.glowstone.net/restServices/archivaServices/searchService/artifact?g=net.glowstone&a=glowstone&v=LATEST&r=snapshots"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.12.2</span></a>
-                    <div class="" style="margin-top: 2rem">
-                        <h4>Maven</h4>
+                    <h4 class="title is-4" style="margin-top: 1.5rem; margin-bottom: 0.5rem">Supported versions</h4>
+                    <div class="latest-downloads">
+                        <div class="latest-downloads-group">
+                            <a class="button is-success is-medium" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/2018.0.0/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>LTS 2018.0.0</span></a>
+                            <br>
+                            <span class="latest-downloads-group-sub">MC 1.12.2 | <a href="GIVE LINK PLEASE">Changelog</a></span>
+                        </div>
+                        <!-- Uncomment this when 2018.1.0 is released
+                        <div class="latest-downloads-group">
+                            <a class="button is-success is-medium" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/2018.1.0/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Release 2018.1.0</span></a>
+                            <br>
+                            <span class="latest-downloads-group-sub">MC 1.12.2 | <a href="GIVE LINK PLEASE">Changelog</a></span>
+                        </div>
+                        -->
+                        <div class="latest-downloads-group">
+                            <a class="button is-warning is-medium" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://repo.glowstone.net/restServices/archivaServices/searchService/artifact?g=net.glowstone&a=glowstone&v=LATEST&r=snapshots"><span class="icon"><i class="fa fa-download"></i></span> <span>Latest build</span></a>
+                            <br>
+                            <span class="latest-downloads-group-sub">MC 1.12.2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <h4 class="title is-4" style="margin-top: 1.5rem; margin-bottom: 0.5rem">Maven</h4>
                         <p>You can use Glowstone and Glowkit as Maven dependencies directly from our <a href="https://repo.glowstone.net/#browse~snapshots/net.glowstone" target="_blank">repository</a>:</p>
                         <pre><code style="padding: 0 1.5rem">
 &lt;repository&gt;
@@ -148,29 +167,6 @@ tab = "home"
     &lt;url&gt;https://repo.glowstone.net/content/repositories/snapshots/&lt;/url&gt;
 &lt;/repository&gt;
                         </code></pre>
-                    </div>
-                </div>
-                <div class="column is-half">
-                    <h4 class="title is-4" style="margin-top: 1.5rem; margin-bottom: 0.5rem">Previous versions</h4>
-                    <p>These versions are no longer supported or developed. They may lack important fixes and features.</p>
-                    <h4 class="title is-5" style="margin-top: 1.5rem; margin-bottom: 0.5rem">Previous Minecraft versions (not recommended)</h4>
-
-                    <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/2017.9.0/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.12.1</span></a>
-                    <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/2017.8.0/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.12</span></a>
-                    <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/2017.6.0/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.11.2</span></a>
-
-                    <br />
-
-                    <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/v1.10.2/glowstone.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.10.2</span></a>
-                    <a class="button is-warning" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone/releases/download/1.9.4/glowstone.-1.9.4-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.9.x</span></a>
-
-                    <br />
-
-                    <h4 class="title is-5" style="margin-top: 1.5rem; margin-bottom: 0.5rem">Legacy versions (not recommended)</h4>
-                    <p>Legacy builds dating from the original Glowstone <a href="https://github.com/GlowstoneMC/Glowstone-Legacy">repository</a>.</p>
-
-                    <a class="button is-danger" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone-Legacy/releases/download/1.7.9/glowstone-1.7.9-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.7.9</span></a>
-                    <a class="button is-danger" style="margin-top: 0.25rem; margin-bottom: 0.25rem; margin-right: 0.5rem;" href="https://github.com/GlowstoneMC/Glowstone-Legacy/releases/download/1.7.2/glowstone-1.7.2-SNAPSHOT.jar"><span class="icon"><i class="fa fa-download"></i></span> <span>Download for 1.7.2</span></a>
                 </div>
             </div>
         </div>
