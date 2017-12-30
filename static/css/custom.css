@@ -145,6 +145,12 @@ td.is-grey {
     font-size: 0.8rem;
 }
 
+.downloads-button {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    margin-right: 0.5rem;
+}
+
 @media screen and (max-width: 768px) {
     #login-button-text { display: none }
     #login-button { padding-right: 2px }
