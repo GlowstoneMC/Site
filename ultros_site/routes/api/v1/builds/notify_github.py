@@ -34,7 +34,7 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
 
         if not project.startswith("GlowstoneMC/"):
             return
-        if context != "ci/circleci: build":
+        if context != "ci/circleci: build-deploy":
             return
         if state != "success":
             return
