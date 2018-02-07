@@ -34,11 +34,11 @@ class APIBuildsNotifyGitHubRoute(BaseRoute):
 
         if not project.startswith("GlowstoneMC/"):
             return
-        if context != "ci/circleci: build-deploy":
+        if not context.startswith("ci/circleci"):
             return
         if state != "success":
             return
-        if "dev" not in branches:
+        if "dev" not in branches and "master" not in branches:
             return
 
         celery.send_task(
