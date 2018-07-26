@@ -47,7 +47,7 @@ class DeleteUserRoute(BaseSink):
                 redirect_uri="/admin/users"
             )
         else:
-            if db_user.username == self.manager.database.config["admin_username"]:
+            if db_user.username == self.manager.database.config.admin_username:
                 return self.render_template(
                     req, resp, "admin/message_gate.html",
                     gate_message=Message(

@@ -49,7 +49,7 @@ class DemoteUserRoute(BaseSink):
         else:
             resp.append_header("Refresh", "5;url=/admin/users")
 
-            if db_user.username == self.manager.database.config["admin_username"]:
+            if db_user.username == self.manager.database.config.admin_username:
                 return self.render_template(
                     req, resp, "admin/message_gate.html",
                     gate_message=Message(

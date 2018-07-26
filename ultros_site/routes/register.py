@@ -70,7 +70,7 @@ class RegisterRoute(BaseRoute):
         http = Session()
         captcha_response = http.post(
             RECAPTCHA_URL, data={
-                "secret": self.manager.database.config["recaptcha_secret"],
+                "secret": self.manager.database.config.recaptcha_secret,
                 "response": params["g-recaptcha-response"]
             }
         ).json()
@@ -132,15 +132,15 @@ class RegisterRoute(BaseRoute):
 
         user = User(
             username=params["username"], password=hashed_password, created=datetime.datetime.now(),
-            email=params["email"], email_verified=not self.db.config["email"]["use"],
-            admin=(params["username"] == self.manager.database.config["admin_username"])
+            email=params["email"], email_verified=not self.db.config.email["use"],
+            admin=(params["username"] == self.manager.database.config.admin_username)
         )
 
         db_session.add(user)
 
         resp.append_header("Refresh", "10;url=/")
 
-        if self.db.config["email"]["use"]:
+        if self.db.config.email["use"]:
             key = secrets.token_urlsafe(32)
             email_code = EmailCode(
                 user=user, code=key

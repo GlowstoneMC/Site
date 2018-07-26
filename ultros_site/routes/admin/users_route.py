@@ -33,6 +33,6 @@ class UsersRoute(BaseRoute):
             page=page,
             pages=pages,
             users=users,
-            immune_user=self.manager.database.config["admin_username"],
+            immune_user=self.manager.database.config.admin_username,
             csrf=resp.csrf
         )

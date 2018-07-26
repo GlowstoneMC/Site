@@ -12,7 +12,7 @@ from email.mime.text import MIMEText
 from mako.lookup import TemplateLookup
 from mako.template import Template
 
-from ruamel import yaml
+from ultros_site.config import Config
 
 __author__ = "Gareth Coles"
 
@@ -27,9 +27,7 @@ log = get_task_logger("Emails")
 class EmailManager:
     def __init__(self):
         self.cache = {}
-
-        with open("config.yml", "r") as fh:
-            self.config = yaml.safe_load(fh)["email"]
+        self.config = Config().email
 
         ssl = self.config["ssl"]
 
