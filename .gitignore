@@ -39,7 +39,7 @@ nosetests.xml
 # Configuration
 *.yml
 ultros_site/tasks/config.py
-!circle.yml
+!.circleci/config.yml
 !.landscape.yml
 
 # Logs
