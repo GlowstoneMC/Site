@@ -87,7 +87,8 @@ class RouteManager:
                 except Exception as e:
                     log.info("   -> Failed to load: %s", e)
         except Exception as e:
-            log.info("Failed to load routes: %s", e)
+            log.warn("Failed to load routes: %s", e)
+            log.exception("")
         log.info("")
 
     def load_modules(self, folder):
