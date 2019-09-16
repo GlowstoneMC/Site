@@ -1,6 +1,0 @@
-MFA Disabled
-============
-
-This is just a notice to let you know that MFA has been disabled
-on your account. If you did not do this, ensure that your account
-is secure immediately and contact us if you run into any trouble.

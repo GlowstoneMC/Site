@@ -1,9 +1,0 @@
-Settings Changed
-================
-
-This is just a notice to let you know that the following
-account settings have been changed: ${settings}.
-
-If you did not make these changes, please ensure that your
-account is secure. Feel free to contact us if you run
-into any problems.
